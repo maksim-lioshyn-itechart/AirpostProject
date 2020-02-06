@@ -1,0 +1,5 @@
+D:\StudyProjects\Airport\airportRepository\ORM\bin\Debug\netstandard2.0\ORM.deps.json
+D:\StudyProjects\Airport\airportRepository\ORM\bin\Debug\netstandard2.0\ORM.dll
+D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netstandard2.0\ORM.csprojAssemblyReference.cache
+D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netstandard2.0\ORM.AssemblyInfoInputs.cache
+D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netstandard2.0\ORM.AssemblyInfo.cs

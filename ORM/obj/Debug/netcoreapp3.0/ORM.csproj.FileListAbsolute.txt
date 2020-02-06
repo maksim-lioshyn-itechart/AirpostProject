@@ -1,0 +1,6 @@
+D:\StudyProjects\Airport\airportRepository\ORM\bin\Debug\netcoreapp3.0\ORM.deps.json
+D:\StudyProjects\Airport\airportRepository\ORM\bin\Debug\netcoreapp3.0\ORM.dll
+D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netcoreapp3.0\ORM.csprojAssemblyReference.cache
+D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netcoreapp3.0\ORM.AssemblyInfoInputs.cache
+D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netcoreapp3.0\ORM.AssemblyInfo.cs
+D:\StudyProjects\Airport\airportRepository\ORM\bin\Debug\netcoreapp3.0\appsettings.json
