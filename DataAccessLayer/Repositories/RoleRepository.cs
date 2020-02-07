@@ -29,8 +29,10 @@ namespace DataAccessLayer.Repositories
             {
                 AssignRoleToUser(idUser, role.Id);
             }
-
-            throw new ArgumentNullException();
+            else
+            {
+                throw new ArgumentNullException();
+            }
         }
 
         public Role GetByName(string name)

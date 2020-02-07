@@ -1,7 +1,7 @@
 ﻿USE [Airport]
 GO
 
-/****** Object:  Table [dbo].[Users]    Script Date: 2/6/2020 3:31:11 PM ******/
+/****** Object:  Table [dbo].[Users] ******/
 SET ANSI_NULLS ON
 GO
 
@@ -29,7 +29,7 @@ GO
 ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Id]  DEFAULT (newid()) FOR [Id]
 GO
 
-/****** Object:  Table [dbo].[Roles]    Script Date: 2/7/2020 2:14:58 PM ******/
+/****** Object:  Table [dbo].[Roles] ******/
 
 CREATE TABLE [dbo].[Roles](
 	[id] [uniqueidentifier] NOT NULL,
@@ -54,4 +54,28 @@ ALTER TABLE dbo.Users ADD CONSTRAINT FK_Users_Roles FOREIGN KEY (RoleId) REFEREN
 GO
 
 ALTER TABLE dbo.Users SET (LOCK_ESCALATION = TABLE)
+GO
+
+/****** Object:  Table [dbo].[ContactInformation] ******/
+
+CREATE TABLE [dbo].[ContactInformation](
+	[Id] [uniqueidentifier] NOT NULL,
+	[UserId] [uniqueidentifier] NOT NULL,
+	[Phone] [nvarchar](50) NOT NULL,
+	[Address] [nvarchar](max) NULL,
+	[Email] [nvarchar](max) NULL,
+ CONSTRAINT [PK_ContactInformation] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ContactInformation]  WITH CHECK ADD  CONSTRAINT [FK_ContactInformation_Users] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([Id])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[ContactInformation] CHECK CONSTRAINT [FK_ContactInformation_Users]
 GO
