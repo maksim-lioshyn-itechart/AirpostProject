@@ -79,3 +79,44 @@ GO
 
 ALTER TABLE [dbo].[ContactInformation] CHECK CONSTRAINT [FK_ContactInformation_Users]
 GO
+
+/****** Object:  Table [dbo].[Countries] ******/
+
+CREATE TABLE [dbo].[Countries](
+	[id] [uniqueidentifier] NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[Code] [nvarchar](10) NOT NULL,
+ CONSTRAINT [PK_Countries] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Airports] ******/
+
+CREATE TABLE [dbo].[Airports](
+	[id] [uniqueidentifier] NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[IsActive] [bit] NULL,
+	[CountryId] [uniqueidentifier] NULL,
+ CONSTRAINT [PK_Airports] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Airports] ADD  CONSTRAINT [DF_Airports_IsActive]  DEFAULT ((0)) FOR [IsActive]
+GO
+
+ALTER TABLE [dbo].[Airports]  WITH CHECK ADD  CONSTRAINT [FK_Airports_Countries] FOREIGN KEY([CountryId])
+REFERENCES [dbo].[Countries] ([id])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[Airports] CHECK CONSTRAINT [FK_Airports_Countries]
+GO
+
+
