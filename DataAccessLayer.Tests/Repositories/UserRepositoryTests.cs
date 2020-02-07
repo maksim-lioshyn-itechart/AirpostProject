@@ -17,6 +17,7 @@ namespace DataAccessLayer.Tests.Repositories
             _userRepository = new UserRepository(new UnitOfWork(new ORM.ApplicationContext()));
             _user = new User
             {
+                Id = Guid.NewGuid(),
                 FirstName = Guid.NewGuid().ToString(),
                 LastName = Guid.NewGuid().ToString(),
                 Login = Guid.NewGuid().ToString(),
@@ -30,7 +31,7 @@ namespace DataAccessLayer.Tests.Repositories
         {
             _userRepository.Create(_user);
         }
-
+       
         [Test]
         [Order(1)]
         public void GetByNameTest()
@@ -41,6 +42,22 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(2)]
+        public void GetByIdTest()
+        {
+            var testUser = _userRepository.GetById(_testUser.Id);
+            Assert.AreEqual(_testUser.Login, testUser.Login);
+        }
+
+        [Test]
+        [Order(3)]
+        public void GetAllTest()
+        {
+            var testUsers = _userRepository.GetAll();
+            Assert.IsNotNull(testUsers);
+        }
+
+        [Test]
+        [Order(99)]
         public void UpdateTest()
         {
             var firstName = "testUser.FirstName";
@@ -49,22 +66,6 @@ namespace DataAccessLayer.Tests.Repositories
             _userRepository.Update(testUser);
             var test = _userRepository.GetByName(firstName);
             Assert.AreEqual(firstName, test.FirstName);
-        }
-
-        [Test]
-        [Order(3)]
-        public void GetByIdTest()
-        {
-            var testUser = _userRepository.GetById(_testUser.Id);
-            Assert.AreEqual(_testUser.Login, testUser.Login);
-        }
-
-        [Test]
-        [Order(4)]
-        public void GetAllTest()
-        {
-            var testUsers = _userRepository.GetAll();
-            Assert.IsNotNull(testUsers);
         }
 
         [Test]

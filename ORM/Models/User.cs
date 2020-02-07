@@ -1,4 +1,5 @@
-﻿using ORM.Attributes;
+﻿using System;
+using ORM.Attributes;
 
 namespace ORM.Models
 {
@@ -13,5 +14,6 @@ namespace ORM.Models
         public string Login { get; set; }
         [AirportColumn(Name = "Password")]
         public string Password { get; set; }
+        public Guid? RoleId { get; set; }
     }
 }

@@ -12,11 +12,11 @@ namespace DataAccessLayer.Repositories
 {
     public abstract class BaseRepository<T>: IBaseRepository<T> where T: BasicModel
     {
-        private readonly IUnitOfWork _unitOfWork;
+        internal readonly IUnitOfWork UnitOfWork;
 
         internal BaseRepository(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            UnitOfWork = unitOfWork;
         }
 
         public void Create(T entity)
@@ -28,22 +28,18 @@ namespace DataAccessLayer.Repositories
             foreach (var property in columnNames)
             {
                 var value = entity.GetType().GetProperty(property.Name)?.GetValue(entity, null);
-                if (value != null)
+
+                fields += $"{property.Name}";
+                values += $"'{value}'";
+
+                if (lastColumn != property)
                 {
-                    if (lastColumn != property)
-                    {
-                        fields += $"{property.Name}, ";
-                        values += $"'{value}', ";
-                    }
-                    else
-                    {
-                        fields += $"{property.Name}";
-                        values += $"'{value}'";
-                    }
+                    fields += ", ";
+                    values += ", ";
                 }
             }
 
-            _unitOfWork.Saving($"INSERT INTO {TableName()} ({fields}) VALUES({values})");
+            UnitOfWork.Saving($"INSERT INTO {TableName()} ({fields}) VALUES({values})");
         }
 
         public T GetById(Guid id)
@@ -73,14 +69,14 @@ namespace DataAccessLayer.Repositories
                 }
             }
 
-            _unitOfWork.Saving(sqlQuery.Substring(0, sqlQuery.Length - 2) + $" WHERE Id = '{entity.Id}'");
+            UnitOfWork.Saving(sqlQuery.Substring(0, sqlQuery.Length - 2) + $" WHERE Id = '{entity.Id}'");
         }
 
         public void Delete(Guid id)
         {
-            _unitOfWork.Saving($"DELETE FROM {TableName()} WHERE Id = '{id}'");
+            UnitOfWork.Saving($"DELETE FROM {TableName()} WHERE Id = '{id}'");
         }
 
-        private static string TableName() => typeof(T).GetTableAttributeValue((AirportTableAttribute att) => att.Name);
+        public static string TableName() => typeof(T).GetTableAttributeValue((AirportTableAttribute att) => att.Name);
     }
 }

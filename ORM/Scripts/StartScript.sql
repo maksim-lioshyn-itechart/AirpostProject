@@ -14,6 +14,7 @@ CREATE TABLE [dbo].[Users](
 	[LastName] [nvarchar](max) NOT NULL,
 	[Login] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](50) NOT NULL,
+	[RoleId] [uniqueidentifier] NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -28,4 +29,29 @@ GO
 ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Id]  DEFAULT (newid()) FOR [Id]
 GO
 
+/****** Object:  Table [dbo].[Roles]    Script Date: 2/7/2020 2:14:58 PM ******/
 
+CREATE TABLE [dbo].[Roles](
+	[id] [uniqueidentifier] NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_RolesName] UNIQUE NONCLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Roles] ADD  CONSTRAINT [DF_Roles_Id]  DEFAULT (newid()) FOR [id]
+GO
+
+ALTER TABLE dbo.Users ADD CONSTRAINT FK_Users_Roles FOREIGN KEY (RoleId) REFERENCES dbo.Roles (id) 
+	ON UPDATE  NO ACTION 
+	ON DELETE  SET NULL 
+GO
+
+ALTER TABLE dbo.Users SET (LOCK_ESCALATION = TABLE)
+GO
