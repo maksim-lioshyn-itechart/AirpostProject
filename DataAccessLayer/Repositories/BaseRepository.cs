@@ -10,8 +10,15 @@ using System.Linq;
 
 namespace DataAccessLayer.Repositories
 {
-    public abstract class BaseRepository<T>: IBaseOperationRepository<T> where T: BasicModel
+    public abstract class BaseRepository<T>: IBaseRepository<T> where T: BasicModel
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        internal BaseRepository(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public void Create(T entity)
         {
             var columnNames = typeof(T).GetColumnAttributeValue().ToList();
@@ -35,10 +42,8 @@ namespace DataAccessLayer.Repositories
                     }
                 }
             }
-            
-            using IDbConnection db = new ApplicationContext().OpenConnection();
-            var sqlQuery = $"INSERT INTO {TableName()} ({fields}) VALUES({values})";
-            db.Execute(sqlQuery, entity);
+
+            _unitOfWork.Saving($"INSERT INTO {TableName()} ({fields}) VALUES({values})");
         }
 
         public T GetById(Guid id)
@@ -68,15 +73,12 @@ namespace DataAccessLayer.Repositories
                 }
             }
 
-            sqlQuery = sqlQuery.Substring(0,sqlQuery.Length - 2) + $" WHERE Id = '{entity.Id}'";
-            db.Execute(sqlQuery, entity);
+            _unitOfWork.Saving(sqlQuery.Substring(0, sqlQuery.Length - 2) + $" WHERE Id = '{entity.Id}'");
         }
 
         public void Delete(Guid id)
         {
-            using IDbConnection db = new ApplicationContext().OpenConnection();
-            var sqlQuery = $"DELETE FROM {TableName()} WHERE Id = '{id}'";
-            db.Execute(sqlQuery, new { id });
+            _unitOfWork.Saving($"DELETE FROM {TableName()} WHERE Id = '{id}'");
         }
 
         private static string TableName() => typeof(T).GetTableAttributeValue((AirportTableAttribute att) => att.Name);

@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IUserRepository: IBaseOperationRepository<User>
+    public interface IUserRepository: IBaseRepository<User>
     {
         User GetByName(string name);
     }

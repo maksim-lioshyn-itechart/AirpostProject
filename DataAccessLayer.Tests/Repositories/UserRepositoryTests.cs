@@ -14,7 +14,7 @@ namespace DataAccessLayer.Tests.Repositories
         private readonly User _user;
         public UserRepositoryTests()
         {
-            _userRepository = new UserRepository();
+            _userRepository = new UserRepository(new UnitOfWork(new ORM.ApplicationContext()));
             _user = new User
             {
                 FirstName = Guid.NewGuid().ToString(),
@@ -30,7 +30,6 @@ namespace DataAccessLayer.Tests.Repositories
         {
             _userRepository.Create(_user);
         }
-
 
         [Test]
         [Order(1)]

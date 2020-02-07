@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IBaseOperationRepository<T>
+    public interface IBaseRepository<T>
     {
         void Create(T entity);
         T GetById(Guid id);

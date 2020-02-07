@@ -8,8 +8,12 @@ using System.Linq;
 
 namespace DataAccessLayer.Repositories
 {
-    public class UserRepository: BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
+        public UserRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
+
         public User GetByName(string name)
         {
             var tableName = typeof(User).GetTableAttributeValue((AirportTableAttribute att) => att.Name);

@@ -13,7 +13,7 @@ namespace ORM
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-            IConfigurationRoot configuration = builder.Build();
+            var configuration = builder.Build();
 
             return new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
         }
