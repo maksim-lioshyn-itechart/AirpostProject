@@ -64,18 +64,20 @@ namespace DataAccessLayer.Tests.Repositories
         [Order(4)]
         public void RoleRepository_AssignRoleToUserByIdTest_SetUpTestRoleToTestUser()
         {
-            _roleRepository.AssignRoleToUser(BaseUser.Id, _role.Id);
+            var isAssign = _roleRepository.AssignRoleToUser(BaseUser.Id, _role.Id);
             var testUser = _userRepository.GetByName(BaseUser.FirstName);
             Assert.AreEqual(testUser.RoleId, _role.Id);
+            Assert.IsTrue(isAssign);
         }
 
         [Test()]
         [Order(5)]
         public void RoleRepository_AssignRoleToUserByNameTest_SetUpTestRoleToTestUser()
         {
-            _roleRepository.AssignRoleToUser(BaseUser.Id, _role.Name);
+            var isAssign = _roleRepository.AssignRoleToUser(BaseUser.Id, _role.Name);
             var testUser = _userRepository.GetByName(BaseUser.FirstName);
             Assert.AreEqual(testUser.RoleId, _role.Id);
+            Assert.IsTrue(isAssign);
         }
 
         [Test]

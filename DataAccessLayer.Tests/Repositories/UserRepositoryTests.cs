@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Interfaces;
+﻿using System.Threading.Tasks;
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
 using ORM.Models;
@@ -30,6 +31,14 @@ namespace DataAccessLayer.Tests.Repositories
         {
             _testUser = _userRepository.GetByName(BaseUser.FirstName);
             Assert.AreEqual(BaseUser.Login, _testUser.Login);
+        }
+
+        [Test]
+        [Order(1)]
+        public async Task UserRepository_GetByNameAsyncTest_ReturnTestUser()
+        {
+            var testUser = await _userRepository.GetByNameAsync(BaseUser.FirstName);
+            Assert.AreEqual(BaseUser.Login, testUser.Login);
         }
 
         [Test]

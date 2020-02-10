@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using DataAccessLayer.Interfaces;
-using ORM;
 using ORM.Attributes;
 using ORM.Models;
 using System;
@@ -15,24 +14,23 @@ namespace DataAccessLayer.Repositories
         {
         }
 
-        public void AssignRoleToUser(Guid idUser, Guid idRole)
+        public bool AssignRoleToUser(Guid idUser, Guid idRole)
         {
             var tableName = typeof(User).GetTableAttributeValue((AirportTableAttribute att) => att.Name);
             UnitOfWork.Saving($"UPDATE {tableName} SET RoleId = '{idRole}' WHERE Id = '{idUser}'");
+            return true;
         }
 
-        public void AssignRoleToUser(Guid idUser, string roleName)
+        public bool AssignRoleToUser(Guid idUser, string roleName)
         {
             using IDbConnection db = new ApplicationContext().OpenConnection();
             var role = db.Query<Role>($"SELECT * FROM {TableName()} WHERE Name = '{roleName}'", new { roleName }).FirstOrDefault();
             if (role != null)
             {
                 AssignRoleToUser(idUser, role.Id);
+                return true;
             }
-            else
-            {
-                throw new ArgumentNullException();
-            }
+            return false;
         }
 
         public Role GetByName(string name)

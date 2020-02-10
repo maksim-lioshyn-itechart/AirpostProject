@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using DataAccessLayer.Interfaces;
-using ORM;
 using System.Data;
 
 namespace DataAccessLayer.Repositories
