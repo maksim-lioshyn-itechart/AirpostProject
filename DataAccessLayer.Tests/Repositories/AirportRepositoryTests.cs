@@ -28,8 +28,8 @@ namespace DataAccessLayer.Tests.Repositories
 
         public AirportRepositoryTests()
         {
-            _countryRepository = new CountryRepository(new UnitOfWork(new ORM.ApplicationContext()));
-            _airportRepository = new AirportRepository(new UnitOfWork(new ORM.ApplicationContext()));
+            _countryRepository = new CountryRepository(new UnitOfWork(new ApplicationContext()));
+            _airportRepository = new AirportRepository(new UnitOfWork(new ApplicationContext()));
         }
 
         [Test]

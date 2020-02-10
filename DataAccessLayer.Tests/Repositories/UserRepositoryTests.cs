@@ -14,7 +14,7 @@ namespace DataAccessLayer.Tests.Repositories
         private readonly User _user;
         public UserRepositoryTests()
         {
-            _userRepository = new UserRepository(new UnitOfWork(new ORM.ApplicationContext()));
+            _userRepository = new UserRepository(new UnitOfWork(new ApplicationContext()));
             _user = new User
             {
                 Id = Guid.NewGuid(),

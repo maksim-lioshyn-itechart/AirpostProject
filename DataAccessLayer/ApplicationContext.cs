@@ -3,7 +3,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
 
-namespace ORM
+namespace DataAccessLayer
 {
     public class ApplicationContext
     {

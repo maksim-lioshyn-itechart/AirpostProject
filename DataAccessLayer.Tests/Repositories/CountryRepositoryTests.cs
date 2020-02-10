@@ -19,7 +19,7 @@ namespace DataAccessLayer.Tests.Repositories
 
         public CountryRepositoryTests()
         {
-            _countryRepository = new CountryRepository(new UnitOfWork(new ORM.ApplicationContext()));
+            _countryRepository = new CountryRepository(new UnitOfWork(new ApplicationContext()));
         }
 
         [Test]

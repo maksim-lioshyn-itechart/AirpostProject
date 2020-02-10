@@ -30,8 +30,8 @@ namespace DataAccessLayer.Tests.Repositories
 
         public RoleRepositoryTests()
         {
-            _roleRepository = new RoleRepository(new UnitOfWork(new ORM.ApplicationContext()));
-            _userRepository = new UserRepository(new UnitOfWork(new ORM.ApplicationContext()));
+            _roleRepository = new RoleRepository(new UnitOfWork(new ApplicationContext()));
+            _userRepository = new UserRepository(new UnitOfWork(new ApplicationContext()));
         }
 
         [Test]

@@ -21,7 +21,7 @@ namespace DataAccessLayer.Tests.Repositories
             Password = Guid.NewGuid().ToString()
         };
 
-        private List<ContactInformation> _information = new List<ContactInformation>
+        private readonly List<ContactInformation> _information = new List<ContactInformation>
         {
             new ContactInformation
             {
@@ -59,8 +59,8 @@ namespace DataAccessLayer.Tests.Repositories
 
         public ContactInformationRepositoryTests()
         {
-            _userRepository = new UserRepository(new UnitOfWork(new ORM.ApplicationContext()));
-            _contactInformationRepository = new ContactInformationRepository(new UnitOfWork(new ORM.ApplicationContext()));
+            _userRepository = new UserRepository(new UnitOfWork(new ApplicationContext()));
+            _contactInformationRepository = new ContactInformationRepository(new UnitOfWork(new ApplicationContext()));
         }
 
         [Test]
