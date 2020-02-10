@@ -1,3 +1,0 @@
-D:\StudyProjects\Airport\airportRepository\DataAccessLayer.Tests\obj\Debug\netcoreapp3.0\DataAccessLayer.Tests.csprojAssemblyReference.cache
-D:\StudyProjects\Airport\airportRepository\DataAccessLayer.Tests\obj\Debug\netcoreapp3.0\DataAccessLayer.Tests.AssemblyInfoInputs.cache
-D:\StudyProjects\Airport\airportRepository\DataAccessLayer.Tests\obj\Debug\netcoreapp3.0\DataAccessLayer.Tests.AssemblyInfo.cs

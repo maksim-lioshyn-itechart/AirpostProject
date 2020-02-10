@@ -1,8 +1,0 @@
-D:\StudyProjects\Airport\airportRepository\ORM\bin\Debug\netcoreapp3.1\appsettings.json
-D:\StudyProjects\Airport\airportRepository\ORM\bin\Debug\netcoreapp3.1\ORM.deps.json
-D:\StudyProjects\Airport\airportRepository\ORM\bin\Debug\netcoreapp3.1\ORM.dll
-D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netcoreapp3.1\ORM.AssemblyInfoInputs.cache
-D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netcoreapp3.1\ORM.AssemblyInfo.cs
-D:\StudyProjects\Airport\airportRepository\ORM\bin\Debug\netcoreapp3.1\ORM.pdb
-D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netcoreapp3.1\ORM.dll
-D:\StudyProjects\Airport\airportRepository\ORM\obj\Debug\netcoreapp3.1\ORM.pdb
