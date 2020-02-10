@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
@@ -87,7 +88,7 @@ namespace DataAccessLayer.Tests.Repositories
         [Order(3)]
         public void ContactInformationRepository_GetAllTest_ReturnAllContactInformation()
         {
-            var contactInformation = _contactInformationRepository.GetAll();
+            var contactInformation = _contactInformationRepository.GetAll().ToList();
             Assert.Greater(contactInformation.Count, 0);
         }
 

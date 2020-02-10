@@ -13,9 +13,7 @@ namespace DataAccessLayer
             Func<TAttribute, TValue> valueSelector)
             where TAttribute : Attribute
         {
-            if (type.GetCustomAttributes(
-                typeof(TAttribute), false
-            ).FirstOrDefault() is TAttribute att)
+            if (type.GetCustomAttributes(typeof(TAttribute), false).FirstOrDefault() is TAttribute att)
             {
                 return valueSelector(att);
             }

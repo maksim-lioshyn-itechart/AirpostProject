@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
@@ -55,7 +56,7 @@ namespace DataAccessLayer.Tests.Repositories
         [Order(3)]
         public void RoleRepository_GetAllTest_ReturnAllRoles()
         {
-            var testRoles = _roleRepository.GetAll();
+            var testRoles = _roleRepository.GetAll().ToList();
             Assert.Greater(testRoles.Count, 0);
         }
 

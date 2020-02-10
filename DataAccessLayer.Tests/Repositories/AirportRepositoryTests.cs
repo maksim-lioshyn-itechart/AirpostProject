@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
@@ -52,7 +53,7 @@ namespace DataAccessLayer.Tests.Repositories
         [Order(3)]
         public void AirportRepository_GetAllTest_ReturnAllAirports()
         {
-            var airports = _airportRepository.GetAll();
+            var airports = _airportRepository.GetAll().ToList();
             Assert.Greater(airports.Count, 0);
         }
 

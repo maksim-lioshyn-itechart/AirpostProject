@@ -48,10 +48,10 @@ namespace DataAccessLayer.Repositories
             return db.Query<T>($"SELECT * FROM {TableName()} WHERE Id = '{id}'").FirstOrDefault();
         }
 
-        public List<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
             using IDbConnection db = new ApplicationContext().OpenConnection();
-            return db.Query<T>($"SELECT * FROM {TableName()}").ToList();
+            return db.Query<T>($"SELECT * FROM {TableName()}");
         }
 
         public void Update(T entity)

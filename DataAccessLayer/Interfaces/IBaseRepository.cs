@@ -7,7 +7,7 @@ namespace DataAccessLayer.Interfaces
     {
         void Create(T entity);
         T GetById(Guid id);
-        List<T> GetAll();
+        IEnumerable<T> GetAll();
         void Update(T entity);
         void Delete(Guid id);
     }
