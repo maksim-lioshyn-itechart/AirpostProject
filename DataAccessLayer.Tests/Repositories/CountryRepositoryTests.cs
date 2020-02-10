@@ -24,14 +24,14 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(0)]
-        public void CreateTest()
+        public void CountryRepository_CreateTest_CreateTestCountry()
         {
             _countryRepository.Create(Country);
         }
 
         [Test]
         [Order(1)]
-        public void GetByIdTest()
+        public void CountryRepository_GetByIdTest_ReturnTestCountry()
         {
             var country = _countryRepository.GetById(Country.Id);
             Assert.AreEqual(country.Id, Country.Id);
@@ -39,15 +39,15 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(3)]
-        public void GetAllTest()
+        public void CountryRepository_GetAllTest_ReturnAllRoles()
         {
             var countries = _countryRepository.GetAll();
-            Assert.IsTrue(countries.Count > 0);
+            Assert.Greater(countries.Count, 0);
         }
 
         [Test]
         [Order(99)]
-        public void UpdateTest()
+        public void CountryRepository_UpdateTest_UpdateTestCountry()
         {
             var newName = "newName";
             var country = _countryRepository.GetById(Country.Id);
@@ -59,7 +59,7 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(100)]
-        public void DeleteTest()
+        public void CountryRepository_DeleteTest_DeleteTestCountry()
         {
             _countryRepository.Delete(Country.Id);
         }

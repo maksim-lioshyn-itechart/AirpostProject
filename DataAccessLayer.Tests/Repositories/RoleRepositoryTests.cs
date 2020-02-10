@@ -3,6 +3,7 @@ using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
 using ORM.Models;
+using static DataAccessLayer.Tests.Repositories.StabsEntities;
 
 namespace DataAccessLayer.Tests.Repositories
 {
@@ -11,15 +12,7 @@ namespace DataAccessLayer.Tests.Repositories
     {
         private readonly IRoleRepository _roleRepository;
         private readonly IUserRepository _userRepository;
-        private readonly User _user = new User
-        {
-            Id = Guid.NewGuid(),
-            FirstName = Guid.NewGuid().ToString(),
-            LastName = Guid.NewGuid().ToString(),
-            Login = Guid.NewGuid().ToString(),
-            Password = Guid.NewGuid().ToString()
-        };
-
+       
         private readonly Role _role = new Role
         {
             Id  = Guid.NewGuid(),
@@ -36,15 +29,15 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(0)]
-        public void CreateTest()
+        public void RoleRepository_CreateTest_CreateTestRole()
         {
-            _userRepository.Create(_user);
+            _userRepository.Create(BaseUser);
             _roleRepository.Create(_role);
         }
 
         [Test]
         [Order(1)]
-        public void GetByNameTest()
+        public void RoleRepository_GetByNameTest_ReturnTestRole()
         {
             _testRole = _roleRepository.GetByName(_role.Name);
             Assert.AreEqual(_testRole.Name, _role.Name);
@@ -52,7 +45,7 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(2)]
-        public void GetByIdTest()
+        public void RoleRepository_GetByIdTest_ReturnTestRole()
         {
             var testRole = _roleRepository.GetById(_testRole.Id);
             Assert.AreEqual(_testRole.Name, testRole.Name);
@@ -60,33 +53,33 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(3)]
-        public void GetAllTest()
+        public void RoleRepository_GetAllTest_ReturnAllRoles()
         {
             var testRoles = _roleRepository.GetAll();
-            Assert.IsTrue(testRoles.Count > 0);
+            Assert.Greater(testRoles.Count, 0);
         }
 
         [Test]
         [Order(4)]
-        public void AssignRoleToUserByIdTest()
+        public void RoleRepository_AssignRoleToUserByIdTest_SetUpTestRoleToTestUser()
         {
-            _roleRepository.AssignRoleToUser(_user.Id, _role.Id);
-            var testUser = _userRepository.GetByName(_user.FirstName);
+            _roleRepository.AssignRoleToUser(BaseUser.Id, _role.Id);
+            var testUser = _userRepository.GetByName(BaseUser.FirstName);
             Assert.AreEqual(testUser.RoleId, _role.Id);
         }
 
         [Test()]
         [Order(5)]
-        public void AssignRoleToUserByNameTest()
+        public void RoleRepository_AssignRoleToUserByNameTest_SetUpTestRoleToTestUser()
         {
-            _roleRepository.AssignRoleToUser(_user.Id, _role.Name);
-            var testUser = _userRepository.GetByName(_user.FirstName);
+            _roleRepository.AssignRoleToUser(BaseUser.Id, _role.Name);
+            var testUser = _userRepository.GetByName(BaseUser.FirstName);
             Assert.AreEqual(testUser.RoleId, _role.Id);
         }
 
         [Test]
         [Order(99)]
-        public void UpdateTest()
+        public void RoleRepository_UpdateTest_UpdateTestRole()
         {
             var name = "name";
             var testRole = _roleRepository.GetByName(_role.Name);
@@ -98,10 +91,10 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(100)]
-        public void DeleteTest()
+        public void RoleRepository_DeleteTest_DeleteTestRole()
         {
             _roleRepository.Delete(_role.Id);
-            _userRepository.Delete(_user.Id);
+            _userRepository.Delete(BaseUser.Id);
         }
 
     }

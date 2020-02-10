@@ -4,6 +4,7 @@ using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
 using ORM.Models;
+using static DataAccessLayer.Tests.Repositories.StabsEntities;
 
 namespace DataAccessLayer.Tests.Repositories
 {
@@ -12,21 +13,13 @@ namespace DataAccessLayer.Tests.Repositories
     {
         private readonly IUserRepository _userRepository;
         private readonly IContactInformationRepository _contactInformationRepository;
-        private static readonly User User = new User
-        {
-            Id = Guid.NewGuid(),
-            FirstName = Guid.NewGuid().ToString(),
-            LastName = Guid.NewGuid().ToString(),
-            Login = Guid.NewGuid().ToString(),
-            Password = Guid.NewGuid().ToString()
-        };
 
         private readonly List<ContactInformation> _information = new List<ContactInformation>
         {
             new ContactInformation
             {
                 Id = Guid.NewGuid(),
-                UserId = User.Id,
+                UserId = BaseUser.Id,
                 Address = Guid.NewGuid().ToString(),
                 Email = Guid.NewGuid().ToString(),
                 Phone = Guid.NewGuid().ToString()
@@ -34,7 +27,7 @@ namespace DataAccessLayer.Tests.Repositories
             new ContactInformation
             {
                 Id = Guid.NewGuid(),
-                UserId = User.Id,
+                UserId = BaseUser.Id,
                 Address = Guid.NewGuid().ToString(),
                 Email = Guid.NewGuid().ToString(),
                 Phone = Guid.NewGuid().ToString()
@@ -42,7 +35,7 @@ namespace DataAccessLayer.Tests.Repositories
             new ContactInformation
             {
                 Id = Guid.NewGuid(),
-                UserId = User.Id,
+                UserId = BaseUser.Id,
                 Address = Guid.NewGuid().ToString(),
                 Email = Guid.NewGuid().ToString(),
                 Phone = Guid.NewGuid().ToString()
@@ -50,7 +43,7 @@ namespace DataAccessLayer.Tests.Repositories
             new ContactInformation
             {
                 Id = Guid.NewGuid(),
-                UserId = User.Id,
+                UserId = BaseUser.Id,
                 Address = Guid.NewGuid().ToString(),
                 Email = Guid.NewGuid().ToString(),
                 Phone = Guid.NewGuid().ToString()
@@ -65,9 +58,9 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(0)]
-        public void CreateTest()
+        public void ContactInformationRepository_CreateTest_CreateTestContactInformation()
         {
-            _userRepository.Create(User);
+            _userRepository.Create(BaseUser);
             foreach (var information in _information)
             {
                 _contactInformationRepository.Create(information);
@@ -76,15 +69,15 @@ namespace DataAccessLayer.Tests.Repositories
        
         [Test]
         [Order(1)]
-        public void GetContactInformationByUserTest()
+        public void ContactInformationRepository_GetContactInformationByUserTest_ReturnTestContactInformation()
         {
-            var testUserInformation = _contactInformationRepository.GetContactInformationByUser(User);
+            var testUserInformation = _contactInformationRepository.GetContactInformationByUser(BaseUser);
             Assert.IsTrue(testUserInformation.FindIndex(u => u.Id == _information[0].Id) >= 0);
         }
 
         [Test]
         [Order(2)]
-        public void GetByIdTest()
+        public void ContactInformationRepository_GetByIdTest_ReturnTestContactInformation()
         {
             var information = _contactInformationRepository.GetById(_information[0].Id);
             Assert.AreEqual(information.Id, _information[0].Id);
@@ -92,15 +85,15 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(3)]
-        public void GetAllTest()
+        public void ContactInformationRepository_GetAllTest_ReturnAllContactInformation()
         {
             var contactInformation = _contactInformationRepository.GetAll();
-            Assert.IsTrue(contactInformation.Count > 0);
+            Assert.Greater(contactInformation.Count, 0);
         }
 
         [Test]
         [Order(99)]
-        public void UpdateTest()
+        public void ContactInformationRepository_UpdateTest_UpdateTestContactInformation()
         {
             var phone = "phone";
             var information = _contactInformationRepository.GetById(_information[0].Id);
@@ -112,13 +105,13 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(100)]
-        public void DeleteTest()
+        public void ContactInformationRepository_DeleteTest_DeleteTestContactInformation()
         {
             foreach (var information in _information)
             {
                 _contactInformationRepository.Delete(information.Id);
             }
-            _userRepository.Delete(User.Id);
+            _userRepository.Delete(BaseUser.Id);
         }
     }
 }

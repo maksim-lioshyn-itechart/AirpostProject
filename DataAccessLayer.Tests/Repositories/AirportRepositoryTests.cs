@@ -34,7 +34,7 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(0)]
-        public void CreateTest()
+        public void AirportRepository_CreateTest_CreateTestAirport()
         {
             _countryRepository.Create(Country);
             _airportRepository.Create(_airport);
@@ -42,7 +42,7 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(1)]
-        public void GetByIdTest()
+        public void AirportRepository_GetByIdTest_ReturnTestAirport()
         {
             var airport = _airportRepository.GetById(_airport.Id);
             Assert.AreEqual(airport.Id, _airport.Id);
@@ -50,15 +50,15 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(3)]
-        public void GetAllTest()
+        public void AirportRepository_GetAllTest_ReturnAllAirports()
         {
             var airports = _airportRepository.GetAll();
-            Assert.IsTrue(airports.Count > 0);
+            Assert.Greater(airports.Count, 0);
         }
 
         [Test]
         [Order(4)]
-        public void AssignRoleToUserByIdTest()
+        public void AirportRepository_AssignAirportToCountryByIdTest_SetUpTestCountryToTestAirport()
         {
             _airportRepository.AssignAirportToCountry(_airport.Id, Country.Id);
             var airport = _airportRepository.GetById(_airport.Id);
@@ -68,7 +68,7 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(99)]
-        public void UpdateTest()
+        public void AirportRepository_UpdateTest_UpdateTestAirport()
         {
             var newName = "newName";
             var airport = _airportRepository.GetById(_airport.Id);
@@ -80,7 +80,7 @@ namespace DataAccessLayer.Tests.Repositories
 
         [Test]
         [Order(100)]
-        public void DeleteTest()
+        public void AirportRepository_DeleteTest_DeleteTestAirport()
         {
             _countryRepository.Delete(Country.Id);
             _airportRepository.Delete(_airport.Id);
