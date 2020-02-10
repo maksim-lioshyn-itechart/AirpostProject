@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using DataAccessLayer.Interfaces;
-using ORM;
 using ORM.Attributes;
 using ORM.Models;
 using System;
@@ -45,7 +44,7 @@ namespace DataAccessLayer.Repositories
         public T GetById(Guid id)
         {
             using IDbConnection db = new ApplicationContext().OpenConnection();
-            return db.Query<T>($"SELECT * FROM {TableName()} WHERE Id = '{id}'").FirstOrDefault();
+            return db.QueryFirstOrDefault<T>($"SELECT * FROM {TableName()} WHERE Id = '{id}'");
         }
 
         public IEnumerable<T> GetAll()
