@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
 using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
-using ORM.Models;
+
 
 namespace DataAccessLayer.Tests.Repositories
 {
@@ -20,7 +21,7 @@ namespace DataAccessLayer.Tests.Repositories
 
         public CountryRepositoryTests()
         {
-            _countryRepository = new CountryRepository(new UnitOfWork(new ApplicationContext()));
+            _countryRepository = new CountryRepository();
         }
 
         [Test]

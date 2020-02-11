@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
-using ORM.Models;
+
 using static DataAccessLayer.Tests.Repositories.StabsEntities;
 
 namespace DataAccessLayer.Tests.Repositories
 {
     [TestFixture()]
-    public class ContactInformationRepositoryTests
+    public class UserContactInformationRepositoryTests
     {
         private readonly IUserRepository _userRepository;
-        private readonly IContactInformationRepository _contactInformationRepository;
+        private readonly IUserContactInformationRepository _UserContactInformationRepository;
 
-        private readonly List<ContactInformation> _information = new List<ContactInformation>
+        private readonly List<UserContactInformation> _information = new List<UserContactInformation>
         {
-            new ContactInformation
+            new UserContactInformation
             {
                 Id = Guid.NewGuid(),
                 UserId = BaseUser.Id,
@@ -25,7 +26,7 @@ namespace DataAccessLayer.Tests.Repositories
                 Email = Guid.NewGuid().ToString(),
                 Phone = Guid.NewGuid().ToString()
             },
-            new ContactInformation
+            new UserContactInformation
             {
                 Id = Guid.NewGuid(),
                 UserId = BaseUser.Id,
@@ -33,7 +34,7 @@ namespace DataAccessLayer.Tests.Repositories
                 Email = Guid.NewGuid().ToString(),
                 Phone = Guid.NewGuid().ToString()
             },
-            new ContactInformation
+            new UserContactInformation
             {
                 Id = Guid.NewGuid(),
                 UserId = BaseUser.Id,
@@ -41,7 +42,7 @@ namespace DataAccessLayer.Tests.Repositories
                 Email = Guid.NewGuid().ToString(),
                 Phone = Guid.NewGuid().ToString()
             },
-            new ContactInformation
+            new UserContactInformation
             {
                 Id = Guid.NewGuid(),
                 UserId = BaseUser.Id,
@@ -51,66 +52,66 @@ namespace DataAccessLayer.Tests.Repositories
             }
         };
 
-        public ContactInformationRepositoryTests()
+        public UserContactInformationRepositoryTests()
         {
-            _userRepository = new UserRepository(new UnitOfWork(new ApplicationContext()));
-            _contactInformationRepository = new ContactInformationRepository(new UnitOfWork(new ApplicationContext()));
+            _userRepository = new UserRepository();
+            _UserContactInformationRepository = new UserContactInformationRepository();
         }
 
         [Test]
         [Order(0)]
-        public void ContactInformationRepository_CreateTest_CreateTestContactInformation()
+        public void UserContactInformationRepository_CreateTest_CreateTestUserContactInformation()
         {
             _userRepository.Create(BaseUser);
             foreach (var information in _information)
             {
-                _contactInformationRepository.Create(information);
+                _UserContactInformationRepository.Create(information);
             }
         }
        
         [Test]
         [Order(1)]
-        public void ContactInformationRepository_GetContactInformationByUserTest_ReturnTestContactInformation()
+        public void UserContactInformationRepository_GetUserContactInformationByUserTest_ReturnTestUserContactInformation()
         {
-            var testUserInformation = _contactInformationRepository.GetContactInformationByUser(BaseUser);
-            Assert.IsTrue(testUserInformation.FindIndex(u => u.Id == _information[0].Id) >= 0);
+            var testUserInformation = _UserContactInformationRepository.GetUserContactInformation(BaseUser);
+            Assert.IsTrue(testUserInformation.ToList().FindIndex(u => u.Id == _information[0].Id) >= 0);
         }
 
         [Test]
         [Order(2)]
-        public void ContactInformationRepository_GetByIdTest_ReturnTestContactInformation()
+        public void UserContactInformationRepository_GetByIdTest_ReturnTestUserContactInformation()
         {
-            var information = _contactInformationRepository.GetById(_information[0].Id);
+            var information = _UserContactInformationRepository.GetById(_information[0].Id);
             Assert.AreEqual(information.Id, _information[0].Id);
         }
 
         [Test]
         [Order(3)]
-        public void ContactInformationRepository_GetAllTest_ReturnAllContactInformation()
+        public void UserContactInformationRepository_GetAllTest_ReturnAllUserContactInformation()
         {
-            var contactInformation = _contactInformationRepository.GetAll().ToList();
-            Assert.Greater(contactInformation.Count, 0);
+            var UserContactInformation = _UserContactInformationRepository.GetAll().ToList();
+            Assert.Greater(UserContactInformation.Count, 0);
         }
 
         [Test]
         [Order(99)]
-        public void ContactInformationRepository_UpdateTest_UpdateTestContactInformation()
+        public void UserContactInformationRepository_UpdateTest_UpdateTestUserContactInformation()
         {
             var phone = "phone";
-            var information = _contactInformationRepository.GetById(_information[0].Id);
+            var information = _UserContactInformationRepository.GetById(_information[0].Id);
             information.Phone = phone;
-            _contactInformationRepository.Update(information);
-            var test = _contactInformationRepository.GetById(_information[0].Id);
+            _UserContactInformationRepository.Update(information);
+            var test = _UserContactInformationRepository.GetById(_information[0].Id);
             Assert.AreEqual(phone, test.Phone);
         }
 
         [Test]
         [Order(100)]
-        public void ContactInformationRepository_DeleteTest_DeleteTestContactInformation()
+        public void UserContactInformationRepository_DeleteTest_DeleteTestUserContactInformation()
         {
             foreach (var information in _information)
             {
-                _contactInformationRepository.Delete(information.Id);
+                _UserContactInformationRepository.Delete(information.Id);
             }
             _userRepository.Delete(BaseUser.Id);
         }

@@ -1,12 +1,12 @@
 ﻿using System;
-using ORM.Models;
+using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Interfaces
 {
     public interface IRoleRepository: IBaseRepository<Role>
     {
-        bool AssignRoleToUser(Guid idUser, Guid idRole);
-        bool AssignRoleToUser(Guid idUser, string roleName);
+        void AssignUser(Guid userId, Guid roleId);
+        void AssignUser(Guid userId, string roleName);
         Role GetByName(string name);
     }
 }

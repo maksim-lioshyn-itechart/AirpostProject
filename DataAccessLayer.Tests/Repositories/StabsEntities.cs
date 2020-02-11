@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ORM.Models;
+using DataAccessLayer.Models;
+
 
 namespace DataAccessLayer.Tests.Repositories
 {

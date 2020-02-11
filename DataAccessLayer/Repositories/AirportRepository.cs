@@ -1,20 +1,51 @@
-﻿using System;
+﻿using Dapper;
 using DataAccessLayer.Interfaces;
-using ORM.Attributes;
-using ORM.Models;
+using DataAccessLayer.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace DataAccessLayer.Repositories
 {
-    public class AirportRepository: BaseRepository<Airport>, IAirportRepository
+    public class AirportRepository: IAirportRepository
     {
-        public AirportRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public void Create(Airport entity)
         {
+            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            db.ExecuteScalar("INSERT INTO Airports (Id, Name, IsActive) VALUES (@Id, @Name, @IsActive)", entity);
         }
 
-        public void AssignAirportToCountry(Guid idAirport, Guid idCountry)
+        public Airport GetById(Guid id)
         {
-            var tableName = typeof(Airport).GetTableAttributeValue((AirportTableAttribute att) => att.Name);
-            UnitOfWork.Saving($"UPDATE {tableName} SET CountryId = '{idCountry}' WHERE Id = '{idAirport}'");
+            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            return db.QuerySingle<Airport>("SELECT * FROM Airports WHERE Id = @Id", new { id });
+        }
+
+        public IEnumerable<Airport> GetAll()
+        {
+            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            return db.Query<Airport>("SELECT * FROM Airports");
+        }
+
+        public void Update(Airport entity)
+        {
+            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            db.Execute("UPDATE Airports SET " +
+                       "Name = @Name, " +
+                       "IsActive = @IsActive " +
+                       "WHERE Id = @Id", entity);
+        }
+
+        public void Delete(Guid id)
+        {
+            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            db.Execute("DELETE FROM Airports WHERE Id = @Id", new { id });
+        }
+
+        public void AssignCountry(Guid airportId, Guid countryId)
+        {
+            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            db.Execute($"UPDATE Airports SET CountryId = @CountryId WHERE Id = @AirportId", new { airportId, countryId });
         }
     }
 }

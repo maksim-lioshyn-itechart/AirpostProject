@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
 using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
-using ORM.Models;
+
 
 namespace DataAccessLayer.Tests.Repositories
 {
@@ -29,8 +30,8 @@ namespace DataAccessLayer.Tests.Repositories
 
         public AirportRepositoryTests()
         {
-            _countryRepository = new CountryRepository(new UnitOfWork(new ApplicationContext()));
-            _airportRepository = new AirportRepository(new UnitOfWork(new ApplicationContext()));
+            _countryRepository = new CountryRepository();
+            _airportRepository = new AirportRepository();
         }
 
         [Test]
@@ -61,7 +62,7 @@ namespace DataAccessLayer.Tests.Repositories
         [Order(4)]
         public void AirportRepository_AssignAirportToCountryByIdTest_SetUpTestCountryToTestAirport()
         {
-            _airportRepository.AssignAirportToCountry(_airport.Id, Country.Id);
+            _airportRepository.AssignCountry(_airport.Id, Country.Id);
             var airport = _airportRepository.GetById(_airport.Id);
             Assert.AreEqual(airport.CountryId, Country.Id);
         }

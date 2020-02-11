@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
 using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
-using ORM.Models;
+
 using static DataAccessLayer.Tests.Repositories.StabsEntities;
 
 namespace DataAccessLayer.Tests.Repositories
@@ -15,7 +16,7 @@ namespace DataAccessLayer.Tests.Repositories
         
         public UserRepositoryTests()
         {
-            _userRepository = new UserRepository(new UnitOfWork(new ApplicationContext()));
+            _userRepository = new UserRepository();
         }
 
         [Test]

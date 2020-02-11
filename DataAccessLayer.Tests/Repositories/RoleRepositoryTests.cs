@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
 using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using NUnit.Framework;
-using ORM.Models;
+
 using static DataAccessLayer.Tests.Repositories.StabsEntities;
 
 namespace DataAccessLayer.Tests.Repositories
@@ -24,8 +25,8 @@ namespace DataAccessLayer.Tests.Repositories
 
         public RoleRepositoryTests()
         {
-            _roleRepository = new RoleRepository(new UnitOfWork(new ApplicationContext()));
-            _userRepository = new UserRepository(new UnitOfWork(new ApplicationContext()));
+            _roleRepository = new RoleRepository();
+            _userRepository = new UserRepository();
         }
 
         [Test]
@@ -64,20 +65,18 @@ namespace DataAccessLayer.Tests.Repositories
         [Order(4)]
         public void RoleRepository_AssignRoleToUserByIdTest_SetUpTestRoleToTestUser()
         {
-            var isAssign = _roleRepository.AssignRoleToUser(BaseUser.Id, _role.Id);
+            _roleRepository.AssignUser(BaseUser.Id, _role.Id);
             var testUser = _userRepository.GetByName(BaseUser.FirstName);
             Assert.AreEqual(testUser.RoleId, _role.Id);
-            Assert.IsTrue(isAssign);
         }
 
         [Test()]
         [Order(5)]
         public void RoleRepository_AssignRoleToUserByNameTest_SetUpTestRoleToTestUser()
         {
-            var isAssign = _roleRepository.AssignRoleToUser(BaseUser.Id, _role.Name);
+            _roleRepository.AssignUser(BaseUser.Id, _role.Name);
             var testUser = _userRepository.GetByName(BaseUser.FirstName);
             Assert.AreEqual(testUser.RoleId, _role.Id);
-            Assert.IsTrue(isAssign);
         }
 
         [Test]
