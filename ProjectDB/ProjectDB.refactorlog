@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="17b19827-7e20-423a-8a94-9a2b222a324b" ChangeDateTime="02/11/2020 14:53:53">
+    <Property Name="ElementName" Value="[dbo].[Airplanes].[CoordinatX]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Airplanes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CoordinateX" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0f910c5c-580c-47df-81ea-d01375882b5f" ChangeDateTime="02/11/2020 15:21:43">
+    <Property Name="ElementName" Value="[dbo].[Airplanes].[Number]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Airplanes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6de80b88-22b9-4434-b0a3-3a6b38c8bd57" ChangeDateTime="02/11/2020 15:24:29">
+    <Property Name="ElementName" Value="[dbo].[Airplanes].[CoordinateX]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Airplanes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CarryingCapacity" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7d6013c0-ff37-4419-8b53-cf60b1130abb" ChangeDateTime="02/11/2020 15:24:32">
+    <Property Name="ElementName" Value="[dbo].[Airplanes].[CoordinateY]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Airplanes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="OverWeightPrice" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c4691778-767a-45e3-bf4e-374c9d25dbfe" ChangeDateTime="02/11/2020 15:46:30">
+    <Property Name="ElementName" Value="[dbo].[Schemas].[CoordinateX]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Schemas]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CoordinateX1" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6e69cecb-8a62-460d-adb8-86b88445b4f5" ChangeDateTime="02/11/2020 15:46:32">
+    <Property Name="ElementName" Value="[dbo].[Schemas].[CoordinateY]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Schemas]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CoordinateY1" />
+  </Operation>
+</Operations>
