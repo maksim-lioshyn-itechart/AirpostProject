@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[UserContactInformation] (
-    [Id]      UNIQUEIDENTIFIER NOT NULL,
+    [Id]      UNIQUEIDENTIFIER NOT NULL DEFAULT newsequentialid(),
     [UserId]  UNIQUEIDENTIFIER NOT NULL,
     [Phone]   NVARCHAR (50)    NOT NULL,
     [Address] NVARCHAR (MAX)   NULL,

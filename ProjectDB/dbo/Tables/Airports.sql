@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Airports] (
-    [id]        UNIQUEIDENTIFIER NOT NULL,
+    [id]        UNIQUEIDENTIFIER NOT NULL DEFAULT newsequentialid(),
     [Name]      NVARCHAR (MAX)   NOT NULL,
     [IsActive]  BIT              CONSTRAINT [DF_Airports_IsActive] DEFAULT ((0)) NULL,
     [CountryId] UNIQUEIDENTIFIER NULL,

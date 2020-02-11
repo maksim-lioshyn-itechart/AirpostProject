@@ -2,11 +2,37 @@
 GO
 
 INSERT INTO [dbo].[Roles]
-            ([id],[Name])
-     VALUES (CAST('00000000-0000-0000-0000-000000000000' AS uniqueidentifier), 'ADMIN')
+            ([Name])
+     VALUES ('ADMIN')
 GO
 
 INSERT INTO [dbo].[Roles]
-            ([id],[Name])
-     VALUES (CAST('00000000-0000-0000-0000-000000000001' AS uniqueidentifier), 'AUTHORIZEDUSER')
+            ([Name])
+     VALUES ('AUTHORIZEDUSER')
+GO
+
+/**********************  Countries  **********************/
+INSERT INTO [dbo].[Countries]
+            ([Name], [Code])
+     VALUES ('BARBADOS', 'BB')
+GO
+
+INSERT INTO [dbo].[Countries]
+            ([Name], [Code])
+     VALUES ('BOSNIA AND HERZEGOVINA', 'BA')
+GO
+
+INSERT INTO [dbo].[Countries]
+            ([Name], [Code])
+     VALUES ('FRENCH SOUTHERN TERRITORIES', 'TF')
+GO
+
+INSERT INTO [dbo].[Countries]
+            ([Name], [Code])
+     VALUES ('GERMANY', 'DE')
+GO
+
+INSERT INTO [dbo].[Countries]
+            ([Name], [Code])
+     VALUES ('HEARD ISLAND AND MCDONALD ISLANDS', 'HM')
 GO
