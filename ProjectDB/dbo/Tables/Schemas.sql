@@ -5,7 +5,8 @@
     [PlaceId] UNIQUEIDENTIFIER NOT NULL, 
     [IsActive] BIT NOT NULL DEFAULT 1, 
     [Price] MONEY NULL, 
-    [Number] INT NULL, 
+    [PlaceNumber] INT NULL, 
+    [Code] NVARCHAR(50) NOT NULL, 
     PRIMARY KEY ([Id]), 
     CONSTRAINT [FK_Schemas_Airplanes] FOREIGN KEY ([AirPlaneId]) REFERENCES Airplanes([Id]), 
     CONSTRAINT [FK_Schemas_Places] FOREIGN KEY ([PlaceId]) REFERENCES Places([Id])

@@ -5,6 +5,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IAirportRepository: IBaseRepository<Airport>
     {
-        void AssignCountry(Guid airportId, Guid countryId);
+        void AssignPlace(Guid airportId, Guid placeId);
     }
 }

@@ -4,6 +4,7 @@ namespace DataAccessLayer.Models
 {
     public class Airplane : BasicModel
     {
+        public string Name { get; set; }
         public AirplaneType Type { get; set; }
         public AirplaneSubType SubType { get; set; }
         public double CarryingCapacity { get; set; } = 0;

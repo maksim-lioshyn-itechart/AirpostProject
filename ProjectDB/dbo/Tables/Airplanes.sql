@@ -6,6 +6,7 @@
     [CarryingCapacity] DECIMAL NOT NULL DEFAULT 0, 
     [OverWeightPrice] MONEY NULL DEFAULT 0,
     [FreeWeightCapacity] DECIMAL NULL DEFAULT 0, 
+    [Name] NVARCHAR(50) NOT NULL, 
     CONSTRAINT [PK_Airplanes] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT CHK_AirplanesType CHECK (
         [Type] = 'CommercialAirplanes' AND [SubType] IN ('JumboPassengerJets', 'MidSizePassengerJets', 'LightPassengerJets', 'PassengerTurboProps', 'CargoAirplanes') OR

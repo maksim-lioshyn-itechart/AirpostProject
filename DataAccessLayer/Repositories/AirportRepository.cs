@@ -30,10 +30,7 @@ namespace DataAccessLayer.Repositories
         public void Update(Airport entity)
         {
             using IDbConnection db = new ConnectionFactory().GetOpenConnection();
-            db.Execute("UPDATE Airports SET " +
-                       "Name = @Name, " +
-                       "IsActive = @IsActive " +
-                       "WHERE Id = @Id", entity);
+            db.Execute("UPDATE Airports SET Name = @Name, IsActive = @IsActive WHERE Id = @Id", entity);
         }
 
         public void Delete(Guid id)
@@ -42,10 +39,10 @@ namespace DataAccessLayer.Repositories
             db.Execute("DELETE FROM Airports WHERE Id = @Id", new { id });
         }
 
-        public void AssignCountry(Guid airportId, Guid countryId)
+        public void AssignPlace(Guid airportId, Guid placeId)
         {
             using IDbConnection db = new ConnectionFactory().GetOpenConnection();
-            db.Execute($"UPDATE Airports SET CountryId = @CountryId WHERE Id = @AirportId", new { airportId, countryId });
+            db.Execute($"UPDATE Airports SET PlaceId = @PlaceId WHERE Id = @AirportId", new { airportId, PlaceId = placeId });
         }
     }
 }
