@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Users] (
     [Id]        UNIQUEIDENTIFIER CONSTRAINT [DF_Users_Id] DEFAULT (newid()) ROWGUIDCOL NOT NULL,
-    [FirstName] NVARCHAR (MAX)   NOT NULL,
-    [LastName]  NVARCHAR (MAX)   NOT NULL,
+    [FirstName] NVARCHAR (300)   NOT NULL,
+    [LastName]  NVARCHAR (300)   NOT NULL,
     [Login]     NVARCHAR (50)    NOT NULL,
     [Password]  NVARCHAR (50)    NOT NULL,
     [RoleId]    UNIQUEIDENTIFIER NULL,
