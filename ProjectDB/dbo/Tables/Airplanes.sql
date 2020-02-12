@@ -1,11 +1,11 @@
 ﻿CREATE TABLE [dbo].[Airplanes]
 (
-    [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT newsequentialid(), 
+    [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT (newsequentialid()), 
     [Type] NVARCHAR(150) NOT NULL, 
     [SubType] NVARCHAR(150) NOT NULL, 
-    [CarryingCapacity] DECIMAL NOT NULL, 
-    [OverWeightPrice] MONEY NULL,
-    [FreeWeightPrice] MONEY NULL, 
+    [CarryingCapacity] DECIMAL NOT NULL DEFAULT 0, 
+    [OverWeightPrice] MONEY NULL DEFAULT 0,
+    [FreeWeightCapacity] DECIMAL NULL DEFAULT 0, 
     CONSTRAINT [PK_Airplanes] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT CHK_AirplanesType CHECK (
         [Type] = 'CommercialAirplanes' AND [SubType] IN ('JumboPassengerJets', 'MidSizePassengerJets', 'LightPassengerJets', 'PassengerTurboProps', 'CargoAirplanes') OR

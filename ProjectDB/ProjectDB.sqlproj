@@ -149,6 +149,10 @@
     <Build Include="Security\Permissions.sql" />
     <Build Include="dbo\Tables\Places.sql" />
     <Build Include="dbo\Tables\Airplanes.sql" />
+    <Build Include="dbo\Tables\Schemas.sql" />
+    <Build Include="dbo\Tables\Tickets.sql" />
+    <Build Include="dbo\Tables\Raises.sql" />
+    <Build Include="dbo\Tables\RaiseAirplane.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\InitialData.sql" />

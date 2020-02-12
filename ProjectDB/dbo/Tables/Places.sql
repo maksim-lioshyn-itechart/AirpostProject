@@ -6,8 +6,6 @@
     [CoordinateY1] INT NULL,
     [CoordinateX2] INT NULL, 
     [CoordinateY2] INT NULL, 
-    [Price] MONEY NULL, 
-    [Number] INT NULL, 
     CONSTRAINT [PK_Places] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT CHK_PlacesType CHECK ([Type] IN ('FirstClass', 'BusinessClass', 'EconomyClass', 'FirstBusinessClass', 'BusinessEconomyClass', 'PremiumEconomyClass', 'Other')),
     
