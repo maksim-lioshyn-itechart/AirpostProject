@@ -1,9 +1,9 @@
 ﻿CREATE TABLE [dbo].[Airports] (
-    [id]        UNIQUEIDENTIFIER NOT NULL DEFAULT newsequentialid(),
-    [Name]      NVARCHAR (MAX)   NOT NULL,
-    [IsActive]  BIT              CONSTRAINT [DF_Airports_IsActive] DEFAULT ((0)) NULL,
+    [Id] UNIQUEIDENTIFIER CONSTRAINT [DF_Airports_Id] DEFAULT (newid()) NOT NULL,
+    [Name] NVARCHAR (300)   NOT NULL,
+    [IsActive] BIT CONSTRAINT [DF_Airports_IsActive] DEFAULT ((0)) NOT NULL,
     [CountryId] UNIQUEIDENTIFIER NULL,
-    CONSTRAINT [PK_Airports] PRIMARY KEY CLUSTERED ([id] ASC),
-    CONSTRAINT [FK_Airports_Countries] FOREIGN KEY ([CountryId]) REFERENCES [dbo].[Countries] ([id]) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT [PK_Airports] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Airports_Countries] FOREIGN KEY ([CountryId]) REFERENCES [dbo].[Countries] ([Id])
 );
 

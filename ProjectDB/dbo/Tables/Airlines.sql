@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Airlines]
+(
+    [Id] UNIQUEIDENTIFIER CONSTRAINT [DF_Airlines_Id] DEFAULT (newid()) NOT NULL,
+    [Name] NVARCHAR(50) NOT NULL, 
+    [Email] NVARCHAR(50) NOT NULL, 
+    [Phone] NVARCHAR(50) NOT NULL, 
+    [Address] NVARCHAR(400) NOT NULL, 
+    [URL] NVARCHAR(400) NOT NULL, 
+    CONSTRAINT [PK_Airlines] PRIMARY KEY CLUSTERED ([Id] ASC)
+)

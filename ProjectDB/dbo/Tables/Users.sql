@@ -1,12 +1,13 @@
 ﻿CREATE TABLE [dbo].[Users] (
-    [Id]        UNIQUEIDENTIFIER CONSTRAINT [DF_Users_Id] DEFAULT (newid()) ROWGUIDCOL NOT NULL,
+    [Id] UNIQUEIDENTIFIER CONSTRAINT [DF_Users_Id] DEFAULT (newid()) NOT NULL,
     [FirstName] NVARCHAR (300)   NOT NULL,
-    [LastName]  NVARCHAR (300)   NOT NULL,
-    [Login]     NVARCHAR (50)    NOT NULL,
-    [Password]  NVARCHAR (50)    NOT NULL,
-    [RoleId]    UNIQUEIDENTIFIER NULL,
+    [LastName] NVARCHAR (300)   NOT NULL,
+    [Email] NVARCHAR (256)    NOT NULL,
+    [Password] NVARCHAR (50)    NOT NULL,
+    [RoleId] UNIQUEIDENTIFIER NOT NULL,
+    [Phone] NVARCHAR(50) NOT NULL, 
+    [Address] NVARCHAR(400) NULL, 
     CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Users_Roles] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles] ([id]) ON DELETE SET NULL,
-    CONSTRAINT [IX_UsersLogin] UNIQUE NONCLUSTERED ([Id] ASC)
+    CONSTRAINT [FK_Users_Roles] FOREIGN KEY ([RoleId]) REFERENCES [UserRoles]([Id])
 );
 

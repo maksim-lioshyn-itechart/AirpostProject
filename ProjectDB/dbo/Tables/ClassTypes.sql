@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[ClassTypes]
+(
+    [Id] UNIQUEIDENTIFIER CONSTRAINT [DF_ClassTypes_Id] DEFAULT (newid()) NOT NULL,
+    [Name] NVARCHAR(50) NOT NULL, 
+    CONSTRAINT [PK_ClassTypes] PRIMARY KEY CLUSTERED ([Id] ASC),
+)
