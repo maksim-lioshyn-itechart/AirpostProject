@@ -4,6 +4,7 @@ using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
@@ -14,42 +15,40 @@ namespace DataAccessLayer.Repositories
         {
             _configuration = configuration;
         }
-        public void Create(Airplane entity)
+        public async Task Create(Airplane entity)
         {
             using IDbConnection db = _configuration.GetConnection();
-            db.ExecuteScalar("INSERT INTO Airplanes " +
-                             "(Id, Name, Type, SubType, CarryingCapacity, OverWeightPrice, FreeWeightCapacity) " +
-                             "VALUES (@Id, @Name, @Type, @SubType, @CarryingCapacity, @OverWeightPrice, @FreeWeightCapacity)", entity);
+            await db.ExecuteAsync(Queries.insertAirplanes, entity);
         }
 
-        public Airplane GetById(Guid id)
+        public async Task<Airplane> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return db.QuerySingle<Airplane>("SELECT * FROM Airplanes WHERE Id = @Id", new { id });
+            return await db.QuerySingleAsync<Airplane>("SELECT * FROM Airplanes WHERE Id = @Id", new { id });
         }
 
-        public IEnumerable<Airplane> GetAll()
+        public async Task<IEnumerable<Airplane>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return db.Query<Airplane>("SELECT * FROM Airplanes");
+            return await db.QueryAsync<Airplane>("SELECT * FROM Airplanes");
         }
 
-        public void Update(Airplane entity)
+        public async Task Update(Airplane entity)
         {
             using IDbConnection db = _configuration.GetConnection();
-            db.Execute("UPDATE Airplanes SET " +
+            await db.ExecuteAsync("UPDATE Airplanes SET " +
                        "Name = @Name, " +
                        "SubType = @SubType, " +
                        "CarryingCapacity = @CarryingCapacity, " +
                        "OverWeightPrice = @OverWeightPrice, " +
-                       "FreeWeightCapacity = @FreeWeightCapacity" +
+                       "FreeWeightCapacity = @FreeWeightCapacity " +
                        "WHERE Id = @Id", entity);
         }
 
-        public void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            db.Execute("DELETE FROM Airplanes WHERE Id = @Id", new { id });
+            await db.ExecuteAsync("DELETE FROM Airplanes WHERE Id = @Id", new { id });
         }
     }
 }

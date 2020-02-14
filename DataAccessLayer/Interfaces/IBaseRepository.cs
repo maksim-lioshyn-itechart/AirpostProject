@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
     public interface IBaseRepository<T>
     {
-        void Create(T entity);
-        T GetById(Guid id);
-        IEnumerable<T> GetAll();
-        void Update(T entity);
-        void Delete(Guid id);
+        Task Create(T entity);
+        Task<T> GetById(Guid id);
+        Task<IEnumerable<T>> GetAll();
+        Task Update(T entity);
+        Task Delete(Guid id);
     }
 }
