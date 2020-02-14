@@ -9,28 +9,35 @@ namespace DataAccessLayer.Repositories
 {
     public class TicketRepository: ITicketRepository
     {
+        private readonly IConfigurationFactory _configuration;
+
+        public TicketRepository(IConfigurationFactory configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void Create(Ticket entity)
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            using IDbConnection db = _configuration.GetConnection();
             db.ExecuteScalar("INSERT INTO Tickets (Id, Number, UserId, RaiseId, PlaceType, Cost) " +
                              "VALUES (@Id, @Number, @UserId, @RaiseId, @PlaceType, @Cost)", entity);
         }
 
         public Ticket GetById(Guid id)
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            using IDbConnection db = _configuration.GetConnection();
             return db.QuerySingle<Ticket>("SELECT * FROM Tickets WHERE Id = @Id", new { id });
         }
 
         public IEnumerable<Ticket> GetAll()
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            using IDbConnection db = _configuration.GetConnection();
             return db.Query<Ticket>("SELECT * FROM Tickets");
         }
 
         public void Update(Ticket entity)
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            using IDbConnection db = _configuration.GetConnection();
             db.Execute("UPDATE Tickets SET " +
                        "Number = @Number, " +
                        "UserId = @UserId, " +
@@ -42,7 +49,7 @@ namespace DataAccessLayer.Repositories
 
         public void Delete(Guid id)
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            using IDbConnection db = _configuration.GetConnection();
             db.Execute("DELETE FROM Tickets WHERE Id = @Id", new { id });
         }
     }

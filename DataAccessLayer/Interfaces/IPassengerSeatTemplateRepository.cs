@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IRaiseRepository : IBaseRepository<Raise>
+    public interface IPassengerSeatTemplateRepository: IBaseRepository<PassengerSeatTemplate>
     {
         
     }

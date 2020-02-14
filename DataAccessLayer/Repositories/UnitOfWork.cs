@@ -6,5 +6,11 @@ namespace DataAccessLayer.Repositories
 {
     public class UnitOfWork: IUnitOfWork
     {
+        private readonly IConfigurationFactory _configuration;
+
+        public UnitOfWork(IConfigurationFactory configuration)
+        {
+            _configuration = configuration;
+        }
     }
 }

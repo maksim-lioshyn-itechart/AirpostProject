@@ -1,14 +1,14 @@
-﻿using DataAccessLayer.Enums;
+﻿using System;
 
 namespace DataAccessLayer.Models
 {
     public class Airplane : BasicModel
     {
-        public string Name { get; set; }
-        public AirplaneType Type { get; set; }
-        public AirplaneSubType SubType { get; set; }
-        public double CarryingCapacity { get; set; } = 0;
-        public double OverWeightPrice { get; set; } = 0;
-        public double FreeWeightCapacity { get; set; } = 0;
-    }
+		public string Name { get; set; }
+        public Guid AirplaneTypeId { get; set; }
+        public Guid AirplaneSubTypeId { get; set; }
+        public decimal CarryingCapacity { get; set; }
+        public Guid AirlineId { get; set; }
+        public Guid AirplaneSchemaId { get; set; }
+	}
 }

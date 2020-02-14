@@ -7,30 +7,37 @@ using System.Data;
 
 namespace DataAccessLayer.Repositories
 {
-    public class SchemaRepository : ISchemaRepository
+    public class AirplaneSchemaRepository : IAirplaneSchemaRepository
     {
-        public void Create(Schema entity)
+        private readonly IConfigurationFactory _configuration;
+
+        public AirplaneSchemaRepository(IConfigurationFactory configuration)
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            _configuration = configuration;
+        }
+
+        public void Create(AirplaneSchema entity)
+        {
+            using IDbConnection db = _configuration.GetConnection();
             db.ExecuteScalar("INSERT INTO Schemas (Id, Code, AirPlaneId, PlaceId, IsActive, Price, PlaceNumber) " +
                              "VALUES (@Id, @Code, @AirPlaneId, @PlaceId, @IsActive, @Price, @PlaceNumber)", entity);
         }
 
-        public Schema GetById(Guid id)
+        public AirplaneSchema GetById(Guid id)
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
-            return db.QuerySingle<Schema>("SELECT * FROM Schemas WHERE Id = @Id", new { id });
+            using IDbConnection db = _configuration.GetConnection();
+            return db.QuerySingle<AirplaneSchema>("SELECT * FROM Schemas WHERE Id = @Id", new { id });
         }
 
-        public IEnumerable<Schema> GetAll()
+        public IEnumerable<AirplaneSchema> GetAll()
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
-            return db.Query<Schema>("SELECT * FROM Schemas");
+            using IDbConnection db = _configuration.GetConnection();
+            return db.Query<AirplaneSchema>("SELECT * FROM Schemas");
         }
 
-        public void Update(Schema entity)
+        public void Update(AirplaneSchema entity)
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            using IDbConnection db = _configuration.GetConnection();
             db.Execute("UPDATE Schemas SET " +
                        "Code = @Code, " +
                        "AirPlaneId = @AirPlaneId, " +
@@ -43,7 +50,7 @@ namespace DataAccessLayer.Repositories
 
         public void Delete(Guid id)
         {
-            using IDbConnection db = new ConnectionFactory().GetOpenConnection();
+            using IDbConnection db = _configuration.GetConnection();
             db.Execute("DELETE FROM Schemas WHERE Id = @Id", new { id });
         }
     }
