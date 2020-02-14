@@ -339,11 +339,3 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-/.vs/AirpostProject
-/AirpostProject/DataAccessLayer/bin
-/AirpostProject/DataAccessLayer.Tests/bin
-/AirpostProject/ORM/bin
-
-/AirpostProject/DataAccessLayer/obj
-/AirpostProject/DataAccessLayer.Tests/obj
-/AirpostProject/ORM/obj
