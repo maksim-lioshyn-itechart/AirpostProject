@@ -2,7 +2,7 @@
 {
     public class AirplaneSchema : BasicModel
     {
-        public int NumberOfSeats { get; set; }
+        public int SeatsNumber { get; set; }
         public string Code { get; set; }
     }
 }

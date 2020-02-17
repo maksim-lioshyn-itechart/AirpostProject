@@ -4,9 +4,9 @@ using System.Text;
 
 namespace DataAccessLayer.Models
 {
-    public class SchemasPassengerSeatTemplate
+    public class SchemasPassengerSeatTemplate: BasicModel
     {
         public Guid PassengerSeatTemplateId { get; set; }
-        public Guid SchemaId { get; set; }
+        public Guid AirplaneSchemaId { get; set; }
     }
 }

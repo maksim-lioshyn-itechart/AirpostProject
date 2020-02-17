@@ -3,7 +3,6 @@
     [FirstName] NVARCHAR (300) NOT NULL,
     [LastName] NVARCHAR (300) NOT NULL,
     [Email] NVARCHAR (256) NOT NULL,
-    [Password] NVARCHAR (50) NOT NULL,
     [RoleId] UNIQUEIDENTIFIER NOT NULL,
     [Phone] NVARCHAR (50) NOT NULL,
     [Address] NVARCHAR (400) NULL,

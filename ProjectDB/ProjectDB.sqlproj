@@ -162,6 +162,7 @@
     <Build Include="dbo\Tables\DocumentTypes.sql" />
     <Build Include="dbo\Tables\Documents.sql" />
     <Build Include="dbo\Tables\PassengerSeats.sql" />
+    <Build Include="dbo\Tables\UserPasswords.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />

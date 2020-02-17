@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace DataAccessLayer.Models
 {
-    public class AirplaneSubType: BasicModel
+    public class DocumentType: BasicModel
     {
-        public Guid AirplaneTypeId { get; set; }
         public string Name { get; set; }
     }
 }
