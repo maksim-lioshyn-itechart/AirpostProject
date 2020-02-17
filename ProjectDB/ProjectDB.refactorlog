@@ -28,4 +28,81 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="PassengerSeatTemplateId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="e1a0bf08-caf9-4c29-81a9-143a7a38bf81" ChangeDateTime="02/17/2020 10:46:36">
+    <Property Name="ElementName" Value="[dbo].[PassengerSeatTemplates].[Type]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PassengerSeatTemplates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f0cf85b4-5399-4fdf-8073-ea0db9e46bd5" ChangeDateTime="02/17/2020 11:18:37">
+    <Property Name="ElementName" Value="[dbo].[Tickets].[Document]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tickets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DocumentID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a1f83e4f-2a68-49d5-a51f-9af117f6acd1" ChangeDateTime="02/17/2020 11:20:17">
+    <Property Name="ElementName" Value="[dbo].[Tickets].[DocumentID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tickets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DocumentId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fed891a6-891c-45e7-98da-71c5efc9d637" ChangeDateTime="02/17/2020 11:21:38">
+    <Property Name="ElementName" Value="[dbo].[SchemasPassengerSeatTemplates].[SchemaId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SchemasPassengerSeatTemplates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AirplaneSchemaId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0d2a1f9e-03a2-4ceb-a403-68cab4dd1fa7" ChangeDateTime="02/17/2020 11:30:47">
+    <Property Name="ElementName" Value="[dbo].[PassengerSeats].[CoordinateY1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PassengerSeats]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Floor" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0034d17e-7b28-49ad-9176-132243f5e7f6" ChangeDateTime="02/17/2020 11:31:24">
+    <Property Name="ElementName" Value="[dbo].[PassengerSeats].[CoordinateX2]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PassengerSeats]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Row" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e2e6a993-e15e-46a5-a37d-b8eab51cb67e" ChangeDateTime="02/17/2020 11:31:32">
+    <Property Name="ElementName" Value="[dbo].[PassengerSeats].[CoordinateY2]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PassengerSeats]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Seat" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a2d1c44c-16fe-44ee-bfe7-1b3e4056b1d4" ChangeDateTime="02/17/2020 11:47:59">
+    <Property Name="ElementName" Value="[dbo].[Tickets].[ClassTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tickets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PassengerSeatId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1640e1f4-87de-4a69-bb73-2a422b899724" ChangeDateTime="02/17/2020 12:01:22">
+    <Property Name="ElementName" Value="[dbo].[AirplaneSchemas].[Code]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AirplaneSchemas]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1e0cf243-fcc3-4a7a-a71a-a761edd9395f" ChangeDateTime="02/17/2020 12:10:41">
+    <Property Name="ElementName" Value="[dbo].[Tickets].[Fare]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tickets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Cost" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2a28d9ac-9e2a-4a31-b2bd-4f8783c5863f" ChangeDateTime="02/17/2020 12:13:03">
+    <Property Name="ElementName" Value="[dbo].[AirplaneSchemas].[NumberOfSeats]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AirplaneSchemas]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SeatsNumber" />
+  </Operation>
 </Operations>

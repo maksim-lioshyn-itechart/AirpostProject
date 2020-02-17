@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Countries] (
     [Id] UNIQUEIDENTIFIER CONSTRAINT [DF_Countries_Id] DEFAULT (newid()) NOT NULL,
     [Name] NVARCHAR (150) UNIQUE NOT NULL,
-    [Code] NVARCHAR (4)    NOT NULL,
+    [Code] NVARCHAR (4) NOT NULL,
     CONSTRAINT [PK_Countries] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [IX_CountryName] UNIQUE ([Name] ASC)
 );

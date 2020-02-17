@@ -1,8 +1,7 @@
 ﻿CREATE TABLE [dbo].[PassengerSeatTemplates]
 (
     [Id] UNIQUEIDENTIFIER CONSTRAINT [DF_PassengerSeatTemplates_Id] DEFAULT (newid()) NOT NULL,
-    [Type] NVARCHAR(50) NOT NULL, 
-    [Code] NVARCHAR(50) NOT NULL, 
+    [Name] NVARCHAR(50) NOT NULL, 
     [CoordinateX1] INT NULL, 
     [CoordinateY1] INT NULL,
     [CoordinateX2] INT NULL, 

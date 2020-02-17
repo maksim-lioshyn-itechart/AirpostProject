@@ -159,6 +159,9 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Tables\DocumentTypes.sql" />
+    <Build Include="dbo\Tables\Documents.sql" />
+    <Build Include="dbo\Tables\PassengerSeats.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />
