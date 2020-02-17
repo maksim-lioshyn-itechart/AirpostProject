@@ -7,6 +7,5 @@ namespace DataAccessLayer.Interfaces
     {
         void AssignUser(Guid userId, Guid roleId);
         void AssignUser(Guid userId, string roleName);
-        UserRole GetByName(string name);
     }
 }
