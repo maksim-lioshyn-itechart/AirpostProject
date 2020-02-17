@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer.Tests", "Da
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProjectDB", "ProjectDB\ProjectDB.sqlproj", "{E635CBE4-D097-40D0-97FD-2C4735324AE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformConsoleApp", "TransformConsoleApp\TransformConsoleApp.csproj", "{85EAB9DD-22A8-4736-99F6-699A53437E4C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +29,6 @@ Global
 		{E635CBE4-D097-40D0-97FD-2C4735324AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E635CBE4-D097-40D0-97FD-2C4735324AE8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E635CBE4-D097-40D0-97FD-2C4735324AE8}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{85EAB9DD-22A8-4736-99F6-699A53437E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85EAB9DD-22A8-4736-99F6-699A53437E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85EAB9DD-22A8-4736-99F6-699A53437E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85EAB9DD-22A8-4736-99F6-699A53437E4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
