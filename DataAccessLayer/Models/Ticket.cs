@@ -16,5 +16,6 @@ namespace DataAccessLayer.Models
         public decimal Taxes { get; set; }
         public decimal FreeWeightCapacity { get; set; }
         public decimal OverWeightPrice { get; set; }
+        public decimal Total { get; set; }
     }
 }

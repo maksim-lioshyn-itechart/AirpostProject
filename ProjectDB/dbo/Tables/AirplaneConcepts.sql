@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[AirplaneSubTypes]
+﻿CREATE TABLE [dbo].[AirplaneConcepts]
 (
     [Id] UNIQUEIDENTIFIER CONSTRAINT [DF_AirplaneSubTypes_Id] DEFAULT (newid()) NOT NULL,
 	[AirplaneTypeId] UNIQUEIDENTIFIER NOT NULL, 

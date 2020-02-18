@@ -13,6 +13,7 @@
     [Taxes] MONEY NOT NULL DEFAULT 0, 
     [FreeWeightCapacity] DECIMAL NOT NULL DEFAULT 0, 
     [OverWeightPrice] MONEY NOT NULL DEFAULT 0, 
+    [Total] MONEY NOT NULL, 
     CONSTRAINT [PK_Tickets] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Tickets_User] FOREIGN KEY ([UserId]) REFERENCES [Users]([Id]), 
     CONSTRAINT [FK_Tickets_Raise] FOREIGN KEY ([RaiseId]) REFERENCES [Flights]([Id]),
