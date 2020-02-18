@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IAirplaneSubTypeRepository : IBaseRepository<AirplaneConcept>
+    public interface IAirplaneSubTypeRepository : IBaseRepository<AirplaneSubTypes>
     {
         
     }

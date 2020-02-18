@@ -162,7 +162,4 @@
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="ProjectDB.refactorlog" />
-  </ItemGroup>
 </Project>

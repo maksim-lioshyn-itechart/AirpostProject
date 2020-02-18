@@ -2,9 +2,8 @@
 
 namespace DataAccessLayer.Models
 {
-    public class AirplaneConcept: BasicModel
+    public class AirplaneSubTypes: BasicModel
     {
-        public Guid AirplaneTypeId { get; set; }
         public string Name { get; set; }
     }
 }
