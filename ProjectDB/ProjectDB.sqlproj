@@ -141,7 +141,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Tables\PassengerSeatTemplates.sql" />
     <Build Include="dbo\Tables\Airplanes.sql" />
     <Build Include="dbo\Tables\AirplaneSchemas.sql">
       <AnsiNulls>Off</AnsiNulls>
@@ -151,14 +150,10 @@
       <AnsiNulls>Off</AnsiNulls>
     </Build>
     <Build Include="dbo\Tables\AirplaneTypes.sql" />
-    <Build Include="dbo\Tables\AirplaneConcepts.sql" />
+    <Build Include="dbo\Tables\AirplaneSubTypes.sql" />
     <Build Include="dbo\Tables\ClassTypes.sql" />
     <Build Include="dbo\Tables\Airlines.sql" />
     <Build Include="dbo\Tables\OrderStatuses.sql" />
-    <Build Include="dbo\Tables\SchemasPassengerSeatTemplates.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="dbo\Tables\DocumentTypes.sql" />
     <Build Include="dbo\Tables\Documents.sql" />
     <Build Include="dbo\Tables\PassengerSeats.sql" />
