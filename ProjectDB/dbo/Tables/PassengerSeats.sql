@@ -2,7 +2,7 @@
 (
     [Id] UNIQUEIDENTIFIER CONSTRAINT [DF_PassengerSeats_Id] DEFAULT (newid()) NOT NULL,
     [AirplaneSchemaId] UNIQUEIDENTIFIER NOT NULL, 
-	[ClassTypeId] UNIQUEIDENTIFIER NOT NULL, 
+    [ClassTypeId] UNIQUEIDENTIFIER NOT NULL, 
     [Sector] NVARCHAR(2) NULL, 
     [Floor] INT NULL ,
     [Row] INT NOT NULL DEFAULT 1, 
