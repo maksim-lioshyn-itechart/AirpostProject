@@ -123,6 +123,9 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="Security\" />
     <Folder Include="Scripts" />
+    <Folder Include="Programmability" />
+    <Folder Include="Programmability\Stored Procedures" />
+    <Folder Include="Programmability\Stored Procedures\Inserts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Users.sql">
@@ -158,6 +161,23 @@
     <Build Include="dbo\Tables\Documents.sql" />
     <Build Include="dbo\Tables\PassengerSeats.sql" />
     <Build Include="dbo\Tables\UserPasswords.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertAirline.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertAirplane.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertAirplaneSchema.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertAirplaneSubType.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertAirplaneType.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertClassType.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertCountry.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertDocumentType.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertOrderStatus.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertUserRoles.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertAirport.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertDocument.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertFlight.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertPassengerSeat.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertTicket.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertUserPassword.sql" />
+    <Build Include="Programmability\Stored Procedures\Inserts\SpInsertUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />

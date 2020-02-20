@@ -18,7 +18,7 @@ namespace DataAccessLayer.Repositories
         public async Task Create(Airplane entity)
         {
             using IDbConnection db = _configuration.GetConnection();
-            await db.ExecuteAsync(Queries.insertAirplanes, entity);
+            await db.ExecuteAsync("SpInsertSpInsertAirplane", entity, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<Airplane> GetById(Guid id)
