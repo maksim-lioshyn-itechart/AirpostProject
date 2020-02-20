@@ -9,13 +9,6 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]                    
 --------------------------------------------------------------------------------------
 */
-Declare  @AirplaneTypeCommercialAirplaneId uniqueidentifier;
-Declare  @AirplaneTypePrivateJetId uniqueidentifier;
-Declare  @AirplaneTypePrivatePropellorPlaneId uniqueidentifier;
-Set @AirplaneTypeCommercialAirplaneId = CAST(newid() AS uniqueidentifier)
-Set @AirplaneTypePrivateJetId = CAST(newid() AS uniqueidentifier)
-Set @AirplaneTypePrivatePropellorPlaneId = CAST(newid() AS uniqueidentifier)
-
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'UserRoles')
     IF (SELECT COUNT([dbo].[UserRoles].[Name]) FROM [dbo].[UserRoles]) = 0
         BEGIN
@@ -36,32 +29,32 @@ IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Countrie
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AirplaneTypes')
     IF (SELECT COUNT([dbo].[AirplaneTypes].[Name]) FROM [dbo].[AirplaneTypes]) = 0
         BEGIN
-            INSERT INTO [dbo].[AirplaneTypes] ([Id], [Name]) VALUES (@AirplaneTypeCommercialAirplaneId, 'CommercialAirplanes')
-            INSERT INTO [dbo].[AirplaneTypes] ([Id], [Name]) VALUES (@AirplaneTypePrivateJetId, 'PrivateJets')
-            INSERT INTO [dbo].[AirplaneTypes] ([Id], [Name]) VALUES (@AirplaneTypePrivatePropellorPlaneId, 'PrivatePropellorPlanes')
+            INSERT INTO [dbo].[AirplaneTypes] ([Name]) VALUES ('CommercialAirplanes')
+            INSERT INTO [dbo].[AirplaneTypes] ([Name]) VALUES ('PrivateJets')
+            INSERT INTO [dbo].[AirplaneTypes] ([Name]) VALUES ('PrivatePropellorPlanes')
         END
 
 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AirplaneSubTypes')
     IF (SELECT COUNT([dbo].[AirplaneSubTypes].[Name]) FROM [dbo].[AirplaneSubTypes]) = 0
         BEGIN
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Jumbo Passenger Jets', @AirplaneTypeCommercialAirplaneId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('MidSize Passenger Jets', @AirplaneTypeCommercialAirplaneId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Light Passenger Jets', @AirplaneTypeCommercialAirplaneId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Passenger Turbo Props', @AirplaneTypeCommercialAirplaneId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Cargo Airplanes', @AirplaneTypeCommercialAirplaneId)
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Jumbo Passenger Jets')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('MidSize Passenger Jets')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Light Passenger Jets')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Passenger Turbo Props')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Cargo Airplanes')
 
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('VLJ', @AirplaneTypePrivateJetId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Light Business Jets', @AirplaneTypePrivateJetId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Midsize Business Jets', @AirplaneTypePrivateJetId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Heavy Business Jets', @AirplaneTypePrivateJetId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Military Jets', @AirplaneTypePrivateJetId)
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('VLJ')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Light Business Jets')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Midsize Business Jets')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Heavy Business Jets')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Military Jets')
 
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Private Single Engine', @AirplaneTypePrivatePropellorPlaneId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Twin Turboprops', @AirplaneTypePrivatePropellorPlaneId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Aerobatic', @AirplaneTypePrivatePropellorPlaneId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Amphibious', @AirplaneTypePrivatePropellorPlaneId)
-            INSERT INTO [dbo].[AirplaneSubTypes] ([Name], [AirplaneTypeId]) VALUES ('Military Turboprops', @AirplaneTypePrivatePropellorPlaneId)
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Private Single Engine')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Twin Turboprops')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Aerobatic')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Amphibious')
+            INSERT INTO [dbo].[AirplaneSubTypes] ([Name]) VALUES ('Military Turboprops')
         END
 
 
