@@ -1,0 +1,15 @@
+﻿CREATE TABLE [dbo].[Users] (
+    [Id] UNIQUEIDENTIFIER CONSTRAINT [DF_Users_Id] DEFAULT (newid()) NOT NULL,
+    [FirstName] NVARCHAR (300) NOT NULL,
+    [LastName] NVARCHAR (300) NOT NULL,
+    [Email] NVARCHAR (256) NOT NULL,
+    [RoleId] UNIQUEIDENTIFIER NOT NULL,
+    [Phone] NVARCHAR (50) NOT NULL,
+    [Address] NVARCHAR (400) NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Users_Roles] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[UserRoles] ([Id]),
+    CONSTRAINT [IX_Emails] UNIQUE NONCLUSTERED ([Id] ASC)
+);
+
+
+
