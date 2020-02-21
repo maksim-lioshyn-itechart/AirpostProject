@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetAllOrderStatuse]
+CREATE PROCEDURE [dbo].[GetAllOrderStatus]
 AS
 BEGIN
     Select [Id], [Name]

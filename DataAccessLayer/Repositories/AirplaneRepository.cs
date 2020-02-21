@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using static DataAccessLayer.Repositories.SpConstants;
 
 namespace DataAccessLayer.Repositories
 {
@@ -19,31 +18,31 @@ namespace DataAccessLayer.Repositories
         public async Task Create(Airplane entity)
         {
             using IDbConnection db = _configuration.GetConnection();
-            await db.ExecuteAsync(SpInsertAirports, entity, commandType: CommandType.StoredProcedure);
+            await db.ExecuteAsync("InsertAirplane", entity, commandType: CommandType.StoredProcedure);
         }
-
+        
         public async Task<Airplane> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<Airplane>(SpSelectByIdAirports, new { id });
+            return await db.QuerySingleAsync<Airplane>("GetByIdAirplane", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<Airplane>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Airplane>(SpSelectAllAirports);
+            return await db.QueryAsync<Airplane>("GetAllAirplane", commandType: CommandType.StoredProcedure);
         }
 
         public async Task Update(Airplane entity)
         {
             using IDbConnection db = _configuration.GetConnection();
-            await db.ExecuteAsync(SpUpdateAirplanes, entity);
+            await db.ExecuteAsync("UpdateAirplane", entity, commandType: CommandType.StoredProcedure);
         }
 
         public async Task Delete(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            await db.ExecuteAsync(SpDeleteAirplanes, new { id });
+            await db.ExecuteAsync("DeleteAirplane", new { id }, commandType: CommandType.StoredProcedure);
         }
     }
 }

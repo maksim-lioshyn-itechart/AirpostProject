@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[UpdateOrderStatuse]
+CREATE PROCEDURE [dbo].[UpdateOrderStatus]
     @Id UNIQUEIDENTIFIER,
     @Name NVARCHAR(10)
 AS
