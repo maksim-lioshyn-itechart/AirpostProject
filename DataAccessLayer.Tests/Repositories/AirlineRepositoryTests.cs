@@ -13,7 +13,9 @@ namespace DataAccessLayer.Tests.Repositories
     [TestFixture()]
     public class AirlineRepositoryTests
     {
-        Airline _airline = new Airline()
+        private readonly IBaseRepository<Airline> _repository;
+
+        readonly Airline _entity = new Airline()
         {
             Id = Guid.NewGuid(),
             Address = Guid.NewGuid().ToString(),
@@ -23,28 +25,31 @@ namespace DataAccessLayer.Tests.Repositories
             Url = Guid.NewGuid().ToString()
         };
 
+        public AirlineRepositoryTests()
+        {
+            _repository = new AirlineRepository(new Test());
+        }
+
         [Test()]
         [Order(1)]
         public void CreateTest()
         {
-            new AirlineRepository(new Test()).Create(_airline).Wait();
+            _repository.Create(_entity).Wait();
         }
 
         [Test()]
         [Order(2)]
         public void GetByIdTest()
         {
-            var airlineRepository = new AirlineRepository(new Test());
-            var airline = airlineRepository.GetById(_airline.Id).Result;
-            Assert.AreEqual(airline.Id, _airline.Id);
+            var airline = _repository.GetById(_entity.Id).Result;
+            Assert.AreEqual(airline.Id, _entity.Id);
         }
 
         [Test()]
         [Order(3)]
         public void GetAllTest()
         {
-            var airlineRepository = new AirlineRepository(new Test());
-            var airlines = airlineRepository.GetAll().Result;
+            var airlines = _repository.GetAll().Result;
             Assert.Greater(airlines.AsList().Count, 2);
         }
 
@@ -52,19 +57,18 @@ namespace DataAccessLayer.Tests.Repositories
         [Order(4)]
         public void UpdateTest()
         {
-            var airlineRepository = new AirlineRepository(new Test());
-            var test = _airline;
+            var test = _entity;
             test.Name = "Test";
-            airlineRepository.Update(test).Wait();
-            var airline = airlineRepository.GetById(_airline.Id).Result;
-            Assert.AreEqual(airline.Name, _airline.Name);
+            _repository.Update(test).Wait();
+            var airline = _repository.GetById(_entity.Id).Result;
+            Assert.AreEqual(airline.Name, _entity.Name);
         }
 
         [Test()]
         [Order(100)]
         public void DeleteTest()
         {
-           new AirlineRepository(new Test()).Delete(_airline.Id).Wait();
+            _repository.Delete(_entity.Id).Wait();
         }
     }
 }
