@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DataAccessLayer.Models;
+﻿using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Interfaces
 {
