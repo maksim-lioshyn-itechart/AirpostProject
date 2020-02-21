@@ -1,6 +1,6 @@
 ﻿namespace DataAccessLayer.Models
 {
-    public class AirplaneType: BasicModel
+    public class AirplaneType: BaseModel
     {
         public string Name { get; set; }
     }

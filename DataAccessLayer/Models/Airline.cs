@@ -1,6 +1,6 @@
 ﻿namespace DataAccessLayer.Models
 {
-    public class Airline: BasicModel
+    public class Airline: BaseModel
     {
         public string Name { get; set; }
         public string Email { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace DataAccessLayer.Models
 {
-    public class UserRole: BasicModel
+    public class UserRole: BaseModel
     {
         public string Name { get; set; }
     }

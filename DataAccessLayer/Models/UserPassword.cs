@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Models
 {
-    public class UserPassword: BasicModel
+    public class UserPassword: BaseModel
     {
         public Guid UserId { get; set; }
         public byte[] Salt { get; set; }

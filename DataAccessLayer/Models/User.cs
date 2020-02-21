@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Models
 {
-    public class User: BasicModel
+    public class User: BaseModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
