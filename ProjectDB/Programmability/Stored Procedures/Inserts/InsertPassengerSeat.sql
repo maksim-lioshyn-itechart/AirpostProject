@@ -12,7 +12,6 @@ CREATE PROCEDURE [dbo].[InsertPassengerSeat]
     @CoordinateY2 INT
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[PassengerSeats] ([Id], [AirplaneSchemaId], [ClassTypeId], [Sector], [Floor], [Row], [Seat], [CoordinateX1], [CoordinateY1], [CoordinateX2], [CoordinateY2])
     VALUES(@Id, @AirplaneSchemaId, @ClassTypeId, @Sector, @Floor, @Row, @Seat, @CoordinateX1, @CoordinateY1, @CoordinateX2, @CoordinateY2)
 END

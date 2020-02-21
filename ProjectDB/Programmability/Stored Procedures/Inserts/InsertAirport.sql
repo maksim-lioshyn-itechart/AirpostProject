@@ -5,7 +5,6 @@ CREATE PROCEDURE [dbo].[InsertAirport]
     @IsActive BIT
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[Airports] ([Id], [CountryId], [Name], [IsActive])
     VALUES(@Id, @CountryId, @Name, @IsActive)
 END

@@ -3,7 +3,6 @@ CREATE PROCEDURE [dbo].[InsertAirplaneType]
     @Name NVARCHAR(50)
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[AirplaneTypes] ([Id], [Name])
     VALUES(@Id, @Name)
 END

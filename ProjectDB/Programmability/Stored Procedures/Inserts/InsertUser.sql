@@ -8,7 +8,6 @@ CREATE PROCEDURE [dbo].[InsertUser]
     @Address NVARCHAR (400)
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[Users] ([Id], [FirstName], [LastName], [Email], [RoleId], [Phone], [Address])
     VALUES(@Id, @FirstName, @LastName, @Email, @RoleId, @Phone, @Address)
 END

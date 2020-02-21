@@ -7,7 +7,6 @@ CREATE PROCEDURE [dbo].[InsertAirline]
     @URL NVARCHAR(400)
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[Airlines] ([Id], [Name], [Email], [Phone], [Address], [URL])
     VALUES(@Id, @Name, @Email, @Phone, @Address, @URL)
 END

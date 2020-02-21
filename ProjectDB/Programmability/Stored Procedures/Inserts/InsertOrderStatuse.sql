@@ -3,7 +3,6 @@ CREATE PROCEDURE [dbo].[InsertOrderStatuse]
     @Name NVARCHAR(10)
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[OrderStatuses] ([Id], [Name])
     VALUES(@Id, @Name)
 END

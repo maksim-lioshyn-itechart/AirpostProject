@@ -7,7 +7,6 @@ CREATE PROCEDURE [dbo].[InsertFlight]
     @AirplaneId UNIQUEIDENTIFIER
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[Flights] ([Id], [DepartureAirportId], [DestinationAirportId], [DepartureTimeUTC], [ArrivalTimeUTC], [AirplaneId])
     VALUES(@Id, @DepartureAirportId, @DestinationAirportId, @DepartureTimeUTC, @ArrivalTimeUTC, @AirplaneId)
 END

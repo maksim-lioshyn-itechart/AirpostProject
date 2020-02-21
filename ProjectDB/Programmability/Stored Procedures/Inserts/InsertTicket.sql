@@ -15,7 +15,6 @@ CREATE PROCEDURE [dbo].[InsertTicket]
     @Total MONEY
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[Tickets] ([Id], [UserId], [OrderStatusId], [FlightId], [PassengerSeatId], [DocumentId], [TicketNumber], [PurchaseDate], [BaggageCount], [Cost], [Taxes], [FreeWeightCapacity], [OverweightPrice], [Total])
     VALUES(@Id, @UserId, @OrderStatusId, @FlightId, @PassengerSeatId, @DocumentId, @TicketNumber, @PurchaseDate, @BaggageCount, @Cost, @Taxes, @FreeWeightCapacity, @OverweightPrice, @Total)
 END

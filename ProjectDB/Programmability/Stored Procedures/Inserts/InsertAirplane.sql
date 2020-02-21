@@ -8,7 +8,6 @@ CREATE PROCEDURE [dbo].[InsertAirplane]
     @CarryingCapacity DECIMAL
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[Airplanes] ([Id], [AirplaneSubTypeId], [AirplaneTypeId], [AirplaneSchemaId], [AirlineId], [Name], [CarryingCapacity])
     VALUES(@Id, @AirplaneSubTypeId, @AirplaneTypeId, @AirplaneSchemaId, @AirlineId, @Name, @CarryingCapacity)
 END

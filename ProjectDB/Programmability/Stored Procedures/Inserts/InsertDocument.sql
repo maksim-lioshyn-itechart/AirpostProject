@@ -5,7 +5,6 @@ CREATE PROCEDURE [dbo].[InsertDocument]
     @DocumentTypeId UNIQUEIDENTIFIER
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[Documents] ([Id], [Name], [Number], [DocumentTypeId])
     VALUES(@Id, @Name, @Number, @DocumentTypeId)
 END

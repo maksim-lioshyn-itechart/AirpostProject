@@ -3,7 +3,6 @@ CREATE PROCEDURE [dbo].[InsertAirplaneSchema]
     @Name NVARCHAR (50)
 AS
 BEGIN
-    SET @Id = NEWID();
     INSERT INTO [dbo].[AirplaneSchemas] ([Id], [Name])
     VALUES(@Id, @Name)
 END
