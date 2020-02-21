@@ -6,6 +6,6 @@ BEGIN
     UPDATE [dbo].[AirplaneSubTypes]
     SET
         [Name] = @Name
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

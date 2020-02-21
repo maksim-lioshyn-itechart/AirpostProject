@@ -24,6 +24,6 @@ BEGIN
         [CoordinateY1] = @CoordinateY1,
         [CoordinateX2] = @CoordinateX2,
         [CoordinateY2] = @CoordinateY2
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

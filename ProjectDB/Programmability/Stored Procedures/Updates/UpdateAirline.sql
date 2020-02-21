@@ -14,6 +14,6 @@ BEGIN
         [Phone] = @Phone,
         [Address] = @Address,
         [URL] = @URL
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

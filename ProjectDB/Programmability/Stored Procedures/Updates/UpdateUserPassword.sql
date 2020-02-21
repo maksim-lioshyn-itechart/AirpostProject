@@ -10,6 +10,6 @@ BEGIN
         [UserId] = @UserId,
         [Salt] = @Salt,
         [Hash] = @Hash
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

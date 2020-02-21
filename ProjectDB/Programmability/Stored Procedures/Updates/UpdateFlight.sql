@@ -14,6 +14,6 @@ BEGIN
         [DepartureTimeUTC] = @DepartureTimeUTC,
         [ArrivalTimeUTC] = @ArrivalTimeUTC,
         [AirplaneId] = @AirplaneId
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

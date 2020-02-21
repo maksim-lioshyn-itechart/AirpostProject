@@ -30,6 +30,6 @@ BEGIN
         [FreeWeightCapacity] = @FreeWeightCapacity,
         [OverweightPrice] = @OverweightPrice,
         [Total] = @Total
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

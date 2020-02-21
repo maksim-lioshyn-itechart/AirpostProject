@@ -16,6 +16,6 @@ BEGIN
         [AirlineId] = @AirlineId,
         [Name] = @Name,
         [CarryingCapacity] = @CarryingCapacity
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

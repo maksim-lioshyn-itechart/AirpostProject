@@ -6,6 +6,6 @@ BEGIN
     UPDATE [dbo].[OrderStatuses]
     SET
         [Name] = @Name
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

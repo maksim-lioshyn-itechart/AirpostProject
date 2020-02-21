@@ -10,6 +10,6 @@ BEGIN
         [Name] = @Name,
         [Number] = @Number,
         [DocumentTypeId] = @DocumentTypeId
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

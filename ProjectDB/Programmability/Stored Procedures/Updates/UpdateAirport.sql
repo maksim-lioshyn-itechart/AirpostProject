@@ -10,6 +10,6 @@ BEGIN
         [CountryId] = @CountryId,
         [Name] = @Name,
         [IsActive] = @IsActive
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

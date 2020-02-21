@@ -6,6 +6,6 @@ BEGIN
     UPDATE [dbo].[AirplaneSchemas]
     SET
         [Name] = @Name
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

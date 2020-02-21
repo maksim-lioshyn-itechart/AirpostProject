@@ -16,6 +16,6 @@ BEGIN
         [RoleId] = @RoleId,
         [Phone] = @Phone,
         [Address] = @Address
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO

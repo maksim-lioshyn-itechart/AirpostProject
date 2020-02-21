@@ -8,6 +8,6 @@ BEGIN
     SET
         [Name] = @Name,
         [Code] = @Code
-WHERE Id = @Id
+    WHERE Id = @Id
 END
 GO
