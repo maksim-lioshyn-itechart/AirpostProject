@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DataAccessLayer.Models
+namespace BusinessLogicLayer.Models
 {
-    public class Airline: BaseModel
+    public class AirlineBM: BaseBM
     {
         public Guid CountryId { get; set; }
         public string Name { get; set; }

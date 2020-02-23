@@ -250,6 +250,7 @@
     <Build Include="Programmability\Stored Procedures\Updates\UpdateUser.sql" />
     <Build Include="Programmability\Stored Procedures\Updates\UpdateUserPassword.sql" />
     <Build Include="Programmability\Stored Procedures\Updates\UpdateUserRole.sql" />
+    <Build Include="Programmability\Stored Procedures\GetByIds\GetByCountryIdAirline.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />
