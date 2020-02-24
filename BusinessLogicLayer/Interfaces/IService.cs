@@ -11,7 +11,7 @@ namespace BusinessLogicLayer.Interfaces
         Task Update(TBM entity);
         Task Delete(TBM entity);
 
-        Task<IEnumerable<Airline>> GetAll();
-        Task<Airline> GetById(Guid id);
+        Task<IEnumerable<TBM>> GetAll();
+        Task<TBM> GetById(Guid id);
     }
 }

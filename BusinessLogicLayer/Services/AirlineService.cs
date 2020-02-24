@@ -5,8 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAccessLayer.Models;
-using static BusinessLogicLayer.Mappers.AirlineMapper;
+using static BusinessLogicLayer.Mappers.CommonMapper;
 
 namespace BusinessLogicLayer.Services
 {
@@ -20,12 +19,12 @@ namespace BusinessLogicLayer.Services
         }
         public async Task<bool> Create(AirlineBM entity)
         {
-            var airplanes = UnitOfWork.AirlineRepository.GetByCountryIdAirline(entity.CountryId).Result;
+            var airplanes = await UnitOfWork.AirlineRepository.GetByCountryIdAirline(entity.CountryId);
             if (airplanes.FirstOrDefault(a => a.Email == entity.Email) != null)
             {
                 return false;
             }
-            await UnitOfWork.AirlineRepository.Create(entity.ToAirline());
+            await UnitOfWork.AirlineRepository.Create(entity.ToDal());
             return true;
         }
 
@@ -34,7 +33,7 @@ namespace BusinessLogicLayer.Services
             var airplanes = await UnitOfWork.AirlineRepository.GetById(entity.Id);
             if (airplanes != null)
             {
-                await UnitOfWork.AirlineRepository.Update(entity.ToAirline());
+                await UnitOfWork.AirlineRepository.Update(entity.ToDal());
             }
         }
 
@@ -47,8 +46,11 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public Task<IEnumerable<Airline>> GetAll() => UnitOfWork.AirlineRepository.GetAll();
+        public async Task<IEnumerable<AirlineBM>> GetAll() => 
+            (await UnitOfWork.AirlineRepository.GetAll())
+            .Select(a => a.ToBm());
 
-        public Task<Airline> GetById(Guid id) => UnitOfWork.AirlineRepository.GetById(id);
+        public async Task<AirlineBM> GetById(Guid id) => 
+            (await UnitOfWork.AirlineRepository.GetById(id)).ToBm();
     }
 }

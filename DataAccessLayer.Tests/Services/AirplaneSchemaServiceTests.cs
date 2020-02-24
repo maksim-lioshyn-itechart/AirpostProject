@@ -1,34 +1,26 @@
-﻿using System;
-using System.Linq;
-using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
-using DataAccessLayer.Interfaces;
-using DataAccessLayer.Models;
-using DataAccessLayer.Repositories;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace DataAccessLayer.Tests.Services
 {
     [TestFixture()]
-    public class AirlineServiceTests
+    public class AirplaneSchemaServiceTests
     {
-        private readonly IAirlineService _testEntityService;
+        private readonly IAirplaneSchemaService _testEntityService;
 
-        private readonly AirlineBM _entityBm = new AirlineBM()
+        private readonly AirplaneSchemaBM _entityBm = new AirplaneSchemaBM()
         {
             Id = Guid.NewGuid(),
-            Email = Guid.NewGuid().ToString(),
-            Name = Guid.NewGuid().ToString(),
-            Address = Guid.NewGuid().ToString(),
-            Phone = "12093",
-            Url = Guid.NewGuid().ToString(),
-            CountryId = Guid.Parse("28E0F235-64E2-4A82-A0D0-3D62E6E0F4D5")
+            Name = Guid.NewGuid().ToString()
         };
 
-        public AirlineServiceTests()
+        public AirplaneSchemaServiceTests()
         {
-            _testEntityService = new AirlineService(TestHelper.UnitOfWork);
+            _testEntityService = new AirplaneSchemaService(TestHelper.UnitOfWork);
         }
 
         [Test()]
@@ -51,7 +43,7 @@ namespace DataAccessLayer.Tests.Services
         public void GetByIdTest()
         {
             var airline = _testEntityService.GetById(_entityBm.Id).Result;
-            Assert.AreEqual(_entityBm.Address, airline.Address);
+            Assert.AreEqual(_entityBm.Name, airline.Name);
         }
 
         [Test()]
@@ -59,10 +51,10 @@ namespace DataAccessLayer.Tests.Services
         public void UpdateTest()
         {
             var test = _entityBm;
-            test.Email = "Test";
+            test.Name = "Test";
             _testEntityService.Update(test).Wait();
             var airline = _testEntityService.GetById(_entityBm.Id).Result;
-            Assert.AreEqual(airline.Email, test.Email);
+            Assert.AreEqual(airline.Name, test.Name);
         }
 
         [Test()]
