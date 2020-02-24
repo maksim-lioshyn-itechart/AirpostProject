@@ -12,11 +12,7 @@ namespace DataAccessLayer.Tests.Services
     {
         private readonly IAirplaneSubTypeService _testEntityService;
 
-        private readonly AirplaneSubTypeBm _entityBm = new AirplaneSubTypeBm()
-        {
-            Id = Guid.NewGuid(),
-            Name = Guid.NewGuid().ToString()
-        };
+        private readonly AirplaneSubTypeBm _entityBm = StubsObjects.AirplaneSubTypeBm;
 
         public AirplaneSubTypeServiceTests()
         {

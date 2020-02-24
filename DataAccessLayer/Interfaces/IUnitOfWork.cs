@@ -3,6 +3,7 @@
     public interface IUnitOfWork
     {
         IAirlineRepository Airline { get; }
+        IAirplaneRepository Airplane { get; }
         IAirplaneSchemaRepository AirplaneSchema { get; }
         IAirplaneSubTypeRepository AirplaneSubType { get; }
         IAirplaneTypeRepository AirplaneType { get; }

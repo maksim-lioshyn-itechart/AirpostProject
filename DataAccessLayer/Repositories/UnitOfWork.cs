@@ -22,9 +22,13 @@ namespace DataAccessLayer.Repositories
         private readonly UserRepository _user;
         private readonly UserRoleRepository _userRole;
         private readonly AirplaneTypeRepository _airplaneType;
+        private readonly AirplaneRepository _airplane;
 
         public IAirlineRepository Airline => 
             _airline ?? new AirlineRepository(ConfigurationFactory);
+
+        public IAirplaneRepository Airplane => 
+            _airplane ?? new AirplaneRepository(ConfigurationFactory);
 
         public IAirplaneSchemaRepository AirplaneSchema =>
             _airplaneSchema ?? new AirplaneSchemaRepository(ConfigurationFactory);
@@ -75,6 +79,7 @@ namespace DataAccessLayer.Repositories
             IConfigurationFactory configurationFactory,
             AirplaneSchemaRepository airplaneSchema,
             AirlineRepository airline,
+            AirplaneRepository airplane,
             AirplaneSubTypeRepository airplaneSubType,
             AirplaneTypeRepository airplaneType,
             AirportRepository airport,
@@ -106,6 +111,7 @@ namespace DataAccessLayer.Repositories
             _userPassword = userPassword;
             _user = user;
             _userRole = userRole;
+            _airplane = airplane;
             _airplaneType = airplaneType;
         }
     }

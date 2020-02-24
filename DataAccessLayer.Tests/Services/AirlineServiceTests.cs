@@ -1,12 +1,8 @@
-﻿using System;
-using System.Linq;
-using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
-using DataAccessLayer.Interfaces;
-using DataAccessLayer.Models;
-using DataAccessLayer.Repositories;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DataAccessLayer.Tests.Services
 {
@@ -14,17 +10,7 @@ namespace DataAccessLayer.Tests.Services
     public class AirlineServiceTests
     {
         private readonly IAirlineService _testEntityService;
-
-        private readonly AirlineBm _entityBm = new AirlineBm()
-        {
-            Id = Guid.NewGuid(),
-            Email = Guid.NewGuid().ToString(),
-            Name = Guid.NewGuid().ToString(),
-            Address = Guid.NewGuid().ToString(),
-            Phone = "12093",
-            Url = Guid.NewGuid().ToString(),
-            CountryId = Guid.Parse("28E0F235-64E2-4A82-A0D0-3D62E6E0F4D5")
-        };
+        private readonly AirlineBm _entityBm = StubsObjects.AirlineBm;
 
         public AirlineServiceTests()
         {

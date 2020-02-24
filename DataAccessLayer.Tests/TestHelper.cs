@@ -10,6 +10,7 @@ namespace DataAccessLayer.Tests
             Test,
             new AirplaneSchemaRepository(Test),
             new AirlineRepository(Test),
+            new AirplaneRepository(Test),
             new AirplaneSubTypeRepository(Test),
             new AirplaneTypeRepository(Test),
             new AirportRepository(Test),

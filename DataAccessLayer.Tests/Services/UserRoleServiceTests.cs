@@ -12,11 +12,7 @@ namespace DataAccessLayer.Tests.Services
     {
         private readonly IUserRoleService _testEntityService;
 
-        private readonly UserRoleBm _entityBm = new UserRoleBm()
-        {
-            Id = Guid.NewGuid(),
-            Name = Guid.NewGuid().ToString()
-        };
+        private readonly UserRoleBm _entityBm = StubsObjects.UserRoleBm;
 
         public UserRoleServiceTests()
         {

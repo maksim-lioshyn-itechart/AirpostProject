@@ -12,12 +12,7 @@ namespace DataAccessLayer.Tests.Services
     {
         private readonly ICountryService _testEntityService;
 
-        private readonly CountryBm _entityBm = new CountryBm()
-        {
-            Id = Guid.NewGuid(),
-            Name = Guid.NewGuid().ToString(),
-            Code = "Der"
-        };
+        private readonly CountryBm _entityBm = StubsObjects.CountryBm;
 
         public CountryServiceTests()
         {

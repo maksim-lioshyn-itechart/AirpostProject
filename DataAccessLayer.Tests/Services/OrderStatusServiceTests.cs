@@ -12,12 +12,7 @@ namespace DataAccessLayer.Tests.Services
     {
         private readonly IOrderStatusService _testEntityService;
 
-        private readonly OrderStatusBm _entityBm = new OrderStatusBm()
-        {
-            Id = Guid.NewGuid(),
-            Name = "NewStatus"
-            
-        };
+        private readonly OrderStatusBm _entityBm = StubsObjects.OrderStatusBm;
 
         public OrderStatusServiceTests()
         {

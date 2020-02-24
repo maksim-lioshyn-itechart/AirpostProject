@@ -2,7 +2,6 @@
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace DataAccessLayer.Tests.Services
@@ -11,12 +10,7 @@ namespace DataAccessLayer.Tests.Services
     public class AirplaneSchemaServiceTests
     {
         private readonly IAirplaneSchemaService _testEntityService;
-
-        private readonly AirplaneSchemaBm _entityBm = new AirplaneSchemaBm()
-        {
-            Id = Guid.NewGuid(),
-            Name = Guid.NewGuid().ToString()
-        };
+        private readonly AirplaneSchemaBm _entityBm = StubsObjects.AirplaneSchemaBm;
 
         public AirplaneSchemaServiceTests()
         {

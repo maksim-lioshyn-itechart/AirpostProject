@@ -12,6 +12,7 @@ namespace BusinessLogicLayer.Mappers
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Airline, AirlineBm>().ReverseMap();
+                cfg.CreateMap<Airplane, AirplaneBm>().ReverseMap();
                 cfg.CreateMap<AirplaneSchema, AirplaneSchemaBm>().ReverseMap();
                 cfg.CreateMap<AirplaneSubType, AirplaneSubTypeBm>().ReverseMap();
                 cfg.CreateMap<AirplaneType, AirplaneTypeBm>().ReverseMap();
@@ -25,6 +26,9 @@ namespace BusinessLogicLayer.Mappers
         }
         public static AirlineBm ToBm(this Airline model) => Mapper.Map<AirlineBm>(model);
         public static Airline ToDal(this AirlineBm model) => Mapper.Map<Airline>(model);
+
+        public static AirplaneBm ToBm(this Airplane model) => Mapper.Map<AirplaneBm>(model);
+        public static Airplane ToDal(this AirplaneBm model) => Mapper.Map<Airplane>(model);
 
         public static AirplaneSchemaBm ToBm(this AirplaneSchema model) => Mapper.Map<AirplaneSchemaBm>(model);
         public static AirplaneSchema ToDal(this AirplaneSchemaBm model) => Mapper.Map<AirplaneSchema>(model);

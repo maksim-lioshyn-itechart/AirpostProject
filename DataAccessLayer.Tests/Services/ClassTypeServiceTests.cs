@@ -12,11 +12,7 @@ namespace DataAccessLayer.Tests.Services
     {
         private readonly IClassTypeService _testEntityService;
 
-        private readonly ClassTypeBm _entityBm = new ClassTypeBm()
-        {
-            Id = Guid.NewGuid(),
-            Name = Guid.NewGuid().ToString()
-        };
+        private readonly ClassTypeBm _entityBm = StubsObjects.ClassTypeBm;
 
         public ClassTypeServiceTests()
         {
