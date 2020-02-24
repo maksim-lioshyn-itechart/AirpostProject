@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Models
 {
-    public class AirlineBM: BaseBM
+    public class AirlineBm: BaseBm
     {
         public Guid CountryId { get; set; }
         public string Name { get; set; }

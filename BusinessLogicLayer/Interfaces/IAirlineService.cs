@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface IAirlineService: IService<AirlineBM>
+    public interface IAirlineService: IService<AirlineBm>
     {
     }
 }

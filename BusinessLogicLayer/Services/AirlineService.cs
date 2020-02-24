@@ -17,7 +17,7 @@ namespace BusinessLogicLayer.Services
         {
             UnitOfWork = unitOfWork;
         }
-        public async Task<bool> Create(AirlineBM entity)
+        public async Task<bool> Create(AirlineBm entity)
         {
             var airplanes = await UnitOfWork.AirlineRepository.GetByCountryIdAirline(entity.CountryId);
             if (airplanes.FirstOrDefault(a => a.Email == entity.Email) != null)
@@ -28,7 +28,7 @@ namespace BusinessLogicLayer.Services
             return true;
         }
 
-        public async Task Update(AirlineBM entity)
+        public async Task Update(AirlineBm entity)
         {
             var airplanes = await UnitOfWork.AirlineRepository.GetById(entity.Id);
             if (airplanes != null)
@@ -37,7 +37,7 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task Delete(AirlineBM entity)
+        public async Task Delete(AirlineBm entity)
         {
             var airplanes = await UnitOfWork.AirlineRepository.GetById(entity.Id);
             if (airplanes != null)
@@ -46,11 +46,11 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task<IEnumerable<AirlineBM>> GetAll() => 
+        public async Task<IEnumerable<AirlineBm>> GetAll() => 
             (await UnitOfWork.AirlineRepository.GetAll())
             .Select(a => a.ToBm());
 
-        public async Task<AirlineBM> GetById(Guid id) => 
+        public async Task<AirlineBm> GetById(Guid id) => 
             (await UnitOfWork.AirlineRepository.GetById(id)).ToBm();
     }
 }

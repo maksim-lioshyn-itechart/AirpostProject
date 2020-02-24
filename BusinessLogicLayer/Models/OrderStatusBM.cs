@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogicLayer.Models
 {
-    public class OrderStatusBM: BaseBM
+    public class OrderStatusBm: BaseBm
     {
         public string Name { get; set; }
     }

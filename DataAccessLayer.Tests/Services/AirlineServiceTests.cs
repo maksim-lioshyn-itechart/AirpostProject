@@ -15,7 +15,7 @@ namespace DataAccessLayer.Tests.Services
     {
         private readonly IAirlineService _testEntityService;
 
-        private readonly AirlineBM _entityBm = new AirlineBM()
+        private readonly AirlineBm _entityBm = new AirlineBm()
         {
             Id = Guid.NewGuid(),
             Email = Guid.NewGuid().ToString(),

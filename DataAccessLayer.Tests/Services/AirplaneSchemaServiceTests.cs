@@ -12,7 +12,7 @@ namespace DataAccessLayer.Tests.Services
     {
         private readonly IAirplaneSchemaService _testEntityService;
 
-        private readonly AirplaneSchemaBM _entityBm = new AirplaneSchemaBM()
+        private readonly AirplaneSchemaBm _entityBm = new AirplaneSchemaBm()
         {
             Id = Guid.NewGuid(),
             Name = Guid.NewGuid().ToString()

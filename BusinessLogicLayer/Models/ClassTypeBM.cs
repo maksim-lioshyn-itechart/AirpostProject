@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogicLayer.Models
 {
-    public class ClassTypeBM: BaseBM
+    public class ClassTypeBm: BaseBm
     {
         public string Name { get; set; }
     }

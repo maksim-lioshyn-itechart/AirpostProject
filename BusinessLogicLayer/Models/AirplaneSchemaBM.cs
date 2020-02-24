@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogicLayer.Models
 {
-    public class AirplaneSchemaBM : BaseBM
+    public class AirplaneSchemaBm : BaseBm
     {
         public string Name { get; set; }
     }

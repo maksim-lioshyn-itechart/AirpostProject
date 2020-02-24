@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Models
 {
-    public class BaseBM
+    public class BaseBm
     {
         public Guid Id { get; set; }
     }

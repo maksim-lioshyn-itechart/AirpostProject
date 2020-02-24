@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogicLayer.Models
 {
-    public class CountryBM: BaseBM
+    public class CountryBm: BaseBm
     {
         public string Name { get; set; }
         public string Code { get; set; }

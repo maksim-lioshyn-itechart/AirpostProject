@@ -17,7 +17,7 @@ namespace BusinessLogicLayer.Services
         {
             UnitOfWork = unitOfWork;
         }
-        public async Task<bool> Create(AirplaneSchemaBM entity)
+        public async Task<bool> Create(AirplaneSchemaBm entity)
         {
             var schemas = await UnitOfWork.AirplaneSchema.GetAll();
             if (schemas.FirstOrDefault(a => a.Name == entity.Name) != null)
@@ -28,7 +28,7 @@ namespace BusinessLogicLayer.Services
             return true;
         }
 
-        public async Task Update(AirplaneSchemaBM entity)
+        public async Task Update(AirplaneSchemaBm entity)
         {
             var schemas = await UnitOfWork.AirplaneSchema.GetById(entity.Id);
             if (schemas != null)
@@ -37,7 +37,7 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task Delete(AirplaneSchemaBM entity)
+        public async Task Delete(AirplaneSchemaBm entity)
         {
             var schemas = await UnitOfWork.AirplaneSchema.GetById(entity.Id);
             if (schemas != null)
@@ -46,11 +46,11 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task<IEnumerable<AirplaneSchemaBM>> GetAll() => 
+        public async Task<IEnumerable<AirplaneSchemaBm>> GetAll() => 
             (await UnitOfWork.AirplaneSchema.GetAll())
             .Select(a => a.ToBm());
 
-        public async Task<AirplaneSchemaBM> GetById(Guid id) => 
+        public async Task<AirplaneSchemaBm> GetById(Guid id) => 
             (await UnitOfWork.AirplaneSchema.GetById(id)).ToBm();
     }
 }
