@@ -19,7 +19,7 @@ namespace BusinessLogicLayer.Services
         }
         public async Task<bool> Create(AirlineBm entity)
         {
-            var airplanes = await UnitOfWork.Airline.GetByCountryIdAirline(entity.CountryId);
+            var airplanes = await UnitOfWork.Airline.GetAirlineByCountryId(entity.CountryId);
             if (airplanes.FirstOrDefault(a => a.Email == entity.Email) != null)
             {
                 return false;

@@ -3,26 +3,25 @@ using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
 using NUnit.Framework;
 using System.Linq;
-using BusinessLogicLayer.Mappers;
 
 namespace DataAccessLayer.Tests.Services
 {
     [TestFixture()]
-    public class AirplaneServiceTests
+    public class DocumentServiceTests
     {
-        private readonly IAirplaneService _testEntityService;
-        private readonly AirplaneBm _entityBm = StubsObjects.AirplaneBm;
+        private readonly IDocumentService _testEntityService;
+        private readonly DocumentBm _entityBm = StubsObjects.DocumentBm;
 
-        public AirplaneServiceTests()
+        public DocumentServiceTests()
         {
-            _testEntityService = new AirplaneService(TestHelper.UnitOfWork);
+            _testEntityService = new DocumentService(TestHelper.UnitOfWork);
         }
 
         [Test()]
         [Order(0)]
         public void CreateTest()
         {
-            TestHelper.CreateEntitiesForAirplaneService();
+            TestHelper.CreateEntitiesForDocumentService();
 
             Assert.IsTrue(_testEntityService.Create(_entityBm).Result);
             Assert.IsFalse(_testEntityService.Create(_entityBm).Result);
@@ -50,8 +49,8 @@ namespace DataAccessLayer.Tests.Services
             var test = _entityBm;
             test.Name = "Test";
             _testEntityService.Update(test).Wait();
-            var airplane = _testEntityService.GetById(_entityBm.Id).Result;
-            Assert.AreEqual(airplane.Name, test.Name);
+            var Document = _testEntityService.GetById(_entityBm.Id).Result;
+            Assert.AreEqual(Document.Name, test.Name);
         }
 
         [Test()]
@@ -59,7 +58,7 @@ namespace DataAccessLayer.Tests.Services
         public void DeleteTest()
         {
             _testEntityService.Delete(_entityBm).Wait();
-            TestHelper.DeleteEntitiesForAirplaneService();
+            TestHelper.DeleteEntitiesForDocumentService();
         }
     }
 }

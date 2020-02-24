@@ -250,8 +250,10 @@
     <Build Include="Programmability\Stored Procedures\Updates\UpdateUser.sql" />
     <Build Include="Programmability\Stored Procedures\Updates\UpdateUserPassword.sql" />
     <Build Include="Programmability\Stored Procedures\Updates\UpdateUserRole.sql" />
-    <Build Include="Programmability\Stored Procedures\GetByIds\GetByCountryIdAirline.sql" />
+    <Build Include="Programmability\Stored Procedures\GetByIds\GetAirlineByCountryId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetAirplanesByAirlineId.sql" />
+    <Build Include="Programmability\Stored Procedures\GetByIds\GetAirportByCountryId.sql" />
+    <Build Include="Programmability\Stored Procedures\GetByIds\GetDocumentsByDocumentTypeId.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />

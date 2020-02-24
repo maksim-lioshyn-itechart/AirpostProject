@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DataAccessLayer.Models
+namespace BusinessLogicLayer.Models
 {
-    public class Document: BaseModel
+    public class DocumentBm: BaseBm
     {
         public Guid DocumentTypeId { get; set; }
         public string Name { get; set; }

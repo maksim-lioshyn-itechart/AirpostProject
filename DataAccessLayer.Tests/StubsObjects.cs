@@ -67,7 +67,7 @@ namespace DataAccessLayer.Tests
             Id = Guid.NewGuid(),
             Name = Guid.NewGuid().ToString()
         };
-
+        
         public static AirplaneBm AirplaneBm = new AirplaneBm
         {
             Id = Guid.NewGuid(),
@@ -77,6 +77,23 @@ namespace DataAccessLayer.Tests
             AirplaneTypeId = AirplaneTypeBm.Id,
             CarryingCapacity = 100,
             Name = "Test"
+        };
+
+        public static AirportBm AirportBm = new AirportBm()
+        {
+            Id = Guid.NewGuid(),
+            Name = Guid.NewGuid().ToString(),
+            CountryId = CountryBm.Id,
+            IsActive = true
+        };
+
+        public static DocumentBm DocumentBm = new DocumentBm()
+        {
+            Id = Guid.NewGuid(),
+            Name = Guid.NewGuid().ToString(),
+            Number = Guid.NewGuid().ToString(),
+            DocumentTypeId = DocumentTypeBm.Id,
+            IsActive = true
         };
     }
 }

@@ -4,6 +4,7 @@ using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
@@ -43,6 +44,12 @@ namespace DataAccessLayer.Repositories
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteDocument", new { id }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<Document>> GetDocumentsByDocumentTypeId(Guid documentTypeId, bool isActive)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QueryAsync<Document>("GetDocumentsByDocumentTypeId", new { documentTypeId, isActive }, commandType: CommandType.StoredProcedure);
         }
     }
 }

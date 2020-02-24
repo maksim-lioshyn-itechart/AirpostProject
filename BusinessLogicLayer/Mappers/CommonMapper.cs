@@ -16,8 +16,10 @@ namespace BusinessLogicLayer.Mappers
                 cfg.CreateMap<AirplaneSchema, AirplaneSchemaBm>().ReverseMap();
                 cfg.CreateMap<AirplaneSubType, AirplaneSubTypeBm>().ReverseMap();
                 cfg.CreateMap<AirplaneType, AirplaneTypeBm>().ReverseMap();
+                cfg.CreateMap<Airport, AirportBm>().ReverseMap();
                 cfg.CreateMap<ClassType, ClassTypeBm>().ReverseMap();
                 cfg.CreateMap<Country, CountryBm>().ReverseMap();
+                cfg.CreateMap<Document, DocumentBm>().ReverseMap();
                 cfg.CreateMap<DocumentType, DocumentTypeBm>().ReverseMap();
                 cfg.CreateMap<OrderStatus, OrderStatusBm>().ReverseMap();
                 cfg.CreateMap<UserRole, UserRoleBm>().ReverseMap();
@@ -39,11 +41,17 @@ namespace BusinessLogicLayer.Mappers
         public static AirplaneTypeBm ToBm(this AirplaneType model) => Mapper.Map<AirplaneTypeBm>(model);
         public static AirplaneType ToDal(this AirplaneTypeBm model) => Mapper.Map<AirplaneType>(model);
         
+        public static AirportBm ToBm(this Airport model) => Mapper.Map<AirportBm>(model);
+        public static Airport ToDal(this AirportBm model) => Mapper.Map<Airport>(model);
+
         public static ClassTypeBm ToBm(this ClassType model) => Mapper.Map<ClassTypeBm>(model);
         public static ClassType ToDal(this ClassTypeBm model) => Mapper.Map<ClassType>(model);
         
         public static CountryBm ToBm(this Country model) => Mapper.Map<CountryBm>(model);
         public static Country ToDal(this CountryBm model) => Mapper.Map<Country>(model);
+
+        public static DocumentBm ToBm(this Document model) => Mapper.Map<DocumentBm>(model);
+        public static Document ToDal(this DocumentBm model) => Mapper.Map<Document>(model);
 
         public static DocumentTypeBm ToBm(this DocumentType model) => Mapper.Map<DocumentTypeBm>(model);
         public static DocumentType ToDal(this DocumentTypeBm model) => Mapper.Map<DocumentType>(model);
