@@ -26,13 +26,13 @@ namespace DataAccessLayer.Repositories
         public async Task<AirplaneType> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<AirplaneType>("GetByIdAirplaneType", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleAsync<AirplaneType>("GetAirplaneTypeById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<AirplaneType>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<AirplaneType>("GetAllAirplaneType", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<AirplaneType>("GetAllAirplaneTypes", commandType: CommandType.StoredProcedure);
         }
 
         public async Task Update(AirplaneType entity)
