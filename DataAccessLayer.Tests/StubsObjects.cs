@@ -101,7 +101,7 @@ namespace DataAccessLayer.Tests
             Address = Guid.NewGuid().ToString(),
             Email = Guid.NewGuid().ToString(),
             LastName = Guid.NewGuid().ToString(),
-            Phone = Guid.NewGuid().ToString(),
+            Phone = "23452345",
             Password = Guid.NewGuid().ToString(),
             RoleId = UserRoleBm.Id
         };

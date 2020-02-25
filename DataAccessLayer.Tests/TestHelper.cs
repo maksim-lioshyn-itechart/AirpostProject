@@ -31,10 +31,10 @@ namespace DataAccessLayer.Tests
 
         public static void CreateEntitiesForAirplaneService()
         {
-            UnitOfWork.AirplaneSchema.Create(StubsObjects.AirplaneSchemaBm.ToDal());
-            UnitOfWork.AirplaneType.Create(StubsObjects.AirplaneTypeBm.ToDal());
-            UnitOfWork.AirplaneSubType.Create(StubsObjects.AirplaneSubTypeBm.ToDal());
-            UnitOfWork.Airline.Create(StubsObjects.AirlineBm.ToDal());
+            UnitOfWork.AirplaneSchema.Create(StubsObjects.AirplaneSchemaBm.ToDal()).Wait();
+            UnitOfWork.AirplaneType.Create(StubsObjects.AirplaneTypeBm.ToDal()).Wait();
+            UnitOfWork.AirplaneSubType.Create(StubsObjects.AirplaneSubTypeBm.ToDal()).Wait();
+            UnitOfWork.Airline.Create(StubsObjects.AirlineBm.ToDal()).Wait();
         }
 
         public static void DeleteEntitiesForAirplaneService()
@@ -47,7 +47,7 @@ namespace DataAccessLayer.Tests
 
         public static void CreateEntitiesForAirportService()
         {
-            UnitOfWork.Country.Create(StubsObjects.CountryBm.ToDal());
+            UnitOfWork.Country.Create(StubsObjects.CountryBm.ToDal()).Wait();
         }
 
         public static void DeleteEntitiesForAirportService()
@@ -57,7 +57,7 @@ namespace DataAccessLayer.Tests
 
         public static void CreateEntitiesForDocumentService()
         {
-            UnitOfWork.DocumentType.Create(StubsObjects.DocumentTypeBm.ToDal());
+            UnitOfWork.DocumentType.Create(StubsObjects.DocumentTypeBm.ToDal()).Wait();
         }
 
         public static void DeleteEntitiesForDocumentService()
@@ -67,7 +67,7 @@ namespace DataAccessLayer.Tests
 
         public static void CreateEntitiesForUserService()
         {
-            UnitOfWork.UserRole.Create(StubsObjects.UserRoleBm.ToDal());
+            UnitOfWork.UserRole.Create(StubsObjects.UserRoleBm.ToDal()).Wait();
         }
 
         public static void DeleteEntitiesForUserService()
@@ -76,8 +76,8 @@ namespace DataAccessLayer.Tests
         }
         public static void CreateEntitiesForPassengerSeatService()
         {
-            UnitOfWork.AirplaneSchema.Create(StubsObjects.AirplaneSchemaBm.ToDal());
-            UnitOfWork.ClassType.Create(StubsObjects.ClassTypeBm.ToDal());
+            UnitOfWork.AirplaneSchema.Create(StubsObjects.AirplaneSchemaBm.ToDal()).Wait();
+            UnitOfWork.ClassType.Create(StubsObjects.ClassTypeBm.ToDal()).Wait();
         }
 
         public static void DeleteEntitiesForPassengerSeatService()
@@ -90,8 +90,8 @@ namespace DataAccessLayer.Tests
         {
             CreateEntitiesForAirplaneService();
             CreateEntitiesForAirportService();
-            UnitOfWork.Airplane.Create(StubsObjects.AirplaneBm.ToDal());
-            UnitOfWork.Airport.Create(StubsObjects.AirportBm.ToDal());
+            UnitOfWork.Airplane.Create(StubsObjects.AirplaneBm.ToDal()).Wait();
+            UnitOfWork.Airport.Create(StubsObjects.AirportBm.ToDal()).Wait();
 
         }
 
@@ -107,12 +107,12 @@ namespace DataAccessLayer.Tests
         {
             CreateEntitiesForFlightService();
             CreateEntitiesForDocumentService();
-            UnitOfWork.Flight.Create(StubsObjects.FlightBm.ToDal());
+            UnitOfWork.Flight.Create(StubsObjects.FlightBm.ToDal()).Wait();
 
-            UnitOfWork.ClassType.Create(StubsObjects.ClassTypeBm.ToDal());
-            UnitOfWork.PassengerSeat.Create(StubsObjects.PassengerSeatBm.ToDal());
-            UnitOfWork.OrderStatus.Create(StubsObjects.OrderStatusBm.ToDal());
-            UnitOfWork.Document.Create(StubsObjects.DocumentBm.ToDal());
+            UnitOfWork.ClassType.Create(StubsObjects.ClassTypeBm.ToDal()).Wait();
+            UnitOfWork.PassengerSeat.Create(StubsObjects.PassengerSeatBm.ToDal()).Wait();
+            UnitOfWork.OrderStatus.Create(StubsObjects.OrderStatusBm.ToDal()).Wait();
+            UnitOfWork.Document.Create(StubsObjects.DocumentBm.ToDal()).Wait();
         }
 
         public static void DeleteEntitiesForTicketService()

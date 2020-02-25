@@ -4,7 +4,7 @@
     [LastName] NVARCHAR (300) NOT NULL,
     [Email] NVARCHAR (256) NOT NULL,
     [RoleId] UNIQUEIDENTIFIER NOT NULL,
-    [Phone] NVARCHAR (50) NOT NULL,
+    [Phone] NVARCHAR (16) NOT NULL,
     [Address] NVARCHAR (400) NULL,
     CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Users_Roles] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[UserRoles] ([Id]),
