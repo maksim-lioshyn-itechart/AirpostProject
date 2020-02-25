@@ -25,7 +25,7 @@ namespace DataAccessLayer.Repositories
         public async Task<User> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<User>("GetUserById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<User>("GetUserById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<User>> GetAll()

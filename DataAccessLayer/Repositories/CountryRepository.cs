@@ -26,7 +26,7 @@ namespace DataAccessLayer.Repositories
         public async Task<Country> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<Country>("GetCountryById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<Country>("GetCountryById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<Country>> GetAll()

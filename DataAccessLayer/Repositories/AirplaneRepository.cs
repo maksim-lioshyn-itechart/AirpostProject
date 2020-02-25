@@ -25,7 +25,7 @@ namespace DataAccessLayer.Repositories
         public async Task<Airplane> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<Airplane>("GetAirplaneById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<Airplane>("GetAirplaneById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<Airplane>> GetAll()
