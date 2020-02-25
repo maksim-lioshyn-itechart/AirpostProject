@@ -7,8 +7,8 @@
     [AirplaneId] UNIQUEIDENTIFIER NOT NULL,
     CONSTRAINT [PK_Flights] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Flights_Airplanes] FOREIGN KEY ([AirplaneId]) REFERENCES [dbo].[Airplanes] ([Id]),
-    CONSTRAINT [FK_Raises_DepartureAirport] FOREIGN KEY ([DepartureAirportId]) REFERENCES [dbo].[Airports] ([Id]),
-    CONSTRAINT [FK_Raises_DestinationAirport] FOREIGN KEY ([DestinationAirportId]) REFERENCES [dbo].[Airports] ([Id])
+    CONSTRAINT [FK_Flights_DepartureAirport] FOREIGN KEY ([DepartureAirportId]) REFERENCES [dbo].[Airports] ([Id]),
+    CONSTRAINT [FK_Flights_DestinationAirport] FOREIGN KEY ([DestinationAirportId]) REFERENCES [dbo].[Airports] ([Id])
 );
 
 

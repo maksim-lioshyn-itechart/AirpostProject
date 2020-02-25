@@ -130,5 +130,22 @@ namespace DataAccessLayer.Tests
             DepartureAirportId = AirportBm.Id,
             DestinationAirportId = AirportBm.Id
         };
+
+        public static TicketBm TicketBm = new TicketBm
+        {
+            Id = Guid.NewGuid(),
+            BaggageCount = 0,
+            TicketNumber = "123",
+            Cost = 100,
+            DocumentId = DocumentBm.Id,
+            FlightId = FlightBm.Id,
+            FreeWeightCapacity = 100,
+            OrderStatusId = OrderStatusBm.Id,
+            OverWeightPrice = 200,
+            PassengerSeatId = PassengerSeatBm.Id,
+            PurchaseDate = DateTime.UtcNow,
+            Taxes = 2131,
+            Total = 54654
+        };
     }
 }
