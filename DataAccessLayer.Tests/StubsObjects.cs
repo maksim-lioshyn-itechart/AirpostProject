@@ -120,5 +120,15 @@ namespace DataAccessLayer.Tests
             CoordinateY1 = 0,
             CoordinateY2 = 0
         };
+
+        public static FlightBm FlightBm = new FlightBm
+        {
+            Id = Guid.NewGuid(),
+            ArrivalTimeUtc = DateTime.UtcNow,
+            DepartureTimeUtc = DateTime.UtcNow,
+            AirplaneId = AirplaneBm.Id,
+            DepartureAirportId = AirportBm.Id,
+            DestinationAirportId = AirportBm.Id
+        };
     }
 }

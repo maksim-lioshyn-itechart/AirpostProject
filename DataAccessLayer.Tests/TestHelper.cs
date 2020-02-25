@@ -85,5 +85,22 @@ namespace DataAccessLayer.Tests
             UnitOfWork.AirplaneSchema.Delete(StubsObjects.AirplaneSchemaBm.Id);
             UnitOfWork.ClassType.Delete(StubsObjects.ClassTypeBm.Id);
         }
+
+        public static void CreateEntitiesForFlightService()
+        {
+            CreateEntitiesForAirplaneService();
+            CreateEntitiesForAirportService();
+            UnitOfWork.Airplane.Create(StubsObjects.AirplaneBm.ToDal());
+            UnitOfWork.Airport.Create(StubsObjects.AirportBm.ToDal());
+
+        }
+
+        public static void DeleteEntitiesForFlightService()
+        {
+            DeleteEntitiesForAirplaneService();
+            DeleteEntitiesForAirportService();
+            UnitOfWork.Airplane.Delete(StubsObjects.AirplaneBm.Id);
+            UnitOfWork.Airport.Delete(StubsObjects.AirportBm.Id);
+        }
     }
 }

@@ -46,5 +46,11 @@ namespace DataAccessLayer.Repositories
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteFlight", new { id }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<Flight>> GetFlightByAirplaneId(Guid airplaneId)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QueryAsync<Flight>("GetFlightByAirplaneId", new { airplaneId }, commandType: CommandType.StoredProcedure);
+        }
     }
 }

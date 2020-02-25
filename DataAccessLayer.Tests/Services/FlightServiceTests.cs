@@ -8,21 +8,22 @@ using System.Linq;
 namespace DataAccessLayer.Tests.Services
 {
     [TestFixture()]
-    public class CountryServiceTests
+    public class FlightServiceTests
     {
-        private readonly ICountryService _testEntityService;
+        private readonly IFlightService _testEntityService;
+        private readonly FlightBm _entityBm = StubsObjects.FlightBm;
 
-        private readonly CountryBm _entityBm = StubsObjects.CountryBm;
-
-        public CountryServiceTests()
+        public FlightServiceTests()
         {
-            _testEntityService = new CountryService(TestHelper.UnitOfWork);
+            _testEntityService = new FlightService(TestHelper.UnitOfWork);
         }
 
         [Test()]
         [Order(0)]
         public void CreateTest()
         {
+            TestHelper.CreateEntitiesForFlightService();
+
             Assert.IsTrue(_testEntityService.Create(_entityBm).Result);
             Assert.IsFalse(_testEntityService.Create(_entityBm).Result);
         }
@@ -38,19 +39,19 @@ namespace DataAccessLayer.Tests.Services
         [Order(1)]
         public void GetByIdTest()
         {
-            var airline = _testEntityService.GetById(_entityBm.Id).Result;
-            Assert.AreEqual(_entityBm.Name, airline.Name);
+            var test = _testEntityService.GetById(_entityBm.Id).Result;
+            Assert.AreEqual(_entityBm.ArrivalTimeUtc.ToShortDateString(), test.ArrivalTimeUtc.ToShortDateString());
         }
 
         [Test()]
-        [Order(2)]
+        [Order(1)]
         public void UpdateTest()
         {
             var test = _entityBm;
-            test.Name = Guid.NewGuid().ToString();
+            test.DepartureTimeUtc = DateTime.UtcNow;
             _testEntityService.Update(test).Wait();
-            var airline = _testEntityService.GetById(_entityBm.Id).Result;
-            Assert.AreEqual(airline.Name, test.Name);
+            var flight = _testEntityService.GetById(_entityBm.Id).Result;
+            Assert.AreEqual(flight.DepartureTimeUtc.ToShortDateString(), test.DepartureTimeUtc.ToShortDateString());
         }
 
         [Test()]
@@ -58,6 +59,7 @@ namespace DataAccessLayer.Tests.Services
         public void DeleteTest()
         {
             _testEntityService.Delete(_entityBm).Wait();
+            TestHelper.DeleteEntitiesForFlightService();
         }
     }
 }
