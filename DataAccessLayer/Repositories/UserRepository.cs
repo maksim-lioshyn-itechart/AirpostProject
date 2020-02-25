@@ -11,6 +11,7 @@ namespace DataAccessLayer.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public UserRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;

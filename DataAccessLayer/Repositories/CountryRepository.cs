@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    public class CountryRepository: ICountryRepository
+    public class CountryRepository : ICountryRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public CountryRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;

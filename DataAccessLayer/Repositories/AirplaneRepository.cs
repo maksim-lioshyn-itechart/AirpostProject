@@ -11,6 +11,7 @@ namespace DataAccessLayer.Repositories
     public class AirplaneRepository : IAirplaneRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public AirplaneRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;
@@ -20,7 +21,7 @@ namespace DataAccessLayer.Repositories
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertAirplane", entity, commandType: CommandType.StoredProcedure);
         }
-        
+
         public async Task<Airplane> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();

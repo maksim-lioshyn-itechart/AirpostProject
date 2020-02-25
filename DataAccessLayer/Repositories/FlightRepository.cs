@@ -11,6 +11,7 @@ namespace DataAccessLayer.Repositories
     public class FlightRepository : IFlightRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public FlightRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;

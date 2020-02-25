@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Models
 {
-    public class PassengerSeat: BaseModel
+    public class PassengerSeat : BaseModel
     {
         public Guid AirplaneSchemaId { get; set; }
         public Guid ClassTypeId { get; set; }

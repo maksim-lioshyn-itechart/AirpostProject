@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[GetAllAirplaneSchemas]
 AS
 BEGIN
-    Select [Id], [Name]
+    SELECT [Id], [Name]
     FROM [dbo].[AirplaneSchemas]
 END
 GO

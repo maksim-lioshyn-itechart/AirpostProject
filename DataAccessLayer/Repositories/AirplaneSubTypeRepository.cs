@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    public class AirplaneSubTypeRepository: IAirplaneSubTypeRepository
+    public class AirplaneSubTypeRepository : IAirplaneSubTypeRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public AirplaneSubTypeRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;

@@ -2,6 +2,6 @@ CREATE PROCEDURE [dbo].[DeleteFlight]
     @Id UNIQUEIDENTIFIER
 AS
 BEGIN
-   DELETE FROM [dbo].[Flights] WHERE Id = @Id
+    DELETE FROM [dbo].[Flights] WHERE Id = @Id
 END
 GO

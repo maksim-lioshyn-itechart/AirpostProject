@@ -11,6 +11,7 @@ namespace DataAccessLayer.Repositories
     public class PassengerSeatRepository : IPassengerSeatRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public PassengerSeatRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;

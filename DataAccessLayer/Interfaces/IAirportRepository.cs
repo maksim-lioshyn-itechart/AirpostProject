@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IAirportRepository: IBaseRepository<Airport>
+    public interface IAirportRepository : IBaseRepository<Airport>
     {
     }
 }

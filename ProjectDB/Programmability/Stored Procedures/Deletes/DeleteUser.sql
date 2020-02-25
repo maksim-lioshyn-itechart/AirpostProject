@@ -2,6 +2,6 @@ CREATE PROCEDURE [dbo].[DeleteUser]
     @Id UNIQUEIDENTIFIER
 AS
 BEGIN
-   DELETE FROM [dbo].[Users] WHERE Id = @Id
+    DELETE FROM [dbo].[Users] WHERE Id = @Id
 END
 GO

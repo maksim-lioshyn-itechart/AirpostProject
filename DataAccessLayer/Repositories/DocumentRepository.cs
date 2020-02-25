@@ -11,6 +11,7 @@ namespace DataAccessLayer.Repositories
     public class DocumentRepository : IDocumentRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public DocumentRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;

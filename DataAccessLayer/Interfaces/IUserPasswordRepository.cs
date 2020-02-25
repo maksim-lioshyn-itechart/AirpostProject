@@ -2,8 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IUserPasswordRepository: IBaseRepository<UserPassword>
+    public interface IUserPasswordRepository : IBaseRepository<UserPassword>
     {
-        
     }
 }

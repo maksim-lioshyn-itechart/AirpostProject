@@ -11,6 +11,7 @@ namespace DataAccessLayer.Repositories
     public class TicketRepository : ITicketRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public TicketRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;

@@ -2,8 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IPassengerSeatRepository: IBaseRepository<PassengerSeat>
+    public interface IPassengerSeatRepository : IBaseRepository<PassengerSeat>
     {
-        
     }
 }

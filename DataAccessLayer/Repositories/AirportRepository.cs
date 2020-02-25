@@ -11,6 +11,7 @@ namespace DataAccessLayer.Repositories
     public class AirportRepository : IAirportRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public AirportRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;

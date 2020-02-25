@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Models
 {
-    public class Flight:BaseModel
+    public class Flight : BaseModel
     {
         public Guid DepartureAirportId { get; set; }
         public Guid DestinationAirportId { get; set; }

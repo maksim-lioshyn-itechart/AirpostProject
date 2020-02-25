@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    public class OrderStatusRepository: IOrderStatusRepository
+    public class OrderStatusRepository : IOrderStatusRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public OrderStatusRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;

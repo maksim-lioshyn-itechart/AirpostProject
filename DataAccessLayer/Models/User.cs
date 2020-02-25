@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Models
 {
-    public class User: BaseModel
+    public class User : BaseModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -10,5 +10,5 @@ namespace DataAccessLayer.Models
         public Guid RoleId { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
-	}
+    }
 }
