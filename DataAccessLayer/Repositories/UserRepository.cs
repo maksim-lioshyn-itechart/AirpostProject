@@ -16,6 +16,7 @@ namespace DataAccessLayer.Repositories
         {
             _configuration = configuration;
         }
+
         public async Task Create(User entity)
         {
             using IDbConnection db = _configuration.GetConnection();
