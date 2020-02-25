@@ -56,7 +56,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<AirplaneBm>> GetAll() =>
             (await UnitOfWork.Airplane.GetAll())
-            .Select(a => a.ToBm());
+            .Select(airplane => airplane.ToBm());
 
         public async Task<AirplaneBm> GetById(Guid id) =>
             (await UnitOfWork.Airplane.GetById(id)).ToBm();

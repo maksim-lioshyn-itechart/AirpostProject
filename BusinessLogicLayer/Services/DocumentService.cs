@@ -55,7 +55,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<DocumentBm>> GetAll() =>
             (await UnitOfWork.Document.GetAll())
-            .Select(a => a.ToBm());
+            .Select(document => document.ToBm());
 
         public async Task<DocumentBm> GetById(Guid id) =>
             (await UnitOfWork.Document.GetById(id)).ToBm();

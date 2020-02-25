@@ -20,8 +20,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(UserRoleBm entity)
         {
-            var airplanes = await UnitOfWork.UserRole.GetAll();
-            if (airplanes.FirstOrDefault(a => a.Name == entity.Name) != null)
+            var roles = await UnitOfWork.UserRole.GetAll();
+            if (roles.FirstOrDefault(role => role.Name == entity.Name) != null)
             {
                 return false;
             }
@@ -31,8 +31,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Update(UserRoleBm entity)
         {
-            var airplanes = await UnitOfWork.UserRole.GetById(entity.Id);
-            if (airplanes != null)
+            var role = await UnitOfWork.UserRole.GetById(entity.Id);
+            if (role != null)
             {
                 await UnitOfWork.UserRole.Update(entity.ToDal());
             }
@@ -40,8 +40,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Delete(UserRoleBm entity)
         {
-            var airplanes = await UnitOfWork.UserRole.GetById(entity.Id);
-            if (airplanes != null)
+            var role = await UnitOfWork.UserRole.GetById(entity.Id);
+            if (role != null)
             {
                 await UnitOfWork.UserRole.Delete(entity.Id);
             }
@@ -49,7 +49,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<UserRoleBm>> GetAll() =>
             (await UnitOfWork.UserRole.GetAll())
-            .Select(a => a.ToBm());
+            .Select(role => role.ToBm());
 
         public async Task<UserRoleBm> GetById(Guid id) =>
             (await UnitOfWork.UserRole.GetById(id)).ToBm();

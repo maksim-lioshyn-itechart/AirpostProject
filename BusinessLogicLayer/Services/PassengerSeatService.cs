@@ -42,8 +42,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Update(PassengerSeatBm entity)
         {
-            var airplanes = await UnitOfWork.PassengerSeat.GetById(entity.Id);
-            if (airplanes != null)
+            var seat = await UnitOfWork.PassengerSeat.GetById(entity.Id);
+            if (seat != null)
             {
                 await UnitOfWork.PassengerSeat.Update(entity.ToDal());
             }
@@ -51,8 +51,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Delete(PassengerSeatBm entity)
         {
-            var airplanes = await UnitOfWork.PassengerSeat.GetById(entity.Id);
-            if (airplanes != null)
+            var seat = await UnitOfWork.PassengerSeat.GetById(entity.Id);
+            if (seat != null)
             {
                 await UnitOfWork.PassengerSeat.Delete(entity.Id);
             }
@@ -60,7 +60,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<PassengerSeatBm>> GetAll() =>
             (await UnitOfWork.PassengerSeat.GetAll())
-            .Select(a => a.ToBm());
+            .Select(seat => seat.ToBm());
 
         public async Task<PassengerSeatBm> GetById(Guid id) =>
             (await UnitOfWork.PassengerSeat.GetById(id)).ToBm();

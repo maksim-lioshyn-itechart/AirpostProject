@@ -53,7 +53,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<AirportBm>> GetAll() =>
             (await UnitOfWork.Airport.GetAll())
-            .Select(a => a.ToBm());
+            .Select(airport => airport.ToBm());
 
         public async Task<AirportBm> GetById(Guid id) =>
             (await UnitOfWork.Airport.GetById(id)).ToBm();

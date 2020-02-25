@@ -20,8 +20,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(AirlineBm entity)
         {
-            var airplanes = await UnitOfWork.Airline.GetAirlineByCountryId(entity.CountryId);
-            if (airplanes.FirstOrDefault(a => a.Email == entity.Email) != null)
+            var airlines = await UnitOfWork.Airline.GetAirlineByCountryId(entity.CountryId);
+            if (airlines.FirstOrDefault(airline => airline.Email == entity.Email) != null)
             {
                 return false;
             }
@@ -31,8 +31,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Update(AirlineBm entity)
         {
-            var airplanes = await UnitOfWork.Airline.GetById(entity.Id);
-            if (airplanes != null)
+            var airline = await UnitOfWork.Airline.GetById(entity.Id);
+            if (airline != null)
             {
                 await UnitOfWork.Airline.Update(entity.ToDal());
             }
@@ -40,8 +40,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Delete(AirlineBm entity)
         {
-            var airplanes = await UnitOfWork.Airline.GetById(entity.Id);
-            if (airplanes != null)
+            var airline = await UnitOfWork.Airline.GetById(entity.Id);
+            if (airline != null)
             {
                 await UnitOfWork.Airline.Delete(entity.Id);
             }
@@ -49,7 +49,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<AirlineBm>> GetAll() =>
             (await UnitOfWork.Airline.GetAll())
-            .Select(a => a.ToBm());
+            .Select(airline => airline.ToBm());
 
         public async Task<AirlineBm> GetById(Guid id) =>
             (await UnitOfWork.Airline.GetById(id)).ToBm();

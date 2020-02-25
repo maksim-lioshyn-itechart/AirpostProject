@@ -20,8 +20,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(AirplaneSubTypeBm entity)
         {
-            var airplanes = await UnitOfWork.AirplaneSubType.GetAll();
-            if (airplanes.FirstOrDefault(a => a.Name == entity.Name) != null)
+            var subTypes = await UnitOfWork.AirplaneSubType.GetAll();
+            if (subTypes.FirstOrDefault(subType => subType.Name == entity.Name) != null)
             {
                 return false;
             }
@@ -31,8 +31,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Update(AirplaneSubTypeBm entity)
         {
-            var airplanes = await UnitOfWork.AirplaneSubType.GetById(entity.Id);
-            if (airplanes != null)
+            var subType = await UnitOfWork.AirplaneSubType.GetById(entity.Id);
+            if (subType != null)
             {
                 await UnitOfWork.AirplaneSubType.Update(entity.ToDal());
             }
@@ -40,8 +40,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Delete(AirplaneSubTypeBm entity)
         {
-            var airplanes = await UnitOfWork.AirplaneSubType.GetById(entity.Id);
-            if (airplanes != null)
+            var subType = await UnitOfWork.AirplaneSubType.GetById(entity.Id);
+            if (subType != null)
             {
                 await UnitOfWork.AirplaneSubType.Delete(entity.Id);
             }
@@ -49,7 +49,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<AirplaneSubTypeBm>> GetAll() =>
             (await UnitOfWork.AirplaneSubType.GetAll())
-            .Select(a => a.ToBm());
+            .Select(subType => subType.ToBm());
 
         public async Task<AirplaneSubTypeBm> GetById(Guid id) =>
             (await UnitOfWork.AirplaneSubType.GetById(id)).ToBm();

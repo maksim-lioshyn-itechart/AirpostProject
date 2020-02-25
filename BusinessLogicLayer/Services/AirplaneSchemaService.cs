@@ -21,7 +21,7 @@ namespace BusinessLogicLayer.Services
         public async Task<bool> Create(AirplaneSchemaBm entity)
         {
             var schemas = await UnitOfWork.AirplaneSchema.GetAll();
-            if (schemas.FirstOrDefault(a => a.Name == entity.Name) != null)
+            if (schemas.FirstOrDefault(schema => schema.Name == entity.Name) != null)
             {
                 return false;
             }
@@ -49,7 +49,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<AirplaneSchemaBm>> GetAll() =>
             (await UnitOfWork.AirplaneSchema.GetAll())
-            .Select(a => a.ToBm());
+            .Select(schema => schema.ToBm());
 
         public async Task<AirplaneSchemaBm> GetById(Guid id) =>
             (await UnitOfWork.AirplaneSchema.GetById(id)).ToBm();

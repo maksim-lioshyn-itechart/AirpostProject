@@ -20,8 +20,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(OrderStatusBm entity)
         {
-            var airplanes = await UnitOfWork.OrderStatus.GetAll();
-            if (airplanes.FirstOrDefault(a => a.Name == entity.Name) != null)
+            var statuses = await UnitOfWork.OrderStatus.GetAll();
+            if (statuses.FirstOrDefault(status => status.Name == entity.Name) != null)
             {
                 return false;
             }
@@ -31,8 +31,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Update(OrderStatusBm entity)
         {
-            var airplanes = await UnitOfWork.OrderStatus.GetById(entity.Id);
-            if (airplanes != null)
+            var status = await UnitOfWork.OrderStatus.GetById(entity.Id);
+            if (status != null)
             {
                 await UnitOfWork.OrderStatus.Update(entity.ToDal());
             }
@@ -40,8 +40,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Delete(OrderStatusBm entity)
         {
-            var airplanes = await UnitOfWork.OrderStatus.GetById(entity.Id);
-            if (airplanes != null)
+            var orderStatus = await UnitOfWork.OrderStatus.GetById(entity.Id);
+            if (orderStatus != null)
             {
                 await UnitOfWork.OrderStatus.Delete(entity.Id);
             }
@@ -49,7 +49,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<OrderStatusBm>> GetAll() =>
             (await UnitOfWork.OrderStatus.GetAll())
-            .Select(a => a.ToBm());
+            .Select(status => status.ToBm());
 
         public async Task<OrderStatusBm> GetById(Guid id) =>
             (await UnitOfWork.OrderStatus.GetById(id)).ToBm();

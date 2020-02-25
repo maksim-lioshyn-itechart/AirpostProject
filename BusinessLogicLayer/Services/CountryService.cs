@@ -20,8 +20,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(CountryBm entity)
         {
-            var airplanes = await UnitOfWork.Country.GetAll();
-            if (airplanes.FirstOrDefault(a => a.Name == entity.Name) != null)
+            var countries = await UnitOfWork.Country.GetAll();
+            if (countries.FirstOrDefault(country => country.Name == entity.Name) != null)
             {
                 return false;
             }
@@ -31,8 +31,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Update(CountryBm entity)
         {
-            var airplanes = await UnitOfWork.Country.GetById(entity.Id);
-            if (airplanes != null)
+            var country = await UnitOfWork.Country.GetById(entity.Id);
+            if (country != null)
             {
                 await UnitOfWork.Country.Update(entity.ToDal());
             }
@@ -40,8 +40,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task Delete(CountryBm entity)
         {
-            var airplanes = await UnitOfWork.Country.GetById(entity.Id);
-            if (airplanes != null)
+            var country = await UnitOfWork.Country.GetById(entity.Id);
+            if (country != null)
             {
                 await UnitOfWork.Country.Delete(entity.Id);
             }
@@ -49,7 +49,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<CountryBm>> GetAll() =>
             (await UnitOfWork.Country.GetAll())
-            .Select(a => a.ToBm());
+            .Select(country => country.ToBm());
 
         public async Task<CountryBm> GetById(Guid id) =>
             (await UnitOfWork.Country.GetById(id)).ToBm();
