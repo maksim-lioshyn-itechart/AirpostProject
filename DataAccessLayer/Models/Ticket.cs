@@ -2,9 +2,9 @@
 
 namespace DataAccessLayer.Models
 {
-    public class Ticket : BasicModel
+    public class Ticket : BaseModel
     {
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
         public Guid OrderStatusId { get; set; }
         public Guid FlightId { get; set; }
         public Guid PassengerSeatId { get; set; }
