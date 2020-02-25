@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Mappers;
 using BusinessLogicLayer.Models;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
 {
@@ -70,7 +69,7 @@ namespace BusinessLogicLayer.Services
         private UserPassword NewUserPassword(string password, Guid userId)
         {
             var salt = CreateSalt();
-            
+
             return new UserPassword
             {
                 Id = Guid.NewGuid(),

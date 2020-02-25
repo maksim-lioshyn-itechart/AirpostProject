@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[GetAllOrderStatuses]
 AS
 BEGIN
-    Select [Id], [Name]
+    SELECT [Id], [Name]
     FROM [dbo].[OrderStatuses]
 END
 GO

@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    public class UserRoleRepository: IUserRoleRepository
+    public class UserRoleRepository : IUserRoleRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public UserRoleRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;
@@ -26,7 +26,7 @@ namespace DataAccessLayer.Repositories
         public async Task<UserRole> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<UserRole>("GetUserRoleById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<UserRole>("GetUserRoleById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<UserRole>> GetAll()

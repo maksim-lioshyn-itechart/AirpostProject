@@ -3,7 +3,6 @@ using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
 using NUnit.Framework;
 using System.Linq;
-using BusinessLogicLayer.Mappers;
 
 namespace DataAccessLayer.Tests.Services
 {

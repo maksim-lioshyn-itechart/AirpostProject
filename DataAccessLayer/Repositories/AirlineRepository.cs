@@ -11,10 +11,12 @@ namespace DataAccessLayer.Repositories
     public class AirlineRepository : IAirlineRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public AirlineRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;
         }
+
         public async Task Create(Airline entity)
         {
             using IDbConnection db = _configuration.GetConnection();
@@ -24,7 +26,7 @@ namespace DataAccessLayer.Repositories
         public async Task<Airline> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<Airline>("GetAirlineById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<Airline>("GetAirlineById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<Airline>> GetAll()

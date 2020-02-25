@@ -11,10 +11,12 @@ namespace DataAccessLayer.Repositories
     public class UserPasswordRepository : IUserPasswordRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public UserPasswordRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;
         }
+
         public async Task Create(UserPassword entity)
         {
             using IDbConnection db = _configuration.GetConnection();
@@ -24,7 +26,7 @@ namespace DataAccessLayer.Repositories
         public async Task<UserPassword> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<UserPassword>("GetUserPasswordById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<UserPassword>("GetUserPasswordById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<UserPassword>> GetAll()

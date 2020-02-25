@@ -9,7 +9,7 @@ using static BusinessLogicLayer.Mappers.CommonMapper;
 
 namespace BusinessLogicLayer.Services
 {
-    public class AirlineService: IAirlineService
+    public class AirlineService : IAirlineService
     {
         private IUnitOfWork UnitOfWork { get; }
 
@@ -17,6 +17,7 @@ namespace BusinessLogicLayer.Services
         {
             UnitOfWork = unitOfWork;
         }
+
         public async Task<bool> Create(AirlineBm entity)
         {
             var airplanes = await UnitOfWork.Airline.GetAirlineByCountryId(entity.CountryId);
@@ -46,11 +47,11 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task<IEnumerable<AirlineBm>> GetAll() => 
+        public async Task<IEnumerable<AirlineBm>> GetAll() =>
             (await UnitOfWork.Airline.GetAll())
             .Select(a => a.ToBm());
 
-        public async Task<AirlineBm> GetById(Guid id) => 
+        public async Task<AirlineBm> GetById(Guid id) =>
             (await UnitOfWork.Airline.GetById(id)).ToBm();
     }
 }

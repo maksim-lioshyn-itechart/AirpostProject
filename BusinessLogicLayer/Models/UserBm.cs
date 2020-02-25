@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Models
 {
-    public class UserBm: BaseBm
+    public class UserBm : BaseBm
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

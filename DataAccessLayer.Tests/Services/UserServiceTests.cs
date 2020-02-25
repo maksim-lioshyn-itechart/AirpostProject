@@ -2,8 +2,6 @@
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
 using NUnit.Framework;
-using System;
-using System.Linq;
 
 namespace DataAccessLayer.Tests.Services
 {
@@ -32,7 +30,7 @@ namespace DataAccessLayer.Tests.Services
         [Order(1)]
         public void ValidateTest()
         {
-            _testEntityService.ValidatePassword(_entityBm.Id, _entityBm.Password).Wait();
+            Assert.IsTrue(_testEntityService.ValidatePassword(_entityBm.Id, _entityBm.Password).Result);
         }
 
         [Test()]

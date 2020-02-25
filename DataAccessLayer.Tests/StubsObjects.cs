@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BusinessLogicLayer.Models;
+﻿using BusinessLogicLayer.Models;
+using System;
 
 namespace DataAccessLayer.Tests
 {
@@ -67,7 +65,7 @@ namespace DataAccessLayer.Tests
             Id = Guid.NewGuid(),
             Name = Guid.NewGuid().ToString()
         };
-        
+
         public static AirplaneBm AirplaneBm = new AirplaneBm
         {
             Id = Guid.NewGuid(),

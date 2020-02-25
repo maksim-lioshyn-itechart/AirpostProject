@@ -4,6 +4,6 @@ namespace BusinessLogicLayer.Interfaces
 {
     public interface IOrderStatusService : IService<OrderStatusBm>
     {
-        
+
     }
 }

@@ -24,22 +24,22 @@ namespace DataAccessLayer.Repositories
         private readonly AirplaneTypeRepository _airplaneType;
         private readonly AirplaneRepository _airplane;
 
-        public IAirlineRepository Airline => 
+        public IAirlineRepository Airline =>
             _airline ?? new AirlineRepository(ConfigurationFactory);
 
-        public IAirplaneRepository Airplane => 
+        public IAirplaneRepository Airplane =>
             _airplane ?? new AirplaneRepository(ConfigurationFactory);
 
         public IAirplaneSchemaRepository AirplaneSchema =>
             _airplaneSchema ?? new AirplaneSchemaRepository(ConfigurationFactory);
 
-        public IAirplaneSubTypeRepository AirplaneSubType => 
+        public IAirplaneSubTypeRepository AirplaneSubType =>
             _airplaneSubType ?? new AirplaneSubTypeRepository(ConfigurationFactory);
 
-        public IAirplaneTypeRepository AirplaneType => 
+        public IAirplaneTypeRepository AirplaneType =>
             _airplaneType ?? new AirplaneTypeRepository(ConfigurationFactory);
 
-        public IAirportRepository Airport => 
+        public IAirportRepository Airport =>
             _airport ?? new AirportRepository(ConfigurationFactory);
 
         public IClassTypeRepository ClassType =>
@@ -54,25 +54,25 @@ namespace DataAccessLayer.Repositories
         public IDocumentTypeRepository DocumentType =>
             _documentType ?? new DocumentTypeRepository(ConfigurationFactory);
 
-        public IFlightRepository Flight => 
+        public IFlightRepository Flight =>
             _flight ?? new FlightRepository(ConfigurationFactory);
 
         public IOrderStatusRepository OrderStatus =>
             _orderStatus ?? new OrderStatusRepository(ConfigurationFactory);
 
-        public IPassengerSeatRepository PassengerSeat => 
+        public IPassengerSeatRepository PassengerSeat =>
             _passengerSeat ?? new PassengerSeatRepository(ConfigurationFactory);
 
-        public ITicketRepository Ticket => 
+        public ITicketRepository Ticket =>
             _ticket ?? new TicketRepository(ConfigurationFactory);
 
-        public IUserPasswordRepository UserPassword => 
+        public IUserPasswordRepository UserPassword =>
             _userPassword ?? new UserPasswordRepository(ConfigurationFactory);
 
-        public IUserRepository User => 
+        public IUserRepository User =>
             _user ?? new UserRepository(ConfigurationFactory);
 
-        public IUserRoleRepository UserRole => 
+        public IUserRoleRepository UserRole =>
             _userRole ?? new UserRoleRepository(ConfigurationFactory);
 
         public UnitOfWork(

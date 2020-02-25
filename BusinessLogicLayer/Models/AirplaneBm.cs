@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLogicLayer.Models
 {
-    public class AirplaneBm: BaseBm
+    public class AirplaneBm : BaseBm
     {
         public Guid AirplaneSubTypeId { get; set; }
         public Guid AirplaneTypeId { get; set; }

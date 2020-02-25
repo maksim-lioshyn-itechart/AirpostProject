@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Mappers;
 using BusinessLogicLayer.Models;
 using DataAccessLayer.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
 {
-    public class DocumentService: IDocumentService
+    public class DocumentService : IDocumentService
     {
         private IUnitOfWork UnitOfWork { get; }
 
@@ -18,11 +17,11 @@ namespace BusinessLogicLayer.Services
         {
             UnitOfWork = unitOfWork;
         }
-        
+
         public async Task<bool> Create(DocumentBm entity)
         {
             var documents = await UnitOfWork.Document.GetDocumentsByDocumentTypeId(entity.DocumentTypeId);
-            var isExist = documents.FirstOrDefault(document => 
+            var isExist = documents.FirstOrDefault(document =>
                 document.Id == entity.Id
                 && document.DocumentTypeId == entity.DocumentTypeId
                 && document.Name == entity.Name

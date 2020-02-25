@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DataAccessLayer.Models;
+using System;
 using System.Threading.Tasks;
-using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IUserPasswordRepository: IBaseRepository<UserPassword>
+    public interface IUserPasswordRepository : IBaseRepository<UserPassword>
     {
         Task<UserPassword> GetByUserId(Guid userId);
     }

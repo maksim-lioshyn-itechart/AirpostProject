@@ -1,8 +1,8 @@
-﻿using BusinessLogicLayer.Interfaces;
+﻿using System;
+using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace DataAccessLayer.Tests.Services
@@ -47,7 +47,7 @@ namespace DataAccessLayer.Tests.Services
         public void UpdateTest()
         {
             var test = _entityBm;
-            test.Name = "Test";
+            test.Name = Guid.NewGuid().ToString();
             _testEntityService.Update(test).Wait();
             var airline = _testEntityService.GetById(_entityBm.Id).Result;
             Assert.AreEqual(airline.Name, test.Name);

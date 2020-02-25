@@ -2,8 +2,8 @@
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface IDocumentService: IService<DocumentBm>
+    public interface IDocumentService : IService<DocumentBm>
     {
-        
+
     }
 }

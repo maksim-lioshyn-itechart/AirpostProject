@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Mappers;
 using BusinessLogicLayer.Models;
 using DataAccessLayer.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
 {
-    public class AirportService: IAirportService
+    public class AirportService : IAirportService
     {
         private IUnitOfWork UnitOfWork { get; }
 
@@ -22,7 +21,7 @@ namespace BusinessLogicLayer.Services
         public async Task<bool> Create(AirportBm entity)
         {
             var airports = await UnitOfWork.Airport.GetAirportByCountryId(entity.CountryId);
-            var isExist = airports.FirstOrDefault(airport => 
+            var isExist = airports.FirstOrDefault(airport =>
                 airport.Id == entity.Id
                 && airport.Name == entity.Name) != null;
 

@@ -17,6 +17,7 @@ namespace BusinessLogicLayer.Services
         {
             UnitOfWork = unitOfWork;
         }
+
         public async Task<bool> Create(AirplaneTypeBm entity)
         {
             var airplanes = await UnitOfWork.AirplaneType.GetAll();
@@ -46,11 +47,11 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task<IEnumerable<AirplaneTypeBm>> GetAll() => 
+        public async Task<IEnumerable<AirplaneTypeBm>> GetAll() =>
             (await UnitOfWork.AirplaneType.GetAll())
             .Select(a => a.ToBm());
 
-        public async Task<AirplaneTypeBm> GetById(Guid id) => 
+        public async Task<AirplaneTypeBm> GetById(Guid id) =>
             (await UnitOfWork.AirplaneType.GetById(id)).ToBm();
     }
 }

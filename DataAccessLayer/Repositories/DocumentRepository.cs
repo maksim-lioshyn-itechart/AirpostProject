@@ -4,7 +4,6 @@ using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
@@ -12,10 +11,12 @@ namespace DataAccessLayer.Repositories
     public class DocumentRepository : IDocumentRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public DocumentRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;
         }
+
         public async Task Create(Document entity)
         {
             using IDbConnection db = _configuration.GetConnection();
@@ -25,7 +26,7 @@ namespace DataAccessLayer.Repositories
         public async Task<Document> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<Document>("GetDocumentById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<Document>("GetDocumentById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<Document>> GetAll()

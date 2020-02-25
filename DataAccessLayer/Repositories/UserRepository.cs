@@ -11,10 +11,12 @@ namespace DataAccessLayer.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly IConfigurationFactory _configuration;
+
         public UserRepository(IConfigurationFactory configuration)
         {
             _configuration = configuration;
         }
+
         public async Task Create(User entity)
         {
             using IDbConnection db = _configuration.GetConnection();
@@ -24,7 +26,7 @@ namespace DataAccessLayer.Repositories
         public async Task<User> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<User>("GetUserById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<User>("GetUserById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<User>> GetAll()

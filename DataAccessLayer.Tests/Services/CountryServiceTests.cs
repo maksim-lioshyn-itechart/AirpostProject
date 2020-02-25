@@ -2,7 +2,6 @@
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace DataAccessLayer.Tests.Services
