@@ -39,31 +39,41 @@ namespace BusinessLogicLayer.Services
             return true;
         }
 
-        public Task Update(UserBm entity)
+        public async Task Update(UserBm entity)
         {
-            throw new NotImplementedException();
+            var user = await UnitOfWork.User.GetById(entity.Id);
+            if (user != null)
+            {
+                await UnitOfWork.User.Update(entity.ToDal());
+            }
         }
 
-        public Task Delete(UserBm entity)
+        public async Task Delete(UserBm entity)
         {
-            throw new NotImplementedException();
+            var user = await UnitOfWork.User.GetById(entity.Id);
+            var passwordInformation = await UnitOfWork.UserPassword.GetByUserId(entity.Id);
+            if (user != null)
+            {
+                await UnitOfWork.UserPassword.Delete(passwordInformation.Id);
+                await UnitOfWork.User.Delete(entity.Id);
+            }
         }
 
-        public Task<IEnumerable<UserBm>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<UserBm>> GetAll() =>
+            (await UnitOfWork.User.GetAll()).Select(user => user.ToBm());
 
-        public Task<UserBm> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<UserBm> GetById(Guid id) =>
+            (await UnitOfWork.User.GetById(id)).ToBm();
 
         public async Task<bool> ValidatePassword(Guid userId, string password)
         {
-            var usrPassword = await UnitOfWork.UserPassword.GetByUserId(userId);
-            var a = Validate(password, usrPassword.Salt, usrPassword.Hash);
-            return a;
+            var userPassword = await UnitOfWork.UserPassword.GetByUserId(userId);
+            return Validate(password, userPassword.Salt, userPassword.Hash);
+        }
+
+        public Task<bool> UpdatePassword(Guid userId, string oldPassword, string newPassword)
+        {
+            throw new NotImplementedException();
         }
 
         private UserPassword NewUserPassword(string password, Guid userId)
@@ -87,17 +97,15 @@ namespace BusinessLogicLayer.Services
             return randomBytes;
         }
 
-        public static bool Validate(string value, byte[] salt, byte[] hash)
-            => UserPassword(value, salt) == hash;
+        public static bool Validate(string value, byte[] salt, byte[] hash) =>
+            UserPassword(value, salt).SequenceEqual(hash);
 
-        private static byte[] UserPassword(string password, byte[] salt)
-        {
-            return KeyDerivation.Pbkdf2(
+        private static byte[] UserPassword(string password, byte[] salt) =>
+            KeyDerivation.Pbkdf2(
                 password: password,
                 salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
+                prf: KeyDerivationPrf.HMACSHA1,
                 iterationCount: 10000,
-                numBytesRequested: 128 / 8);
-        }
+                numBytesRequested: 256 / 8);
     }
 }

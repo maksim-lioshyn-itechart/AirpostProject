@@ -1,4 +1,6 @@
-﻿using BusinessLogicLayer.Interfaces;
+﻿using System;
+using System.Linq;
+using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
 using NUnit.Framework;
@@ -31,40 +33,42 @@ namespace DataAccessLayer.Tests.Services
         public void ValidateTest()
         {
             Assert.IsTrue(_testEntityService.ValidatePassword(_entityBm.Id, _entityBm.Password).Result);
+            Assert.IsFalse(_testEntityService.ValidatePassword(_entityBm.Id, Guid.NewGuid().ToString()).Result);
         }
 
         [Test()]
         [Order(1)]
         public void GetAllTest()
         {
-            //Assert.GreaterOrEqual(_testEntityService.GetAll().Result.Count(), 1);
+            Assert.GreaterOrEqual(_testEntityService.GetAll().Result.Count(), 1);
         }
 
         [Test()]
         [Order(1)]
         public void GetByIdTest()
         {
-            //var airline = _testEntityService.GetById(_entityBm.Id).Result;
-            //Assert.AreEqual(_entityBm.Name, airline.Name);
+            var result = _testEntityService.GetById(_entityBm.Id).Result;
+            Assert.AreEqual(_entityBm.LastName, result.LastName);
         }
 
         [Test()]
         [Order(1)]
         public void UpdateTest()
         {
-            //var test = _entityBm;
-            //test.Name = "Test";
-            //_testEntityService.Update(test).Wait();
-            //var airline = _testEntityService.GetById(_entityBm.Id).Result;
-            //Assert.AreEqual(airline.Name, test.Name);
+            var test = _entityBm;
+            test.LastName = "Test";
+            _testEntityService.Update(test).Wait();
+            var result = _testEntityService.GetById(_entityBm.Id).Result;
+            Assert.AreEqual(result.LastName, test.LastName);
         }
 
         [Test()]
         [Order(100)]
         public void DeleteTest()
         {
+            _testEntityService.Delete(_entityBm).Wait();
             TestHelper.DeleteEntitiesForUserService();
-            //_testEntityService.Delete(_entityBm).Wait();
+            
         }
     }
 }
