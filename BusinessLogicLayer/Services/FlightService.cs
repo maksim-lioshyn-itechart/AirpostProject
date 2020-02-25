@@ -2,12 +2,9 @@
 using BusinessLogicLayer.Mappers;
 using BusinessLogicLayer.Models;
 using DataAccessLayer.Interfaces;
-using DataAccessLayer.Models;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
@@ -24,8 +21,6 @@ namespace BusinessLogicLayer.Services
         public async Task<bool> Create(FlightBm entity)
         {
             var flights = await UnitOfWork.Flight.GetFlightByAirplaneId(entity.AirplaneId);
-            var a = flights.ToList();
-
             var isExist = flights.FirstOrDefault(flight =>
                               flight.Id == entity.Id
                               && flight.DestinationAirportId == entity.DestinationAirportId

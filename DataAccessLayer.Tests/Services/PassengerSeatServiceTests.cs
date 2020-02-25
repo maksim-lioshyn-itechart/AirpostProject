@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DataAccessLayer.Tests.Services
 {
@@ -60,7 +59,7 @@ namespace DataAccessLayer.Tests.Services
         {
             _testEntityService.Delete(_entityBm).Wait();
             TestHelper.DeleteEntitiesForPassengerSeatService();
-            
+
         }
     }
 }
