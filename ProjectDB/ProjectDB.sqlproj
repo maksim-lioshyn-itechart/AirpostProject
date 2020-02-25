@@ -254,6 +254,7 @@
     <Build Include="Programmability\Stored Procedures\GetByIds\GetAirplanesByAirlineId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetAirportByCountryId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetDocumentsByDocumentTypeId.sql" />
+    <Build Include="Programmability\Stored Procedures\GetByIds\GetUserPasswordByUserId.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />

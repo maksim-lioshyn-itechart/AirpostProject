@@ -64,5 +64,15 @@ namespace DataAccessLayer.Tests
         {
             UnitOfWork.DocumentType.Delete(StubsObjects.DocumentTypeBm.Id);
         }
+
+        public static void CreateEntitiesForUserService()
+        {
+            UnitOfWork.UserRole.Create(StubsObjects.UserRoleBm.ToDal());
+        }
+
+        public static void DeleteEntitiesForUserService()
+        {
+            UnitOfWork.UserRole.Delete(StubsObjects.UserRoleBm.Id);
+        }
     }
 }

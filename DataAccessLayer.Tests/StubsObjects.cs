@@ -95,5 +95,17 @@ namespace DataAccessLayer.Tests
             DocumentTypeId = DocumentTypeBm.Id,
             IsActive = true
         };
+
+        public static UserBm UserBm = new UserBm()
+        {
+            Id = Guid.NewGuid(),
+            FirstName = Guid.NewGuid().ToString(),
+            Address = Guid.NewGuid().ToString(),
+            Email = Guid.NewGuid().ToString(),
+            LastName = Guid.NewGuid().ToString(),
+            Phone = Guid.NewGuid().ToString(),
+            Password = Guid.NewGuid().ToString(),
+            RoleId = UserRoleBm.Id
+        };
     }
 }
