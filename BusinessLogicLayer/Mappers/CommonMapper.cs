@@ -21,7 +21,10 @@ namespace BusinessLogicLayer.Mappers
                 cfg.CreateMap<Country, CountryBm>().ReverseMap();
                 cfg.CreateMap<Document, DocumentBm>().ReverseMap();
                 cfg.CreateMap<DocumentType, DocumentTypeBm>().ReverseMap();
+                cfg.CreateMap<Flight, FlightBm>().ReverseMap();
                 cfg.CreateMap<OrderStatus, OrderStatusBm>().ReverseMap();
+                cfg.CreateMap<PassengerSeat, PassengerSeatBm>().ReverseMap();
+                cfg.CreateMap<Ticket, TicketBm>().ReverseMap();
                 cfg.CreateMap<UserRole, UserRoleBm>().ReverseMap();
             });
             Mapper = new Mapper(config);
@@ -61,5 +64,14 @@ namespace BusinessLogicLayer.Mappers
 
         public static UserRoleBm ToBm(this UserRole model) => Mapper.Map<UserRoleBm>(model);
         public static UserRole ToDal(this UserRoleBm model) => Mapper.Map<UserRole>(model);
+
+        public static FlightBm ToBm(this Flight model) => Mapper.Map<FlightBm>(model);
+        public static Flight ToDal(this FlightBm model) => Mapper.Map<Flight>(model);
+
+        public static PassengerSeatBm ToBm(this PassengerSeat model) => Mapper.Map<PassengerSeatBm>(model);
+        public static PassengerSeat ToDal(this PassengerSeatBm model) => Mapper.Map<PassengerSeat>(model);
+
+        public static TicketBm ToBm(this Ticket model) => Mapper.Map<TicketBm>(model);
+        public static Ticket ToDal(this TicketBm model) => Mapper.Map<Ticket>(model);
     }
 }

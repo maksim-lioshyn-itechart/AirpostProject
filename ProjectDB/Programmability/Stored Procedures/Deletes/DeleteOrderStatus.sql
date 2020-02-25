@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[DeleteOrderStatuse]
+CREATE PROCEDURE [dbo].[DeleteOrderStatus]
     @Id UNIQUEIDENTIFIER
 AS
 BEGIN

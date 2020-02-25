@@ -105,5 +105,20 @@ namespace DataAccessLayer.Tests
             Password = Guid.NewGuid().ToString(),
             RoleId = UserRoleBm.Id
         };
+
+        public static PassengerSeatBm PassengerSeatBm = new PassengerSeatBm
+        {
+            Id = Guid.NewGuid(),
+            Seat = 0,
+            Row = 0,
+            Floor = 0,
+            Sector = "aa",
+            ClassTypeId = ClassTypeBm.Id,
+            AirplaneSchemaId = AirplaneSchemaBm.Id,
+            CoordinateX1 = 0,
+            CoordinateX2 = 0,
+            CoordinateY1 = 0,
+            CoordinateY2 = 0
+        };
     }
 }

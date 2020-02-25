@@ -176,7 +176,7 @@
     <Build Include="Programmability\Stored Procedures\Deletes\DeleteDocument.sql" />
     <Build Include="Programmability\Stored Procedures\Deletes\DeleteDocumentType.sql" />
     <Build Include="Programmability\Stored Procedures\Deletes\DeleteFlight.sql" />
-    <Build Include="Programmability\Stored Procedures\Deletes\DeleteOrderStatuse.sql" />
+    <Build Include="Programmability\Stored Procedures\Deletes\DeleteOrderStatus.sql" />
     <Build Include="Programmability\Stored Procedures\Deletes\DeletePassengerSeat.sql" />
     <Build Include="Programmability\Stored Procedures\Deletes\DeleteTicket.sql" />
     <Build Include="Programmability\Stored Procedures\Deletes\DeleteUser.sql" />
@@ -255,6 +255,7 @@
     <Build Include="Programmability\Stored Procedures\GetByIds\GetAirportByCountryId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetDocumentsByDocumentTypeId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetUserPasswordByUserId.sql" />
+    <Build Include="Programmability\Stored Procedures\GetByIds\GetPassengerSeatsByAirplaneSchemaId.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />

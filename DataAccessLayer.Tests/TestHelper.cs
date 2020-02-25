@@ -74,5 +74,16 @@ namespace DataAccessLayer.Tests
         {
             UnitOfWork.UserRole.Delete(StubsObjects.UserRoleBm.Id);
         }
+        public static void CreateEntitiesForPassengerSeatService()
+        {
+            UnitOfWork.AirplaneSchema.Create(StubsObjects.AirplaneSchemaBm.ToDal());
+            UnitOfWork.ClassType.Create(StubsObjects.ClassTypeBm.ToDal());
+        }
+
+        public static void DeleteEntitiesForPassengerSeatService()
+        {
+            UnitOfWork.AirplaneSchema.Delete(StubsObjects.AirplaneSchemaBm.Id);
+            UnitOfWork.ClassType.Delete(StubsObjects.ClassTypeBm.Id);
+        }
     }
 }
