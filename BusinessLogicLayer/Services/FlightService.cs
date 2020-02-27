@@ -26,13 +26,16 @@ namespace BusinessLogicLayer.Services
                                   flight.Id == entity.Id
                                   && flight.DestinationAirportId == entity.DestinationAirportId
                                   && flight.DepartureAirportId == entity.DepartureAirportId
-                                  && CompareDates(flight.ArrivalTimeUtc, entity.ArrivalTimeUtc));
+                                  && flight.ArrivalTimeUtc == entity.ArrivalTimeUtc);
             var isExist = flights != null;
 
             if (isExist)
             {
                 return false;
             }
+
+            entity.ArrivalTimeUtc = ConvertToDateTime(entity.ArrivalTimeUtc);
+            entity.DepartureTimeUtc = ConvertToDateTime(entity.DepartureTimeUtc);
 
             await Flight.Create(entity.ToEntity());
             return true;
@@ -62,7 +65,7 @@ namespace BusinessLogicLayer.Services
         public async Task<Flight> GetById(Guid id) =>
             (await Flight.GetById(id))?.ToModel();
 
-        public bool CompareDates(DateTime date, DateTime entityDate) => 
-            date.ToString("yyyy-mm-dd HH:MM") == entityDate.ToString("yyyy-mm-dd HH:MM");
+        private DateTime ConvertToDateTime(DateTime date) =>
+            new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0);
     }
 }
