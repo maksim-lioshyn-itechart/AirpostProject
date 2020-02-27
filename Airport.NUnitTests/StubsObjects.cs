@@ -124,7 +124,7 @@ namespace AirportProject.NUnitTests
         {
             Id = Guid.NewGuid(),
             ArrivalTimeUtc = DateTime.UtcNow,
-            DepartureTimeUtc = DateTime.UtcNow,
+            DepartureTimeUtc = DateTime.UtcNow.Date,
             AirplaneId = Airplane.Id,
             DepartureAirportId = Airport.Id,
             DestinationAirportId = Airport.Id

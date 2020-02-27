@@ -34,7 +34,8 @@ namespace BusinessLogicLayer.Services
                 return false;
             }
 
-            var a = entity.ArrivalTimeUtc.GetDateTimeFormats();
+            entity.ArrivalTimeUtc = ConvertToDateTime(entity.ArrivalTimeUtc);
+            entity.DepartureTimeUtc = ConvertToDateTime(entity.DepartureTimeUtc);
 
             await Flight.Create(entity.ToEntity());
             return true;
@@ -63,5 +64,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<Flight> GetById(Guid id) =>
             (await Flight.GetById(id))?.ToModel();
+
+        private DateTime ConvertToDateTime(DateTime date) => 
+            new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0);
     }
 }
