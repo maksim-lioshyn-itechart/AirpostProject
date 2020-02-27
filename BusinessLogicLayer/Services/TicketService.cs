@@ -20,10 +20,12 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(Ticket entity)
         {
-            var tickets = await Ticket.GetAll();
-            var isExist = tickets.FirstOrDefault(ticket =>
-                              ticket.Id == entity.Id
-                              && ticket.TicketNumber == entity.TicketNumber) != null;
+            var tickets = (await Ticket.GetAll())
+                .FirstOrDefault(
+                    ticket =>
+                        ticket.Id == entity.Id
+                        && ticket.TicketNumber == entity.TicketNumber);
+            var isExist = tickets != null;
 
             if (isExist)
             {
@@ -56,6 +58,6 @@ namespace BusinessLogicLayer.Services
             (await Ticket.GetAll()).Select(ticket => ticket.ToModel());
 
         public async Task<Ticket> GetById(Guid id) =>
-            (await Ticket.GetById(id)).ToModel();
+            (await Ticket.GetById(id))?.ToModel();
     }
 }

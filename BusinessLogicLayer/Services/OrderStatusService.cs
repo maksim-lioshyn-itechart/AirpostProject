@@ -20,11 +20,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(OrderStatus entity)
         {
-            var statuses = await OrderStatus.GetAll();
-            if (statuses.FirstOrDefault(status => status.Name == entity.Name) != null)
+            var statuses = (await OrderStatus.GetAll())
+                .FirstOrDefault(status => status.Name == entity.Name);
+            var isExist = statuses != null;
+
+            if (isExist)
             {
                 return false;
             }
+
             await OrderStatus.Create(entity.ToEntity());
             return true;
         }
@@ -52,6 +56,6 @@ namespace BusinessLogicLayer.Services
             .Select(status => status.ToModel());
 
         public async Task<OrderStatus> GetById(Guid id) =>
-            (await OrderStatus.GetById(id)).ToModel();
+            (await OrderStatus.GetById(id))?.ToModel();
     }
 }

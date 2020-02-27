@@ -20,11 +20,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(AirplaneSchema entity)
         {
-            var schemas = await AirplaneSchema.GetAll();
-            if (schemas.FirstOrDefault(schema => schema.Name == entity.Name) != null)
+            var schemas = (await AirplaneSchema.GetAll())
+                .FirstOrDefault(schema => schema.Name == entity.Name);
+            var isExist = schemas != null;
+
+            if (isExist)
             {
                 return false;
             }
+
             await AirplaneSchema.Create(entity.ToEntity());
             return true;
         }
@@ -52,6 +56,6 @@ namespace BusinessLogicLayer.Services
             .Select(schema => schema.ToModel());
 
         public async Task<AirplaneSchema> GetById(Guid id) =>
-            (await AirplaneSchema.GetById(id)).ToModel();
+            (await AirplaneSchema.GetById(id))?.ToModel();
     }
 }

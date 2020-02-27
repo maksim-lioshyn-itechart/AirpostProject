@@ -20,11 +20,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(AirplaneSubType entity)
         {
-            var subTypes = await AirplaneSubType.GetAll();
-            if (subTypes.FirstOrDefault(subType => subType.Name == entity.Name) != null)
+            var subTypes = (await AirplaneSubType.GetAll())
+                .FirstOrDefault(subType => subType.Name == entity.Name);
+            var isExist = subTypes != null;
+
+            if (isExist)
             {
                 return false;
             }
+
             await AirplaneSubType.Create(entity.ToEntity());
             return true;
         }
@@ -52,6 +56,6 @@ namespace BusinessLogicLayer.Services
             .Select(subType => subType.ToModel());
 
         public async Task<AirplaneSubType> GetById(Guid id) =>
-            (await AirplaneSubType.GetById(id)).ToModel();
+            (await AirplaneSubType.GetById(id))?.ToModel();
     }
 }

@@ -20,11 +20,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(ClassType entity)
         {
-            var types = await ClassType.GetAll();
-            if (types.FirstOrDefault(type => type.Name == entity.Name) != null)
+            var types = (await ClassType.GetAll())
+                .FirstOrDefault(type => type.Name == entity.Name);
+            var isExist = types != null;
+
+            if (isExist)
             {
                 return false;
             }
+
             await ClassType.Create(entity.ToEntity());
             return true;
         }
@@ -52,6 +56,6 @@ namespace BusinessLogicLayer.Services
             .Select(type => type.ToModel());
 
         public async Task<ClassType> GetById(Guid id) =>
-            (await ClassType.GetById(id)).ToModel();
+            (await ClassType.GetById(id))?.ToModel();
     }
 }

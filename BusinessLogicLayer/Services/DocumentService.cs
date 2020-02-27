@@ -20,17 +20,20 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(Document entity)
         {
-            var documents = await Document.GetDocumentsByDocumentTypeId(entity.DocumentTypeId);
-            var isExist = documents.FirstOrDefault(document =>
-                document.Id == entity.Id
-                && document.DocumentTypeId == entity.DocumentTypeId
-                && document.Name == entity.Name
-                && document.Number == entity.Number) != null;
+            var documents = (await Document.GetDocumentsByDocumentTypeId(entity.DocumentTypeId))
+                .FirstOrDefault(
+                    document =>
+                        document.Id == entity.Id
+                        && document.DocumentTypeId == entity.DocumentTypeId
+                        && document.Name == entity.Name
+                        && document.Number == entity.Number);
+            var isExist = documents != null;
 
             if (isExist)
             {
                 return false;
             }
+
             await Document.Create(entity.ToEntity());
             return true;
         }
@@ -58,6 +61,6 @@ namespace BusinessLogicLayer.Services
             .Select(document => document.ToModel());
 
         public async Task<Document> GetById(Guid id) =>
-            (await Document.GetById(id)).ToModel();
+            (await Document.GetById(id))?.ToModel();
     }
 }

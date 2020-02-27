@@ -20,18 +20,22 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(Airplane entity)
         {
-            var airplanes = await Airplane.GetAirplanesByAirlineId(entity.AirlineId);
-            var isExist = airplanes.FirstOrDefault(airplane =>
-                airplane.Id == entity.Id
-                && airplane.AirplaneSchemaId == entity.AirplaneSchemaId
-                && airplane.AirplaneSubTypeId == entity.AirplaneSubTypeId
-                && airplane.AirplaneTypeId == entity.AirplaneTypeId
-                && airplane.Name == entity.Name) != null;
+            var airplanes = 
+                (await Airplane.GetAirplanesByAirlineId(entity.AirlineId))
+                .FirstOrDefault(
+                    airplane =>
+                        airplane.Id == entity.Id
+                        && airplane.AirplaneSchemaId == entity.AirplaneSchemaId
+                        && airplane.AirplaneSubTypeId == entity.AirplaneSubTypeId
+                        && airplane.AirplaneTypeId == entity.AirplaneTypeId
+                        && airplane.Name == entity.Name);
+            var isExist = airplanes != null;
 
             if (isExist || entity.CarryingCapacity <= 0)
             {
                 return false;
             }
+
             await Airplane.Create(entity.ToEntity());
             return true;
         }
@@ -59,6 +63,6 @@ namespace BusinessLogicLayer.Services
             .Select(airplane => airplane.ToModel());
 
         public async Task<Airplane> GetById(Guid id) =>
-            (await Airplane.GetById(id)).ToModel();
+            (await Airplane.GetById(id))?.ToModel();
     }
 }
