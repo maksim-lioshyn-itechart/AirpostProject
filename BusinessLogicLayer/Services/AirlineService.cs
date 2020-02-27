@@ -11,47 +11,47 @@ namespace BusinessLogicLayer.Services
 {
     public class AirlineService : IAirlineService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IAirlineRepository Airline { get; }
 
-        public AirlineService(IUnitOfWork unitOfWork)
+        public AirlineService(IAirlineRepository airline)
         {
-            UnitOfWork = unitOfWork;
+            Airline = airline;
         }
 
-        public async Task<bool> Create(AirlineBm entity)
+        public async Task<bool> Create(Airline entity)
         {
-            var airplanes = await UnitOfWork.Airline.GetAirlineByCountryId(entity.CountryId);
-            if (airplanes.FirstOrDefault(a => a.Email == entity.Email) != null)
+            var airlines = await Airline.GetAirlineByCountryId(entity.CountryId);
+            if (airlines.FirstOrDefault(airline => airline.Email == entity.Email) != null)
             {
                 return false;
             }
-            await UnitOfWork.Airline.Create(entity.ToDal());
+            await Airline.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(AirlineBm entity)
+        public async Task Update(Airline entity)
         {
-            var airplanes = await UnitOfWork.Airline.GetById(entity.Id);
-            if (airplanes != null)
+            var airline = await Airline.GetById(entity.Id);
+            if (airline != null)
             {
-                await UnitOfWork.Airline.Update(entity.ToDal());
+                await Airline.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(AirlineBm entity)
+        public async Task Delete(Airline entity)
         {
-            var airplanes = await UnitOfWork.Airline.GetById(entity.Id);
-            if (airplanes != null)
+            var airline = await Airline.GetById(entity.Id);
+            if (airline != null)
             {
-                await UnitOfWork.Airline.Delete(entity.Id);
+                await Airline.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<AirlineBm>> GetAll() =>
-            (await UnitOfWork.Airline.GetAll())
-            .Select(a => a.ToBm());
+        public async Task<IEnumerable<Airline>> GetAll() =>
+            (await Airline.GetAll())
+            .Select(airline => airline.ToModel());
 
-        public async Task<AirlineBm> GetById(Guid id) =>
-            (await UnitOfWork.Airline.GetById(id)).ToBm();
+        public async Task<Airline> GetById(Guid id) =>
+            (await Airline.GetById(id)).ToModel();
     }
 }

@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(PassengerSeat entity)
+        public async Task Create(PassengerSeatEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertPassengerSeat", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<PassengerSeat> GetById(Guid id)
+        public async Task<PassengerSeatEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<PassengerSeat>("GetPassengerSeatById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<PassengerSeatEntity>("GetPassengerSeatById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<PassengerSeat>> GetAll()
+        public async Task<IEnumerable<PassengerSeatEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<PassengerSeat>("GetAllPassengerSeats", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<PassengerSeatEntity>("GetAllPassengerSeats", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(PassengerSeat entity)
+        public async Task Update(PassengerSeatEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdatePassengerSeat", entity, commandType: CommandType.StoredProcedure);
@@ -47,10 +47,10 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeletePassengerSeat", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<PassengerSeat>> GetPassengerSeatsByAirplaneSchemaId(Guid airplaneSchemaId)
+        public async Task<IEnumerable<PassengerSeatEntity>> GetBy(Guid airplaneSchemaId)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<PassengerSeat>("GetPassengerSeatsByAirplaneSchemaId", new { airplaneSchemaId }, commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<PassengerSeatEntity>("GetPassengerSeatsByAirplaneSchemaId", new { airplaneSchemaId }, commandType: CommandType.StoredProcedure);
         }
     }
 }

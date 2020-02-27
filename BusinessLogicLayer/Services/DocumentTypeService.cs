@@ -11,47 +11,47 @@ namespace BusinessLogicLayer.Services
 {
     public class DocumentTypeService : IDocumentTypeService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IDocumentTypeRepository DocumentType { get; }
 
-        public DocumentTypeService(IUnitOfWork unitOfWork)
+        public DocumentTypeService(IDocumentTypeRepository documentType)
         {
-            UnitOfWork = unitOfWork;
+            DocumentType = documentType;
         }
 
-        public async Task<bool> Create(DocumentTypeBm entity)
+        public async Task<bool> Create(DocumentType entity)
         {
-            var airplanes = await UnitOfWork.DocumentType.GetAll();
-            if (airplanes.FirstOrDefault(a => a.Name == entity.Name) != null)
+            var types = await DocumentType.GetAll();
+            if (types.FirstOrDefault(type => type.Name == entity.Name) != null)
             {
                 return false;
             }
-            await UnitOfWork.DocumentType.Create(entity.ToDal());
+            await DocumentType.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(DocumentTypeBm entity)
+        public async Task Update(DocumentType entity)
         {
-            var airplanes = await UnitOfWork.DocumentType.GetById(entity.Id);
-            if (airplanes != null)
+            var type = await DocumentType.GetById(entity.Id);
+            if (type != null)
             {
-                await UnitOfWork.DocumentType.Update(entity.ToDal());
+                await DocumentType.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(DocumentTypeBm entity)
+        public async Task Delete(DocumentType entity)
         {
-            var airplanes = await UnitOfWork.DocumentType.GetById(entity.Id);
-            if (airplanes != null)
+            var type = await DocumentType.GetById(entity.Id);
+            if (type != null)
             {
-                await UnitOfWork.DocumentType.Delete(entity.Id);
+                await DocumentType.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<DocumentTypeBm>> GetAll() =>
-            (await UnitOfWork.DocumentType.GetAll())
-            .Select(a => a.ToBm());
+        public async Task<IEnumerable<DocumentType>> GetAll() =>
+            (await DocumentType.GetAll())
+            .Select(type => type.ToModel());
 
-        public async Task<DocumentTypeBm> GetById(Guid id) =>
-            (await UnitOfWork.DocumentType.GetById(id)).ToBm();
+        public async Task<DocumentType> GetById(Guid id) =>
+            (await DocumentType.GetById(id)).ToModel();
     }
 }

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IDocumentRepository : IBaseRepository<Document>
+    public interface IDocumentRepository : IBaseRepository<DocumentEntity>
     {
-        Task<IEnumerable<Document>> GetDocumentsByDocumentTypeId(Guid documentTypeId, bool isActive = true);
+        Task<IEnumerable<DocumentEntity>> GetDocumentsByDocumentTypeId(Guid documentTypeId, bool isActive = true);
     }
 }

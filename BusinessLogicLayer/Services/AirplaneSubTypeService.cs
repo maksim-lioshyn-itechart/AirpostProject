@@ -11,47 +11,47 @@ namespace BusinessLogicLayer.Services
 {
     public class AirplaneSubTypeService : IAirplaneSubTypeService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IAirplaneSubTypeRepository AirplaneSubType { get; }
 
-        public AirplaneSubTypeService(IUnitOfWork unitOfWork)
+        public AirplaneSubTypeService(IAirplaneSubTypeRepository airplaneSubType)
         {
-            UnitOfWork = unitOfWork;
+            AirplaneSubType = airplaneSubType;
         }
 
-        public async Task<bool> Create(AirplaneSubTypeBm entity)
+        public async Task<bool> Create(AirplaneSubType entity)
         {
-            var airplanes = await UnitOfWork.AirplaneSubType.GetAll();
-            if (airplanes.FirstOrDefault(a => a.Name == entity.Name) != null)
+            var subTypes = await AirplaneSubType.GetAll();
+            if (subTypes.FirstOrDefault(subType => subType.Name == entity.Name) != null)
             {
                 return false;
             }
-            await UnitOfWork.AirplaneSubType.Create(entity.ToDal());
+            await AirplaneSubType.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(AirplaneSubTypeBm entity)
+        public async Task Update(AirplaneSubType entity)
         {
-            var airplanes = await UnitOfWork.AirplaneSubType.GetById(entity.Id);
-            if (airplanes != null)
+            var subType = await AirplaneSubType.GetById(entity.Id);
+            if (subType != null)
             {
-                await UnitOfWork.AirplaneSubType.Update(entity.ToDal());
+                await AirplaneSubType.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(AirplaneSubTypeBm entity)
+        public async Task Delete(AirplaneSubType entity)
         {
-            var airplanes = await UnitOfWork.AirplaneSubType.GetById(entity.Id);
-            if (airplanes != null)
+            var subType = await AirplaneSubType.GetById(entity.Id);
+            if (subType != null)
             {
-                await UnitOfWork.AirplaneSubType.Delete(entity.Id);
+                await AirplaneSubType.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<AirplaneSubTypeBm>> GetAll() =>
-            (await UnitOfWork.AirplaneSubType.GetAll())
-            .Select(a => a.ToBm());
+        public async Task<IEnumerable<AirplaneSubType>> GetAll() =>
+            (await AirplaneSubType.GetAll())
+            .Select(subType => subType.ToModel());
 
-        public async Task<AirplaneSubTypeBm> GetById(Guid id) =>
-            (await UnitOfWork.AirplaneSubType.GetById(id)).ToBm();
+        public async Task<AirplaneSubType> GetById(Guid id) =>
+            (await AirplaneSubType.GetById(id)).ToModel();
     }
 }

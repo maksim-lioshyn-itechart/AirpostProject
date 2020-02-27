@@ -11,16 +11,16 @@ namespace BusinessLogicLayer.Services
 {
     public class PassengerSeatService : IPassengerSeatService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IPassengerSeatRepository PassengerSeat { get; }
 
-        public PassengerSeatService(IUnitOfWork unitOfWork)
+        public PassengerSeatService(IPassengerSeatRepository passengerSeat)
         {
-            UnitOfWork = unitOfWork;
+            PassengerSeat = passengerSeat;
         }
 
-        public async Task<bool> Create(PassengerSeatBm entity)
+        public async Task<bool> Create(PassengerSeat entity)
         {
-            var passengerSeats = await UnitOfWork.PassengerSeat.GetPassengerSeatsByAirplaneSchemaId(entity.AirplaneSchemaId);
+            var passengerSeats = await PassengerSeat.GetBy(entity.AirplaneSchemaId);
             var isExist = passengerSeats.FirstOrDefault(seat =>
                               seat.Id == entity.Id
                               && seat.ClassTypeId == entity.ClassTypeId
@@ -36,33 +36,33 @@ namespace BusinessLogicLayer.Services
             {
                 return false;
             }
-            await UnitOfWork.PassengerSeat.Create(entity.ToDal());
+            await PassengerSeat.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(PassengerSeatBm entity)
+        public async Task Update(PassengerSeat entity)
         {
-            var airplanes = await UnitOfWork.PassengerSeat.GetById(entity.Id);
-            if (airplanes != null)
+            var seat = await PassengerSeat.GetById(entity.Id);
+            if (seat != null)
             {
-                await UnitOfWork.PassengerSeat.Update(entity.ToDal());
+                await PassengerSeat.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(PassengerSeatBm entity)
+        public async Task Delete(PassengerSeat entity)
         {
-            var airplanes = await UnitOfWork.PassengerSeat.GetById(entity.Id);
-            if (airplanes != null)
+            var seat = await PassengerSeat.GetById(entity.Id);
+            if (seat != null)
             {
-                await UnitOfWork.PassengerSeat.Delete(entity.Id);
+                await PassengerSeat.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<PassengerSeatBm>> GetAll() =>
-            (await UnitOfWork.PassengerSeat.GetAll())
-            .Select(a => a.ToBm());
+        public async Task<IEnumerable<PassengerSeat>> GetAll() =>
+            (await PassengerSeat.GetAll())
+            .Select(seat => seat.ToModel());
 
-        public async Task<PassengerSeatBm> GetById(Guid id) =>
-            (await UnitOfWork.PassengerSeat.GetById(id)).ToBm();
+        public async Task<PassengerSeat> GetById(Guid id) =>
+            (await PassengerSeat.GetById(id)).ToModel();
     }
 }

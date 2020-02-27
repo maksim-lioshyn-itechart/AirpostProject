@@ -11,47 +11,47 @@ namespace BusinessLogicLayer.Services
 {
     public class AirplaneSchemaService : IAirplaneSchemaService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IAirplaneSchemaRepository AirplaneSchema { get; }
 
-        public AirplaneSchemaService(IUnitOfWork unitOfWork)
+        public AirplaneSchemaService(IAirplaneSchemaRepository airplaneSchema)
         {
-            UnitOfWork = unitOfWork;
+            AirplaneSchema = airplaneSchema;
         }
 
-        public async Task<bool> Create(AirplaneSchemaBm entity)
+        public async Task<bool> Create(AirplaneSchema entity)
         {
-            var schemas = await UnitOfWork.AirplaneSchema.GetAll();
-            if (schemas.FirstOrDefault(a => a.Name == entity.Name) != null)
+            var schemas = await AirplaneSchema.GetAll();
+            if (schemas.FirstOrDefault(schema => schema.Name == entity.Name) != null)
             {
                 return false;
             }
-            await UnitOfWork.AirplaneSchema.Create(entity.ToDal());
+            await AirplaneSchema.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(AirplaneSchemaBm entity)
+        public async Task Update(AirplaneSchema entity)
         {
-            var schemas = await UnitOfWork.AirplaneSchema.GetById(entity.Id);
+            var schemas = await AirplaneSchema.GetById(entity.Id);
             if (schemas != null)
             {
-                await UnitOfWork.AirplaneSchema.Update(entity.ToDal());
+                await AirplaneSchema.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(AirplaneSchemaBm entity)
+        public async Task Delete(AirplaneSchema entity)
         {
-            var schemas = await UnitOfWork.AirplaneSchema.GetById(entity.Id);
+            var schemas = await AirplaneSchema.GetById(entity.Id);
             if (schemas != null)
             {
-                await UnitOfWork.AirplaneSchema.Delete(entity.Id);
+                await AirplaneSchema.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<AirplaneSchemaBm>> GetAll() =>
-            (await UnitOfWork.AirplaneSchema.GetAll())
-            .Select(a => a.ToBm());
+        public async Task<IEnumerable<AirplaneSchema>> GetAll() =>
+            (await AirplaneSchema.GetAll())
+            .Select(schema => schema.ToModel());
 
-        public async Task<AirplaneSchemaBm> GetById(Guid id) =>
-            (await UnitOfWork.AirplaneSchema.GetById(id)).ToBm();
+        public async Task<AirplaneSchema> GetById(Guid id) =>
+            (await AirplaneSchema.GetById(id)).ToModel();
     }
 }

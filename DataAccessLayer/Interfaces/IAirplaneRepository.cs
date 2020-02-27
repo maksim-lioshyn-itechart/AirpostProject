@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IAirplaneRepository : IBaseRepository<Airplane>
+    public interface IAirplaneRepository : IBaseRepository<AirplaneEntity>
     {
-        Task<IEnumerable<Airplane>> GetAirplanesByAirlineId(Guid airlineId);
+        Task<IEnumerable<AirplaneEntity>> GetAirplanesByAirlineId(Guid airlineId);
     }
 }

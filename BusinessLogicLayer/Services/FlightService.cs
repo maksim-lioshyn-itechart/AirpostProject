@@ -11,16 +11,16 @@ namespace BusinessLogicLayer.Services
 {
     public class FlightService : IFlightService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IFlightRepository Flight { get; }
 
-        public FlightService(IUnitOfWork unitOfWork)
+        public FlightService(IFlightRepository flight)
         {
-            UnitOfWork = unitOfWork;
+            Flight = flight;
         }
 
-        public async Task<bool> Create(FlightBm entity)
+        public async Task<bool> Create(Flight entity)
         {
-            var flights = await UnitOfWork.Flight.GetFlightByAirplaneId(entity.AirplaneId);
+            var flights = await Flight.GetFlightByAirplaneId(entity.AirplaneId);
             var isExist = flights.FirstOrDefault(flight =>
                               flight.Id == entity.Id
                               && flight.DestinationAirportId == entity.DestinationAirportId
@@ -32,35 +32,35 @@ namespace BusinessLogicLayer.Services
                 return false;
             }
 
-            await UnitOfWork.Flight.Create(entity.ToDal());
+            await Flight.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(FlightBm entity)
+        public async Task Update(Flight entity)
         {
-            var flight = await UnitOfWork.Flight.GetById(entity.Id);
+            var flight = await Flight.GetById(entity.Id);
             if (flight != null)
             {
-                await UnitOfWork.Flight.Update(entity.ToDal());
+                await Flight.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(FlightBm entity)
+        public async Task Delete(Flight entity)
         {
-            var flight = await UnitOfWork.Flight.GetById(entity.Id);
+            var flight = await Flight.GetById(entity.Id);
             if (flight != null)
             {
-                await UnitOfWork.Flight.Delete(entity.Id);
+                await Flight.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<FlightBm>> GetAll() =>
-            (await UnitOfWork.Flight.GetAll()).Select(flight => flight.ToBm());
+        public async Task<IEnumerable<Flight>> GetAll() =>
+            (await Flight.GetAll()).Select(flight => flight.ToModel());
 
-        public async Task<FlightBm> GetById(Guid id) =>
-            (await UnitOfWork.Flight.GetById(id)).ToBm();
+        public async Task<Flight> GetById(Guid id) =>
+            (await Flight.GetById(id)).ToModel();
 
-        public bool CompareDates(DateTime date, DateTime entityDate) =>
+        public bool CompareDates(DateTime date, DateTime entityDate) => 
             date.ToString("yyyy-mm-dd HH:MM") == entityDate.ToString("yyyy-mm-dd HH:MM");
     }
 }

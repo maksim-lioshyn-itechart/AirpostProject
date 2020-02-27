@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(Airplane entity)
+        public async Task Create(AirplaneEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertAirplane", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<Airplane> GetById(Guid id)
+        public async Task<AirplaneEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<Airplane>("GetAirplaneById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<AirplaneEntity>("GetAirplaneById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Airplane>> GetAll()
+        public async Task<IEnumerable<AirplaneEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Airplane>("GetAllAirplanes", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<AirplaneEntity>("GetAllAirplanes", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(Airplane entity)
+        public async Task Update(AirplaneEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateAirplane", entity, commandType: CommandType.StoredProcedure);
@@ -47,10 +47,10 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeleteAirplane", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Airplane>> GetAirplanesByAirlineId(Guid airlineId)
+        public async Task<IEnumerable<AirplaneEntity>> GetAirplanesByAirlineId(Guid airlineId)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Airplane>("GetAirplanesByAirlineId", new { airlineId }, commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<AirplaneEntity>("GetAirplanesByAirlineId", new { airlineId }, commandType: CommandType.StoredProcedure);
         }
     }
 }

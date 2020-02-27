@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface IOrderStatusService : IService<OrderStatusBm>
+    public interface IOrderStatusService : IService<OrderStatus>
     {
 
     }
