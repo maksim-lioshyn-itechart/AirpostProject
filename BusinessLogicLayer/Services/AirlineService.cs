@@ -20,11 +20,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(Airline entity)
         {
-            var airlines = await Airline.GetAirlineByCountryId(entity.CountryId);
-            if (airlines.FirstOrDefault(airline => airline.Email == entity.Email) != null)
+            var airlineEntity = (await Airline.GetAirlineByCountryId(entity.CountryId))
+                .FirstOrDefault(airline => airline.Email == entity.Email);
+            var isExist = airlineEntity != null;
+            
+            if (isExist)
             {
                 return false;
             }
+
             await Airline.Create(entity.ToEntity());
             return true;
         }
@@ -52,6 +56,6 @@ namespace BusinessLogicLayer.Services
             .Select(airline => airline.ToModel());
 
         public async Task<Airline> GetById(Guid id) =>
-            (await Airline.GetById(id)).ToModel();
+            (await Airline.GetById(id))?.ToModel();
     }
 }

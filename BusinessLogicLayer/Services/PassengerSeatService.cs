@@ -20,22 +20,26 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(PassengerSeat entity)
         {
-            var passengerSeats = await PassengerSeat.GetBy(entity.AirplaneSchemaId);
-            var isExist = passengerSeats.FirstOrDefault(seat =>
-                              seat.Id == entity.Id
-                              && seat.ClassTypeId == entity.ClassTypeId
-                              && seat.Sector == entity.Sector
-                              && seat.Floor == entity.Floor
-                              && seat.Row == entity.Row
-                              && seat.Seat == entity.Seat
-                              && seat.CoordinateX1 == entity.CoordinateX1
-                              && seat.CoordinateY1 == entity.CoordinateY1
-                              && seat.CoordinateX2 == entity.CoordinateX2
-                              && seat.CoordinateY2 == entity.CoordinateY2) != null;
+            var passengerSeats = (await PassengerSeat.GetBy(entity.AirplaneSchemaId))
+                .FirstOrDefault(
+                    seat =>
+                        seat.Id == entity.Id
+                        && seat.ClassTypeId == entity.ClassTypeId
+                        && seat.Sector == entity.Sector
+                        && seat.Floor == entity.Floor
+                        && seat.Row == entity.Row
+                        && seat.Seat == entity.Seat
+                        && seat.CoordinateX1 == entity.CoordinateX1
+                        && seat.CoordinateY1 == entity.CoordinateY1
+                        && seat.CoordinateX2 == entity.CoordinateX2
+                        && seat.CoordinateY2 == entity.CoordinateY2);
+            var isExist = passengerSeats != null;
+
             if (isExist)
             {
                 return false;
             }
+
             await PassengerSeat.Create(entity.ToEntity());
             return true;
         }
@@ -63,6 +67,6 @@ namespace BusinessLogicLayer.Services
             .Select(seat => seat.ToModel());
 
         public async Task<PassengerSeat> GetById(Guid id) =>
-            (await PassengerSeat.GetById(id)).ToModel();
+            (await PassengerSeat.GetById(id))?.ToModel();
     }
 }

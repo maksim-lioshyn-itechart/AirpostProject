@@ -20,11 +20,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(Country entity)
         {
-            var countries = await Country.GetAll();
-            if (countries.FirstOrDefault(country => country.Name == entity.Name) != null)
+            var countries = (await Country.GetAll())
+                .FirstOrDefault(country => country.Name == entity.Name);
+            var isExist = countries != null;
+
+            if (isExist)
             {
                 return false;
             }
+
             await Country.Create(entity.ToEntity());
             return true;
         }
@@ -52,6 +56,6 @@ namespace BusinessLogicLayer.Services
             .Select(country => country.ToModel());
 
         public async Task<Country> GetById(Guid id) =>
-            (await Country.GetById(id)).ToModel();
+            (await Country.GetById(id))?.ToModel();
     }
 }

@@ -20,11 +20,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(UserRole entity)
         {
-            var roles = await UserRole.GetAll();
-            if (roles.FirstOrDefault(role => role.Name == entity.Name) != null)
+            var roles = (await UserRole.GetAll())
+                .FirstOrDefault(role => role.Name == entity.Name);
+            var isExist = roles != null;
+
+            if (isExist)
             {
                 return false;
             }
+
             await UserRole.Create(entity.ToEntity());
             return true;
         }
@@ -52,6 +56,6 @@ namespace BusinessLogicLayer.Services
             .Select(role => role.ToModel());
 
         public async Task<UserRole> GetById(Guid id) =>
-            (await UserRole.GetById(id)).ToModel();
+            (await UserRole.GetById(id))?.ToModel();
     }
 }

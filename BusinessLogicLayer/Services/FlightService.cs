@@ -20,12 +20,14 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(Flight entity)
         {
-            var flights = await Flight.GetFlightByAirplaneId(entity.AirplaneId);
-            var isExist = flights.FirstOrDefault(flight =>
-                              flight.Id == entity.Id
-                              && flight.DestinationAirportId == entity.DestinationAirportId
-                              && flight.DepartureAirportId == entity.DepartureAirportId
-                              && CompareDates(flight.ArrivalTimeUtc, entity.ArrivalTimeUtc)) != null;
+            var flights = (await Flight.GetFlightByAirplaneId(entity.AirplaneId))
+                          .FirstOrDefault(
+                              flight =>
+                                  flight.Id == entity.Id
+                                  && flight.DestinationAirportId == entity.DestinationAirportId
+                                  && flight.DepartureAirportId == entity.DepartureAirportId
+                                  && CompareDates(flight.ArrivalTimeUtc, entity.ArrivalTimeUtc));
+            var isExist = flights != null;
 
             if (isExist)
             {
@@ -58,7 +60,7 @@ namespace BusinessLogicLayer.Services
             (await Flight.GetAll()).Select(flight => flight.ToModel());
 
         public async Task<Flight> GetById(Guid id) =>
-            (await Flight.GetById(id)).ToModel();
+            (await Flight.GetById(id))?.ToModel();
 
         public bool CompareDates(DateTime date, DateTime entityDate) => 
             date.ToString("yyyy-mm-dd HH:MM") == entityDate.ToString("yyyy-mm-dd HH:MM");

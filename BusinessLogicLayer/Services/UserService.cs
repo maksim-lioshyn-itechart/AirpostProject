@@ -25,11 +25,13 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> Create(User entity)
         {
-            var users = await User.GetAll();
-            var isExist = users.FirstOrDefault(user =>
-                              user.Id == entity.Id
-                              && user.Email == entity.Email
-                              && user.Phone == entity.Phone) != null;
+            var users = (await User.GetAll())
+                .FirstOrDefault(
+                    user =>
+                        user.Id == entity.Id
+                        && user.Email == entity.Email
+                        && user.Phone == entity.Phone);
+            var isExist = users != null;
 
             if (isExist)
             {
@@ -65,7 +67,7 @@ namespace BusinessLogicLayer.Services
             (await User.GetAll()).Select(user => user.ToModel());
 
         public async Task<User> GetById(Guid id) =>
-            (await User.GetById(id)).ToModel();
+            (await User.GetById(id))?.ToModel();
 
         public async Task<bool> ValidatePassword(Guid userId, string password)
         {
