@@ -9,6 +9,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProjectDB", "ProjectDB\Proj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{388C86AC-0F13-4CB1-9540-A554281DADD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportProject.NUnitTests", "Airport.NUnitTests\AirportProject.NUnitTests.csproj", "{D6857709-C110-4F7F-994E-E29EC18564FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{388C86AC-0F13-4CB1-9540-A554281DADD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{388C86AC-0F13-4CB1-9540-A554281DADD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{388C86AC-0F13-4CB1-9540-A554281DADD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6857709-C110-4F7F-994E-E29EC18564FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6857709-C110-4F7F-994E-E29EC18564FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6857709-C110-4F7F-994E-E29EC18564FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6857709-C110-4F7F-994E-E29EC18564FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
