@@ -11,16 +11,16 @@ namespace BusinessLogicLayer.Services
 {
     public class AirportService : IAirportService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IAirportRepository Airport { get; }
 
-        public AirportService(IUnitOfWork unitOfWork)
+        public AirportService(IAirportRepository airport)
         {
-            UnitOfWork = unitOfWork;
+            Airport = airport;
         }
 
-        public async Task<bool> Create(AirportBm entity)
+        public async Task<bool> Create(Airport entity)
         {
-            var airports = await UnitOfWork.Airport.GetAirportByCountryId(entity.CountryId);
+            var airports = await Airport.GetAirportByCountryId(entity.CountryId);
             var isExist = airports.FirstOrDefault(airport =>
                 airport.Id == entity.Id
                 && airport.Name == entity.Name) != null;
@@ -29,33 +29,33 @@ namespace BusinessLogicLayer.Services
             {
                 return false;
             }
-            await UnitOfWork.Airport.Create(entity.ToDal());
+            await Airport.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(AirportBm entity)
+        public async Task Update(Airport entity)
         {
-            var airport = await UnitOfWork.Airport.GetById(entity.Id);
+            var airport = await Airport.GetById(entity.Id);
             if (airport != null)
             {
-                await UnitOfWork.Airport.Update(entity.ToDal());
+                await Airport.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(AirportBm entity)
+        public async Task Delete(Airport entity)
         {
-            var airport = await UnitOfWork.Airport.GetById(entity.Id);
+            var airport = await Airport.GetById(entity.Id);
             if (airport != null)
             {
-                await UnitOfWork.Airport.Delete(entity.Id);
+                await Airport.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<AirportBm>> GetAll() =>
-            (await UnitOfWork.Airport.GetAll())
-            .Select(airport => airport.ToBm());
+        public async Task<IEnumerable<Airport>> GetAll() =>
+            (await Airport.GetAll())
+            .Select(airport => airport.ToModel());
 
-        public async Task<AirportBm> GetById(Guid id) =>
-            (await UnitOfWork.Airport.GetById(id)).ToBm();
+        public async Task<Airport> GetById(Guid id) =>
+            (await Airport.GetById(id)).ToModel();
     }
 }

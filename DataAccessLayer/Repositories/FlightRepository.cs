@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(Flight entity)
+        public async Task Create(FlightEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertFlight", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<Flight> GetById(Guid id)
+        public async Task<FlightEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<Flight>("GetFlightById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<FlightEntity>("GetFlightById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Flight>> GetAll()
+        public async Task<IEnumerable<FlightEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Flight>("GetAllFlights", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<FlightEntity>("GetAllFlights", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(Flight entity)
+        public async Task Update(FlightEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateFlight", entity, commandType: CommandType.StoredProcedure);
@@ -47,10 +47,10 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeleteFlight", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Flight>> GetFlightByAirplaneId(Guid airplaneId)
+        public async Task<IEnumerable<FlightEntity>> GetFlightByAirplaneId(Guid airplaneId)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Flight>("GetFlightByAirplaneId", new { airplaneId }, commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<FlightEntity>("GetFlightByAirplaneId", new { airplaneId }, commandType: CommandType.StoredProcedure);
         }
     }
 }

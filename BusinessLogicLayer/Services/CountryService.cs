@@ -11,47 +11,47 @@ namespace BusinessLogicLayer.Services
 {
     public class CountryService : ICountryService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private ICountryRepository Country { get; }
 
-        public CountryService(IUnitOfWork unitOfWork)
+        public CountryService(ICountryRepository country)
         {
-            UnitOfWork = unitOfWork;
+            Country = country;
         }
 
-        public async Task<bool> Create(CountryBm entity)
+        public async Task<bool> Create(Country entity)
         {
-            var countries = await UnitOfWork.Country.GetAll();
+            var countries = await Country.GetAll();
             if (countries.FirstOrDefault(country => country.Name == entity.Name) != null)
             {
                 return false;
             }
-            await UnitOfWork.Country.Create(entity.ToDal());
+            await Country.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(CountryBm entity)
+        public async Task Update(Country entity)
         {
-            var country = await UnitOfWork.Country.GetById(entity.Id);
+            var country = await Country.GetById(entity.Id);
             if (country != null)
             {
-                await UnitOfWork.Country.Update(entity.ToDal());
+                await Country.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(CountryBm entity)
+        public async Task Delete(Country entity)
         {
-            var country = await UnitOfWork.Country.GetById(entity.Id);
+            var country = await Country.GetById(entity.Id);
             if (country != null)
             {
-                await UnitOfWork.Country.Delete(entity.Id);
+                await Country.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<CountryBm>> GetAll() =>
-            (await UnitOfWork.Country.GetAll())
-            .Select(country => country.ToBm());
+        public async Task<IEnumerable<Country>> GetAll() =>
+            (await Country.GetAll())
+            .Select(country => country.ToModel());
 
-        public async Task<CountryBm> GetById(Guid id) =>
-            (await UnitOfWork.Country.GetById(id)).ToBm();
+        public async Task<Country> GetById(Guid id) =>
+            (await Country.GetById(id)).ToModel();
     }
 }

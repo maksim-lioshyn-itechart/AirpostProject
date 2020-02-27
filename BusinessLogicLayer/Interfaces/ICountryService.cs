@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface ICountryService : IService<CountryBm>
+    public interface ICountryService : IService<Country>
     {
 
     }

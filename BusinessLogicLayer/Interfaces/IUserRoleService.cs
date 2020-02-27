@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface IUserRoleService : IService<UserRoleBm>
+    public interface IUserRoleService : IService<UserRole>
     {
 
     }

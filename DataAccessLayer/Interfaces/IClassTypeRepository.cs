@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IClassTypeRepository : IBaseRepository<ClassType>
+    public interface IClassTypeRepository : IBaseRepository<ClassTypeEntity>
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface ITicketService : IService<TicketBm>
+    public interface ITicketService : IService<Ticket>
     {
 
     }

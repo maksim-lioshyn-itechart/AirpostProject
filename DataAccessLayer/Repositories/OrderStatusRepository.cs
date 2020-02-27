@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(OrderStatus entity)
+        public async Task Create(OrderStatusEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertOrderStatus", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<OrderStatus> GetById(Guid id)
+        public async Task<OrderStatusEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<OrderStatus>("GetOrderStatusById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<OrderStatusEntity>("GetOrderStatusById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<OrderStatus>> GetAll()
+        public async Task<IEnumerable<OrderStatusEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<OrderStatus>("GetAllOrderStatuses", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<OrderStatusEntity>("GetAllOrderStatuses", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(OrderStatus entity)
+        public async Task Update(OrderStatusEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateOrderStatus", entity, commandType: CommandType.StoredProcedure);

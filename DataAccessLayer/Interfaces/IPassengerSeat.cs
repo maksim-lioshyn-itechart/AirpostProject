@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IPassengerSeatRepository : IBaseRepository<PassengerSeat>
+    public interface IPassengerSeatRepository : IBaseRepository<PassengerSeatEntity>
     {
-        Task<IEnumerable<PassengerSeat>> GetPassengerSeatsByAirplaneSchemaId(Guid airplaneSchemaId);
+        Task<IEnumerable<PassengerSeatEntity>> GetBy(Guid airplaneSchemaId);
     }
 }

@@ -11,47 +11,47 @@ namespace BusinessLogicLayer.Services
 {
     public class ClassTypeService : IClassTypeService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IClassTypeRepository ClassType { get; }
 
-        public ClassTypeService(IUnitOfWork unitOfWork)
+        public ClassTypeService(IClassTypeRepository classType)
         {
-            UnitOfWork = unitOfWork;
+            ClassType = classType;
         }
 
-        public async Task<bool> Create(ClassTypeBm entity)
+        public async Task<bool> Create(ClassType entity)
         {
-            var types = await UnitOfWork.ClassType.GetAll();
+            var types = await ClassType.GetAll();
             if (types.FirstOrDefault(type => type.Name == entity.Name) != null)
             {
                 return false;
             }
-            await UnitOfWork.ClassType.Create(entity.ToDal());
+            await ClassType.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(ClassTypeBm entity)
+        public async Task Update(ClassType entity)
         {
-            var type = await UnitOfWork.ClassType.GetById(entity.Id);
+            var type = await ClassType.GetById(entity.Id);
             if (type != null)
             {
-                await UnitOfWork.ClassType.Update(entity.ToDal());
+                await ClassType.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(ClassTypeBm entity)
+        public async Task Delete(ClassType entity)
         {
-            var type = await UnitOfWork.ClassType.GetById(entity.Id);
+            var type = await ClassType.GetById(entity.Id);
             if (type != null)
             {
-                await UnitOfWork.ClassType.Delete(entity.Id);
+                await ClassType.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<ClassTypeBm>> GetAll() =>
-            (await UnitOfWork.ClassType.GetAll())
-            .Select(type => type.ToBm());
+        public async Task<IEnumerable<ClassType>> GetAll() =>
+            (await ClassType.GetAll())
+            .Select(type => type.ToModel());
 
-        public async Task<ClassTypeBm> GetById(Guid id) =>
-            (await UnitOfWork.ClassType.GetById(id)).ToBm();
+        public async Task<ClassType> GetById(Guid id) =>
+            (await ClassType.GetById(id)).ToModel();
     }
 }

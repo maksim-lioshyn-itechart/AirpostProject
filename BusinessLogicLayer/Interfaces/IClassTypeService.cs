@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface IClassTypeService : IService<ClassTypeBm>
+    public interface IClassTypeService : IService<ClassType>
     {
 
     }

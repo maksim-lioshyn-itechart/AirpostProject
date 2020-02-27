@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface ICountryRepository : IBaseRepository<Country>
+    public interface ICountryRepository : IBaseRepository<CountryEntity>
     {
     }
 }

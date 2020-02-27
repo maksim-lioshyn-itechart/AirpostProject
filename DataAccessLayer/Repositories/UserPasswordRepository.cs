@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(UserPassword entity)
+        public async Task Create(UserPasswordEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertUserPassword", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<UserPassword> GetById(Guid id)
+        public async Task<UserPasswordEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<UserPassword>("GetUserPasswordById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<UserPasswordEntity>("GetUserPasswordById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<UserPassword>> GetAll()
+        public async Task<IEnumerable<UserPasswordEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<UserPassword>("GetAllUserPasswords", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<UserPasswordEntity>("GetAllUserPasswords", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(UserPassword entity)
+        public async Task Update(UserPasswordEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateUserPassword", entity, commandType: CommandType.StoredProcedure);
@@ -47,10 +47,10 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeleteUserPassword", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<UserPassword> GetByUserId(Guid userId)
+        public async Task<UserPasswordEntity> GetByUserId(Guid userId)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<UserPassword>("GetUserPasswordByUserId", new { userId }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleAsync<UserPasswordEntity>("GetUserPasswordByUserId", new { userId }, commandType: CommandType.StoredProcedure);
         }
     }
 }
