@@ -60,7 +60,7 @@ namespace BusinessLogicLayer.Services
         public async Task<FlightBm> GetById(Guid id) =>
             (await UnitOfWork.Flight.GetById(id)).ToBm();
 
-        public bool CompareDates(DateTime date, DateTime entityDate) => 
+        public bool CompareDates(DateTime date, DateTime entityDate) =>
             date.ToString("yyyy-mm-dd HH:MM") == entityDate.ToString("yyyy-mm-dd HH:MM");
     }
 }

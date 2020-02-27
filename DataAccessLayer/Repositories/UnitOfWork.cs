@@ -75,6 +75,10 @@ namespace DataAccessLayer.Repositories
         public IUserRoleRepository UserRole =>
             _userRole ?? new UserRoleRepository(ConfigurationFactory);
 
+        public UnitOfWork()
+        {
+
+        }
         public UnitOfWork(
             IConfigurationFactory configurationFactory,
             AirplaneSchemaRepository airplaneSchema,
