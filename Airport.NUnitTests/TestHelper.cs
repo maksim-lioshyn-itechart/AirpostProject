@@ -107,7 +107,8 @@ namespace DataAccessLayer.Tests
         {
             CreateEntitiesForFlightService();
             CreateEntitiesForDocumentService();
-            Flight.Create(StubsObjects.Flight.ToEntity());
+
+            Flight.Create(StubsObjects.Flight.ToEntity()).Wait();
 
             ClassType.Create(StubsObjects.ClassType.ToEntity());
             PassengerSeat.Create(StubsObjects.PassengerSeat.ToEntity());
