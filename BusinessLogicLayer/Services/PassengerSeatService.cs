@@ -11,58 +11,62 @@ namespace BusinessLogicLayer.Services
 {
     public class PassengerSeatService : IPassengerSeatService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IPassengerSeatRepository PassengerSeat { get; }
 
-        public PassengerSeatService(IUnitOfWork unitOfWork)
+        public PassengerSeatService(IPassengerSeatRepository passengerSeat)
         {
-            UnitOfWork = unitOfWork;
+            PassengerSeat = passengerSeat;
         }
 
-        public async Task<bool> Create(PassengerSeatBm entity)
+        public async Task<bool> Create(PassengerSeat entity)
         {
-            var passengerSeats = await UnitOfWork.PassengerSeat.GetPassengerSeatsByAirplaneSchemaId(entity.AirplaneSchemaId);
-            var isExist = passengerSeats.FirstOrDefault(seat =>
-                              seat.Id == entity.Id
-                              && seat.ClassTypeId == entity.ClassTypeId
-                              && seat.Sector == entity.Sector
-                              && seat.Floor == entity.Floor
-                              && seat.Row == entity.Row
-                              && seat.Seat == entity.Seat
-                              && seat.CoordinateX1 == entity.CoordinateX1
-                              && seat.CoordinateY1 == entity.CoordinateY1
-                              && seat.CoordinateX2 == entity.CoordinateX2
-                              && seat.CoordinateY2 == entity.CoordinateY2) != null;
+            var passengerSeats = (await PassengerSeat.GetBy(entity.AirplaneSchemaId))
+                .FirstOrDefault(
+                    seat =>
+                        seat.Id == entity.Id
+                        && seat.ClassTypeId == entity.ClassTypeId
+                        && seat.Sector == entity.Sector
+                        && seat.Floor == entity.Floor
+                        && seat.Row == entity.Row
+                        && seat.Seat == entity.Seat
+                        && seat.CoordinateX1 == entity.CoordinateX1
+                        && seat.CoordinateY1 == entity.CoordinateY1
+                        && seat.CoordinateX2 == entity.CoordinateX2
+                        && seat.CoordinateY2 == entity.CoordinateY2);
+            var isExist = passengerSeats != null;
+
             if (isExist)
             {
                 return false;
             }
-            await UnitOfWork.PassengerSeat.Create(entity.ToDal());
+
+            await PassengerSeat.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(PassengerSeatBm entity)
+        public async Task Update(PassengerSeat entity)
         {
-            var seat = await UnitOfWork.PassengerSeat.GetById(entity.Id);
+            var seat = await PassengerSeat.GetById(entity.Id);
             if (seat != null)
             {
-                await UnitOfWork.PassengerSeat.Update(entity.ToDal());
+                await PassengerSeat.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(PassengerSeatBm entity)
+        public async Task Delete(PassengerSeat entity)
         {
-            var seat = await UnitOfWork.PassengerSeat.GetById(entity.Id);
+            var seat = await PassengerSeat.GetById(entity.Id);
             if (seat != null)
             {
-                await UnitOfWork.PassengerSeat.Delete(entity.Id);
+                await PassengerSeat.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<PassengerSeatBm>> GetAll() =>
-            (await UnitOfWork.PassengerSeat.GetAll())
-            .Select(seat => seat.ToBm());
+        public async Task<IEnumerable<PassengerSeat>> GetAll() =>
+            (await PassengerSeat.GetAll())
+            .Select(seat => seat.ToModel());
 
-        public async Task<PassengerSeatBm> GetById(Guid id) =>
-            (await UnitOfWork.PassengerSeat.GetById(id)).ToBm();
+        public async Task<PassengerSeat> GetById(Guid id) =>
+            (await PassengerSeat.GetById(id))?.ToModel();
     }
 }

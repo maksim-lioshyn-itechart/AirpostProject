@@ -47,8 +47,6 @@ namespace PresentationAPILayer
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 
-            services.AddSingleton<IUnitOfWork, UnitOfWork>();
-
             services.AddScoped<IAirlineService, AirlineService>();
             services.AddScoped<IAirplaneService, AirplaneService>();
             services.AddScoped<IAirplaneSchemaService, AirplaneSchemaService>();

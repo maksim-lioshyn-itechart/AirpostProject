@@ -11,47 +11,51 @@ namespace BusinessLogicLayer.Services
 {
     public class UserRoleService : IUserRoleService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IUserRoleRepository UserRole { get; }
 
-        public UserRoleService(IUnitOfWork unitOfWork)
+        public UserRoleService(IUserRoleRepository userRole)
         {
-            UnitOfWork = unitOfWork;
+            UserRole = userRole;
         }
 
-        public async Task<bool> Create(UserRoleBm entity)
+        public async Task<bool> Create(UserRole entity)
         {
-            var roles = await UnitOfWork.UserRole.GetAll();
-            if (roles.FirstOrDefault(role => role.Name == entity.Name) != null)
+            var roles = (await UserRole.GetAll())
+                .FirstOrDefault(role => role.Name == entity.Name);
+            var isExist = roles != null;
+
+            if (isExist)
             {
                 return false;
             }
-            await UnitOfWork.UserRole.Create(entity.ToDal());
+
+            await UserRole.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(UserRoleBm entity)
+        public async Task Update(UserRole entity)
         {
-            var role = await UnitOfWork.UserRole.GetById(entity.Id);
+            var role = await UserRole.GetById(entity.Id);
             if (role != null)
             {
-                await UnitOfWork.UserRole.Update(entity.ToDal());
+                await UserRole.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(UserRoleBm entity)
+        public async Task Delete(UserRole entity)
         {
-            var role = await UnitOfWork.UserRole.GetById(entity.Id);
+            var role = await UserRole.GetById(entity.Id);
             if (role != null)
             {
-                await UnitOfWork.UserRole.Delete(entity.Id);
+                await UserRole.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<UserRoleBm>> GetAll() =>
-            (await UnitOfWork.UserRole.GetAll())
-            .Select(role => role.ToBm());
+        public async Task<IEnumerable<UserRole>> GetAll() =>
+            (await UserRole.GetAll())
+            .Select(role => role.ToModel());
 
-        public async Task<UserRoleBm> GetById(Guid id) =>
-            (await UnitOfWork.UserRole.GetById(id)).ToBm();
+        public async Task<UserRole> GetById(Guid id) =>
+            (await UserRole.GetById(id))?.ToModel();
     }
 }

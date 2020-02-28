@@ -5,9 +5,9 @@ namespace PresentationAPILayer.Mappers
 {
     public static class UserMapper
     {
-        public static UserBm ToBm(this UserVm user)
+        public static User To(this UserVm user)
         {
-            return new UserBm
+            return new User
             {
                 Id = user.Id,
                 Email = user.Email,
@@ -20,7 +20,7 @@ namespace PresentationAPILayer.Mappers
             };
         }
 
-        public static UserVm ToVm(this UserBm user)
+        public static UserVm ToVm(this User user)
         {
             return new UserVm
             {

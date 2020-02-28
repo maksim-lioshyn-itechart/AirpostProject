@@ -11,47 +11,51 @@ namespace BusinessLogicLayer.Services
 {
     public class OrderStatusService : IOrderStatusService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private IOrderStatusRepository OrderStatus { get; }
 
-        public OrderStatusService(IUnitOfWork unitOfWork)
+        public OrderStatusService(IOrderStatusRepository orderStatus)
         {
-            UnitOfWork = unitOfWork;
+            OrderStatus = orderStatus;
         }
 
-        public async Task<bool> Create(OrderStatusBm entity)
+        public async Task<bool> Create(OrderStatus entity)
         {
-            var statuses = await UnitOfWork.OrderStatus.GetAll();
-            if (statuses.FirstOrDefault(status => status.Name == entity.Name) != null)
+            var statuses = (await OrderStatus.GetAll())
+                .FirstOrDefault(status => status.Name == entity.Name);
+            var isExist = statuses != null;
+
+            if (isExist)
             {
                 return false;
             }
-            await UnitOfWork.OrderStatus.Create(entity.ToDal());
+
+            await OrderStatus.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(OrderStatusBm entity)
+        public async Task Update(OrderStatus entity)
         {
-            var status = await UnitOfWork.OrderStatus.GetById(entity.Id);
+            var status = await OrderStatus.GetById(entity.Id);
             if (status != null)
             {
-                await UnitOfWork.OrderStatus.Update(entity.ToDal());
+                await OrderStatus.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(OrderStatusBm entity)
+        public async Task Delete(OrderStatus entity)
         {
-            var orderStatus = await UnitOfWork.OrderStatus.GetById(entity.Id);
+            var orderStatus = await OrderStatus.GetById(entity.Id);
             if (orderStatus != null)
             {
-                await UnitOfWork.OrderStatus.Delete(entity.Id);
+                await OrderStatus.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<OrderStatusBm>> GetAll() =>
-            (await UnitOfWork.OrderStatus.GetAll())
-            .Select(status => status.ToBm());
+        public async Task<IEnumerable<OrderStatus>> GetAll() =>
+            (await OrderStatus.GetAll())
+            .Select(status => status.ToModel());
 
-        public async Task<OrderStatusBm> GetById(Guid id) =>
-            (await UnitOfWork.OrderStatus.GetById(id)).ToBm();
+        public async Task<OrderStatus> GetById(Guid id) =>
+            (await OrderStatus.GetById(id))?.ToModel();
     }
 }

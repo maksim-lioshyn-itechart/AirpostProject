@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IDocumentTypeRepository : IBaseRepository<DocumentType>
+    public interface IDocumentTypeRepository : IBaseRepository<DocumentTypeEntity>
     {
     }
 }

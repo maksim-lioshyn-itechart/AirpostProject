@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IUserPasswordRepository : IBaseRepository<UserPassword>
+    public interface IUserPasswordRepository : IBaseRepository<UserPasswordEntity>
     {
-        Task<UserPassword> GetByUserId(Guid userId);
+        Task<UserPasswordEntity> GetByUserId(Guid userId);
     }
 }

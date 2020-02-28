@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface ITicketRepository : IBaseRepository<Ticket>
+    public interface ITicketRepository : IBaseRepository<TicketEntity>
     {
     }
 }

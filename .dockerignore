@@ -9,7 +9,7 @@
 **/.vs
 **/.vscode
 **/*.*proj.user
-**/*.dbmdl
+**/*.ddl
 **/*.jfm
 **/azds.yaml
 **/bin

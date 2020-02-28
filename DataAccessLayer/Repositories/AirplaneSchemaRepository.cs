@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(AirplaneSchema entity)
+        public async Task Create(AirplaneSchemaEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertAirplaneSchema", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<AirplaneSchema> GetById(Guid id)
+        public async Task<AirplaneSchemaEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<AirplaneSchema>("GetAirplaneSchemaById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<AirplaneSchemaEntity>("GetAirplaneSchemaById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<AirplaneSchema>> GetAll()
+        public async Task<IEnumerable<AirplaneSchemaEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<AirplaneSchema>("GetAllAirplaneSchemas", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<AirplaneSchemaEntity>("GetAllAirplaneSchemas", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(AirplaneSchema entity)
+        public async Task Update(AirplaneSchemaEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateAirplaneSchema", entity, commandType: CommandType.StoredProcedure);

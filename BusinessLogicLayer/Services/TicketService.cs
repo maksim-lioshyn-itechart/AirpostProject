@@ -11,51 +11,53 @@ namespace BusinessLogicLayer.Services
 {
     public class TicketService : ITicketService
     {
-        private IUnitOfWork UnitOfWork { get; }
+        private ITicketRepository Ticket { get; }
 
-        public TicketService(IUnitOfWork unitOfWork)
+        public TicketService(ITicketRepository ticket)
         {
-            UnitOfWork = unitOfWork;
+            Ticket = ticket;
         }
 
-        public async Task<bool> Create(TicketBm entity)
+        public async Task<bool> Create(Ticket entity)
         {
-            var tickets = await UnitOfWork.Ticket.GetAll();
-            var isExist = tickets.FirstOrDefault(ticket =>
-                              ticket.Id == entity.Id
-                              && ticket.TicketNumber == entity.TicketNumber) != null;
+            var tickets = (await Ticket.GetAll())
+                .FirstOrDefault(
+                    ticket =>
+                        ticket.Id == entity.Id
+                        && ticket.TicketNumber == entity.TicketNumber);
+            var isExist = tickets != null;
 
             if (isExist)
             {
                 return false;
             }
 
-            await UnitOfWork.Ticket.Create(entity.ToDal());
+            await Ticket.Create(entity.ToEntity());
             return true;
         }
 
-        public async Task Update(TicketBm entity)
+        public async Task Update(Ticket entity)
         {
-            var ticket = await UnitOfWork.Ticket.GetById(entity.Id);
+            var ticket = await Ticket.GetById(entity.Id);
             if (ticket != null)
             {
-                await UnitOfWork.Ticket.Update(entity.ToDal());
+                await Ticket.Update(entity.ToEntity());
             }
         }
 
-        public async Task Delete(TicketBm entity)
+        public async Task Delete(Ticket entity)
         {
-            var ticket = await UnitOfWork.Ticket.GetById(entity.Id);
+            var ticket = await Ticket.GetById(entity.Id);
             if (ticket != null)
             {
-                await UnitOfWork.Ticket.Delete(entity.Id);
+                await Ticket.Delete(entity.Id);
             }
         }
 
-        public async Task<IEnumerable<TicketBm>> GetAll() =>
-            (await UnitOfWork.Ticket.GetAll()).Select(ticket => ticket.ToBm());
+        public async Task<IEnumerable<Ticket>> GetAll() =>
+            (await Ticket.GetAll()).Select(ticket => ticket.ToModel());
 
-        public async Task<TicketBm> GetById(Guid id) =>
-            (await UnitOfWork.Ticket.GetById(id)).ToBm();
+        public async Task<Ticket> GetById(Guid id) =>
+            (await Ticket.GetById(id))?.ToModel();
     }
 }

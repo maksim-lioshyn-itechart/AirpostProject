@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface IService<TBM>
+    public interface IService<TModel>
     {
-        Task<bool> Create(TBM entity);
-        Task Update(TBM entity);
-        Task Delete(TBM entity);
+        Task<bool> Create(TModel entity);
+        Task Update(TModel entity);
+        Task Delete(TModel entity);
 
-        Task<IEnumerable<TBM>> GetAll();
-        Task<TBM> GetById(Guid id);
+        Task<IEnumerable<TModel>> GetAll();
+        Task<TModel> GetById(Guid id);
     }
 }

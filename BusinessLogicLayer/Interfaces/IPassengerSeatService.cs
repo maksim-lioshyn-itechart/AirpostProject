@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface IPassengerSeatService : IService<PassengerSeatBm>
+    public interface IPassengerSeatService : IService<PassengerSeat>
     {
 
     }

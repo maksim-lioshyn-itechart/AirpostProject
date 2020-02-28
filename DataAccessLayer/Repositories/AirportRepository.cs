@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(Airport entity)
+        public async Task Create(AirportEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertAirport", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<Airport> GetById(Guid id)
+        public async Task<AirportEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<Airport>("GetAirportById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<AirportEntity>("GetAirportById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Airport>> GetAll()
+        public async Task<IEnumerable<AirportEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Airport>("GetAllAirports", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<AirportEntity>("GetAllAirports", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(Airport entity)
+        public async Task Update(AirportEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateAirport", entity, commandType: CommandType.StoredProcedure);
@@ -47,10 +47,10 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeleteAirport", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Airport>> GetAirportByCountryId(Guid countryId)
+        public async Task<IEnumerable<AirportEntity>> GetAirportByCountryId(Guid countryId)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Airport>("GetAirportByCountryId", new { countryId }, commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<AirportEntity>("GetAirportByCountryId", new { countryId }, commandType: CommandType.StoredProcedure);
         }
     }
 }

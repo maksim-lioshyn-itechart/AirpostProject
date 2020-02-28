@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(User entity)
+        public async Task Create(UserEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertUser", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<User> GetById(Guid id)
+        public async Task<UserEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<User>("GetUserById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<UserEntity>("GetUserById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<UserEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<User>("GetAllUsers", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<UserEntity>("GetAllUsers", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(User entity)
+        public async Task Update(UserEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateUser", entity, commandType: CommandType.StoredProcedure);
