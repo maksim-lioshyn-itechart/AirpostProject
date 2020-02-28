@@ -2,7 +2,7 @@
 
 namespace PresentationAPILayer.Models
 {
-    public class BaseVm
+    public class BaseViewModel
     {
         public Guid Id { get; set; }
     }

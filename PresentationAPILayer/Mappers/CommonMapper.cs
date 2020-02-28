@@ -11,67 +11,75 @@ namespace PresentationAPILayer.Mappers
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Airline, AirlineVm>().ReverseMap();
-                cfg.CreateMap<Airplane, AirplaneVm>().ReverseMap();
-                cfg.CreateMap<AirplaneSchema, AirplaneSchemaVm>().ReverseMap();
-                cfg.CreateMap<AirplaneSubType, AirplaneSubTypeVm>().ReverseMap();
-                cfg.CreateMap<AirplaneType, AirplaneTypeVm>().ReverseMap();
-                cfg.CreateMap<Airport, AirportVm>().ReverseMap();
-                cfg.CreateMap<ClassType, ClassTypeVm>().ReverseMap();
-                cfg.CreateMap<Country, CountryVm>().ReverseMap();
-                cfg.CreateMap<Document, DocumentVm>().ReverseMap();
-                cfg.CreateMap<DocumentType, DocumentTypeVm>().ReverseMap();
-                cfg.CreateMap<Flight, FlightVm>().ReverseMap();
-                cfg.CreateMap<OrderStatus, OrderStatusVm>().ReverseMap();
-                cfg.CreateMap<PassengerSeat, PassengerSeatVm>().ReverseMap();
-                cfg.CreateMap<Ticket, TicketVm>().ReverseMap();
-                cfg.CreateMap<UserRole, UserRoleVm>().ReverseMap();
+                cfg.CreateMap<Airline, AirlineViewModel>().ReverseMap();
+                cfg.CreateMap<Airplane, AirplaneViewModel>().ReverseMap();
+                cfg.CreateMap<AirplaneSchema, AirplaneSchemaViewModel>().ReverseMap();
+                cfg.CreateMap<AirplaneSubType, AirplaneSubTypeViewModel>().ReverseMap();
+                cfg.CreateMap<AirplaneType, AirplaneTypeViewModel>().ReverseMap();
+                cfg.CreateMap<Airport, AirportViewModel>().ReverseMap();
+                cfg.CreateMap<ClassType, ClassTypeViewModel>().ReverseMap();
+                cfg.CreateMap<Country, CountryViewModel>().ReverseMap();
+                cfg.CreateMap<Document, DocumentViewModel>().ReverseMap();
+                cfg.CreateMap<DocumentType, DocumentTypeViewModel>().ReverseMap();
+                cfg.CreateMap<Flight, FlightViewModel>().ReverseMap();
+                cfg.CreateMap<OrderStatus, OrderStatusViewModel>().ReverseMap();
+                cfg.CreateMap<PassengerSeat, PassengerSeatViewModel>().ReverseMap();
+                cfg.CreateMap<Ticket, TicketViewModel>().ReverseMap();
+                cfg.CreateMap<UserRole, UserRoleViewModel>().ReverseMap();
+                cfg.CreateMap<User, UserViewModel>()
+                    .ForMember(
+                        dest => dest.Password,
+                        opt => opt.Ignore())
+                    .ReverseMap();
             });
             Mapper = new Mapper(config);
         }
-        public static AirlineVm To(this Airline model) => Mapper.Map<AirlineVm>(model);
-        public static Airline ToDal(this AirlineVm model) => Mapper.Map<Airline>(model);
+        public static AirlineViewModel ToViewModel(this Airline model) => Mapper.Map<AirlineViewModel>(model);
+        public static Airline ToModel(this AirlineViewModel model) => Mapper.Map<Airline>(model);
 
-        public static AirplaneVm To(this Airplane model) => Mapper.Map<AirplaneVm>(model);
-        public static Airplane ToDal(this AirplaneVm model) => Mapper.Map<Airplane>(model);
+        public static AirplaneViewModel ToViewModel(this Airplane model) => Mapper.Map<AirplaneViewModel>(model);
+        public static Airplane ToModel(this AirplaneViewModel model) => Mapper.Map<Airplane>(model);
 
-        public static AirplaneSchemaVm To(this AirplaneSchema model) => Mapper.Map<AirplaneSchemaVm>(model);
-        public static AirplaneSchema ToDal(this AirplaneSchemaVm model) => Mapper.Map<AirplaneSchema>(model);
+        public static AirplaneSchemaViewModel ToViewModel(this AirplaneSchema model) => Mapper.Map<AirplaneSchemaViewModel>(model);
+        public static AirplaneSchema ToModel(this AirplaneSchemaViewModel model) => Mapper.Map<AirplaneSchema>(model);
 
-        public static AirplaneSubTypeVm To(this AirplaneSubType model) => Mapper.Map<AirplaneSubTypeVm>(model);
-        public static AirplaneSubType ToDal(this AirplaneSubTypeVm model) => Mapper.Map<AirplaneSubType>(model);
+        public static AirplaneSubTypeViewModel ToViewModel(this AirplaneSubType model) => Mapper.Map<AirplaneSubTypeViewModel>(model);
+        public static AirplaneSubType ToModel(this AirplaneSubTypeViewModel model) => Mapper.Map<AirplaneSubType>(model);
 
-        public static AirplaneTypeVm To(this AirplaneType model) => Mapper.Map<AirplaneTypeVm>(model);
-        public static AirplaneType ToDal(this AirplaneTypeVm model) => Mapper.Map<AirplaneType>(model);
+        public static AirplaneTypeViewModel ToViewModel(this AirplaneType model) => Mapper.Map<AirplaneTypeViewModel>(model);
+        public static AirplaneType ToModel(this AirplaneTypeViewModel model) => Mapper.Map<AirplaneType>(model);
 
-        public static AirportVm To(this Airport model) => Mapper.Map<AirportVm>(model);
-        public static Airport ToDal(this AirportVm model) => Mapper.Map<Airport>(model);
+        public static AirportViewModel ToViewModel(this Airport model) => Mapper.Map<AirportViewModel>(model);
+        public static Airport ToModel(this AirportViewModel model) => Mapper.Map<Airport>(model);
 
-        public static ClassTypeVm To(this ClassType model) => Mapper.Map<ClassTypeVm>(model);
-        public static ClassType ToDal(this ClassTypeVm model) => Mapper.Map<ClassType>(model);
+        public static ClassTypeViewModel ToViewModel(this ClassType model) => Mapper.Map<ClassTypeViewModel>(model);
+        public static ClassType ToModel(this ClassTypeViewModel model) => Mapper.Map<ClassType>(model);
 
-        public static CountryVm To(this Country model) => Mapper.Map<CountryVm>(model);
-        public static Country ToDal(this CountryVm model) => Mapper.Map<Country>(model);
+        public static CountryViewModel ToViewModel(this Country model) => Mapper.Map<CountryViewModel>(model);
+        public static Country ToModel(this CountryViewModel model) => Mapper.Map<Country>(model);
 
-        public static DocumentVm To(this Document model) => Mapper.Map<DocumentVm>(model);
-        public static Document ToDal(this DocumentVm model) => Mapper.Map<Document>(model);
+        public static DocumentViewModel ToViewModel(this Document model) => Mapper.Map<DocumentViewModel>(model);
+        public static Document ToModel(this DocumentViewModel model) => Mapper.Map<Document>(model);
 
-        public static DocumentTypeVm To(this DocumentType model) => Mapper.Map<DocumentTypeVm>(model);
-        public static DocumentType ToDal(this DocumentTypeVm model) => Mapper.Map<DocumentType>(model);
+        public static DocumentTypeViewModel ToViewModel(this DocumentType model) => Mapper.Map<DocumentTypeViewModel>(model);
+        public static DocumentType ToModel(this DocumentTypeViewModel model) => Mapper.Map<DocumentType>(model);
 
-        public static OrderStatusVm To(this OrderStatus model) => Mapper.Map<OrderStatusVm>(model);
-        public static OrderStatus ToDal(this OrderStatusVm model) => Mapper.Map<OrderStatus>(model);
+        public static OrderStatusViewModel ToViewModel(this OrderStatus model) => Mapper.Map<OrderStatusViewModel>(model);
+        public static OrderStatus ToModel(this OrderStatusViewModel model) => Mapper.Map<OrderStatus>(model);
 
-        public static UserRoleVm To(this UserRole model) => Mapper.Map<UserRoleVm>(model);
-        public static UserRole ToDal(this UserRoleVm model) => Mapper.Map<UserRole>(model);
+        public static UserRoleViewModel ToViewModel(this UserRole model) => Mapper.Map<UserRoleViewModel>(model);
+        public static UserRole ToModel(this UserRoleViewModel model) => Mapper.Map<UserRole>(model);
 
-        public static FlightVm To(this Flight model) => Mapper.Map<FlightVm>(model);
-        public static Flight ToDal(this FlightVm model) => Mapper.Map<Flight>(model);
+        public static FlightViewModel ToViewModel(this Flight model) => Mapper.Map<FlightViewModel>(model);
+        public static Flight ToModel(this FlightViewModel model) => Mapper.Map<Flight>(model);
 
-        public static PassengerSeatVm To(this PassengerSeat model) => Mapper.Map<PassengerSeatVm>(model);
-        public static PassengerSeat ToDal(this PassengerSeatVm model) => Mapper.Map<PassengerSeat>(model);
+        public static PassengerSeatViewModel ToViewModel(this PassengerSeat model) => Mapper.Map<PassengerSeatViewModel>(model);
+        public static PassengerSeat ToModel(this PassengerSeatViewModel model) => Mapper.Map<PassengerSeat>(model);
 
-        public static TicketVm To(this Ticket model) => Mapper.Map<TicketVm>(model);
-        public static Ticket ToDal(this TicketVm model) => Mapper.Map<Ticket>(model);
+        public static TicketViewModel ToViewModel(this Ticket model) => Mapper.Map<TicketViewModel>(model);
+        public static Ticket ToModel(this TicketViewModel model) => Mapper.Map<Ticket>(model);
+
+        public static UserViewModel ToViewModel(this User model) => Mapper.Map<UserViewModel>(model);
+        public static User ToModel(this UserViewModel model) => Mapper.Map<User>(model);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace PresentationAPILayer.Models
 {
-    public class TicketVm : BaseVm
+    public class TicketViewModel : BaseViewModel
     {
         public Guid? UserId { get; set; }
         public Guid OrderStatusId { get; set; }

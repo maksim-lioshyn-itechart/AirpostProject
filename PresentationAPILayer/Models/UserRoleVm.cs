@@ -1,6 +1,6 @@
 ﻿namespace PresentationAPILayer.Models
 {
-    public class UserRoleVm : BaseVm
+    public class UserRoleViewModel : BaseViewModel
     {
         public string Name { get; set; }
     }

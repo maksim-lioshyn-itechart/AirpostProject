@@ -1,6 +1,6 @@
 ﻿namespace PresentationAPILayer.Models
 {
-    public class DocumentTypeVm : BaseVm
+    public class DocumentTypeViewModel : BaseViewModel
     {
         public string Name { get; set; }
     }

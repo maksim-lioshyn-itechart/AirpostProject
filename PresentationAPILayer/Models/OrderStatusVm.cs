@@ -1,6 +1,6 @@
 ﻿namespace PresentationAPILayer.Models
 {
-    public class OrderStatusVm : BaseVm
+    public class OrderStatusViewModel : BaseViewModel
     {
         public string Name { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿namespace PresentationAPILayer.Models
 {
-    public class AirplaneSubTypeVm : BaseVm
+    public class AirplaneSubTypeViewModel : BaseViewModel
     {
         public string Name { get; set; }
     }

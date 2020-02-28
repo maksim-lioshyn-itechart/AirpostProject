@@ -2,7 +2,7 @@
 
 namespace PresentationAPILayer.Models
 {
-    public class UserVm : BaseVm
+    public class UserViewModel : BaseViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

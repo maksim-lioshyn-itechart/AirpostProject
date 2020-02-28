@@ -2,7 +2,7 @@
 
 namespace PresentationAPILayer.Models
 {
-    public class PassengerSeatVm : BaseVm
+    public class PassengerSeatViewModel : BaseViewModel
     {
         public Guid AirplaneSchemaId { get; set; }
         public Guid ClassTypeId { get; set; }

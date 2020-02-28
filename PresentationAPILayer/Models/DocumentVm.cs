@@ -2,7 +2,7 @@
 
 namespace PresentationAPILayer.Models
 {
-    public class DocumentVm : BaseVm
+    public class DocumentViewModel : BaseViewModel
     {
         public Guid DocumentTypeId { get; set; }
         public string Name { get; set; }
