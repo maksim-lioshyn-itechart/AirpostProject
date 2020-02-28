@@ -1,5 +1,5 @@
 import React from 'react';
-import UserRole from './components/userrole.jsx'
+import UserRole from "./components/userrole";
 
 class App extends React.Component {
   render() {

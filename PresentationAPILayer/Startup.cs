@@ -70,7 +70,12 @@ namespace PresentationAPILayer
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseCors(
+                builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                });
             app.UseHttpsRedirection();
 
             app.UseRouting();

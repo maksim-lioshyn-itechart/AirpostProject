@@ -22,9 +22,44 @@ namespace PresentationAPILayer.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserRoleViewModel> Get()
+        public async Task<IEnumerable<UserRoleViewModel>> Get()
         {
-            return _userRoleService.GetAll().Result.Select(ur=>ur.ToViewModel());
+            return (await _userRoleService.GetAll()).Select(ur=>ur.ToViewModel());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserRoleViewModel>> Get(Guid id)
+        {
+            UserRoleViewModel user = (await _userRoleService.GetById(id)).ToViewModel();
+            if (user == null)
+                return NotFound();
+            return new ObjectResult(user);
+        }
+
+        // PUT api/users/
+        [HttpPut]
+        public async Task<ActionResult<UserRoleViewModel>> Put(UserRoleViewModel userRole)
+        {
+            if (userRole == null)
+            {
+                return BadRequest();
+            }
+            await _userRoleService.Update(userRole.ToModel());
+            return Ok(userRole);
+        }
+
+        // DELETE api/users/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UserRoleViewModel>> Delete(Guid id)
+        {
+            var userRole = await _userRoleService.GetById(id);
+            if (userRole == null)
+            {
+                return NotFound();
+            }
+
+            await _userRoleService.Delete(userRole);
+            return Ok(userRole);
         }
     }
 }
