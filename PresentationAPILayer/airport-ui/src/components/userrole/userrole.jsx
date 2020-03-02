@@ -1,42 +1,8 @@
+import { url } from '../../config.js';
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn }
   from 'react-bootstrap-table'
-
-function onInsertRow(model) {
-  fetch("https://localhost:44366/UserRoles", {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(model.name)
-  }).then(response => {
-    if (response.ok) {
-      alert('Added: ' + model.name)
-    }
-    throw new Error(response.statusText);
-  })
-}
-
-function onSaveCell(value) {
-  fetch("https://localhost:44366/UserRoles", {
-    method: "PUT",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(value)
-  }).then(response => {
-    if (response.ok) {
-      alert('Updated: ' + value.name)
-    }
-    throw new Error(response.statusText);
-  }
-  )
-}
-
-function onDeleteRow(rowKeys) {
-  rowKeys.map((key) => {
-    fetch("https://localhost:44366/UserRoles/" + key,
-      {
-        method: "DELETE"
-      });
-  });
-}
+import {onDeleteRow, onInsertRow, onSaveCell} from './actions';
 
 class UserRole extends React.Component {
 
@@ -52,11 +18,8 @@ class UserRole extends React.Component {
     this.intervalCoordinateID = this.fetchData();
   }
 
-  componentWillUnmount() {
-  }
-
   async fetchData() {
-    await fetch("https://localhost:44366/UserRoles", {
+    await fetch(url + "UserRoles", {
       method: "GET",
       headers: { "Content-Type": "text/plain;charset=UTF-8" }
     })
@@ -69,7 +32,7 @@ class UserRole extends React.Component {
   render() {
 
     const options = {
-      afterInsertRow: this.fetchData(),
+      afterInsertRow: this.fetchData,
       onAddRow: onInsertRow,
       onDeleteRow: onDeleteRow
     }
@@ -99,7 +62,8 @@ class UserRole extends React.Component {
             hiddenOnInsert
             dataField='id'
             dataSort={true}
-            hidden={this.state.hidden}>
+            hidden={this.state.hidden}
+            autoValue>
             ID
           </TableHeaderColumn>
           <TableHeaderColumn
