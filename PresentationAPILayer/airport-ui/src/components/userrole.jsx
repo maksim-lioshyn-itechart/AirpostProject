@@ -2,35 +2,50 @@ import React from 'react';
 import { BootstrapTable, TableHeaderColumn }
   from 'react-bootstrap-table'
 
-function onInsertRow(row) {
-  let newRowStr = ''
-
-  
-  for (const prop in row) {
-    newRowStr += prop + ': ' + row[prop] + ' \n'
-  }
-  alert('You inserted:\n ' + newRowStr)
+function onInsertRow(model) {
+  fetch("https://localhost:44366/UserRoles", {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(model.name)
+  }).then(response => {
+    if (response.ok) {
+      alert('Added: ' + model.name)
+    }
+    throw new Error(response.statusText);
+  })
 }
 
+function onSaveCell(value) {
+  fetch("https://localhost:44366/UserRoles", {
+    method: "PUT",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(value)
+  }).then(response => {
+    if (response.ok) {
+      alert('Updated: ' + value.name)
+    }
+    throw new Error(response.statusText);
+  }
+  )
+}
 
 function onDeleteRow(rowKeys) {
-  fetch("https://localhost:44366/UserRoles/" + rowKeys, {method: "DELETE"}).then((response) => {
-      return response.json();
-    }).then((result) => {
-      // do what you want with the response here
-    })
-
-    console.log("https://localhost:44366/UserRoles/" + rowKeys);
-  alert('You deleted: ' + rowKeys)
+  rowKeys.map((key) => {
+    fetch("https://localhost:44366/UserRoles/" + key,
+      {
+        method: "DELETE"
+      });
+  });
 }
-
-
 
 class UserRole extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { userRoles: [] }
+    this.state = {
+      hidden: true,
+      userRoles: []
+    }
   }
 
   componentDidMount() {
@@ -41,67 +56,55 @@ class UserRole extends React.Component {
   }
 
   async fetchData() {
-    const response = await fetch("https://localhost:44366/UserRoles", {
+    await fetch("https://localhost:44366/UserRoles", {
       method: "GET",
       headers: { "Content-Type": "text/plain;charset=UTF-8" }
     })
-      .then(r => r.json());
-
-    this.setState({
-      userRoles: response
-    });
-  }
-
-  renderTableData() {
-    return this.state.userRoles.map((roles, index) => {
-      const { id, name } = roles
-      return (
-        <tbody key={index}>
-          <tr>
-            <td>{id}</td>
-            <td>{name}</td>
-          </tr>
-        </tbody>
-      )
-    })
+      .then(r => r.json())
+      .then(response => this.setState({
+        userRoles: response
+      }));
   }
 
   render() {
 
     const options = {
-      afterInsertRow: onInsertRow,
-      afterDeleteRow: onDeleteRow
+      afterInsertRow: this.fetchData(),
+      onAddRow: onInsertRow,
+      onDeleteRow: onDeleteRow
     }
 
-    // To delete rows you be able to select rows
     const selectRowProp = {
       mode: 'checkbox'
     }
 
+    const cellEditProp = {
+      mode: 'click',
+      afterSaveCell: onSaveCell,
+      blurToSave: true
+    }
+
     return (
       <div>
-        {/* <table className="userRoles" aria-label="test table">
-          <thead>
-            <tr>
-              <td>Id</td>
-              <td align="right">Name</td>
-            </tr>
-          </thead>
-          {this.renderTableData()}
-        </table> */}
-
-
-        <BootstrapTable 
+        <BootstrapTable
+          keyField="id"
           data={this.state.userRoles}
-          insertRow={true}
-          deleteRow={true}
+          insertRow
+          deleteRow
           selectRow={selectRowProp}
+          cellEdit={cellEditProp}
           options={options}
         >
-          <TableHeaderColumn isKey dataField='id'>
+          <TableHeaderColumn
+            hiddenOnInsert
+            dataField='id'
+            dataSort={true}
+            hidden={this.state.hidden}>
             ID
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>
+          <TableHeaderColumn
+            dataField='name'
+            dataSort={true}>
             Name
           </TableHeaderColumn>
         </BootstrapTable>

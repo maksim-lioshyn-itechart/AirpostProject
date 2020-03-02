@@ -1,11 +1,10 @@
-﻿using System;
+﻿using BusinessLogicLayer.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using PresentationAPILayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLogicLayer.Interfaces;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PresentationAPILayer.Models;
 using static PresentationAPILayer.Mappers.CommonMapper;
 
 namespace PresentationAPILayer.Controllers
@@ -24,19 +23,18 @@ namespace PresentationAPILayer.Controllers
         [HttpGet]
         public async Task<IEnumerable<UserRoleViewModel>> Get()
         {
-            return (await _userRoleService.GetAll()).Select(ur=>ur.ToViewModel());
+            return (await _userRoleService.GetAll()).Select(ur => ur.ToViewModel());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserRoleViewModel>> Get(Guid id)
         {
-            UserRoleViewModel user = (await _userRoleService.GetById(id)).ToViewModel();
+            var user = (await _userRoleService.GetById(id)).ToViewModel();
             if (user == null)
                 return NotFound();
             return new ObjectResult(user);
         }
 
-        // PUT api/users/
         [HttpPut]
         public async Task<ActionResult<UserRoleViewModel>> Put(UserRoleViewModel userRole)
         {
@@ -45,10 +43,28 @@ namespace PresentationAPILayer.Controllers
                 return BadRequest();
             }
             await _userRoleService.Update(userRole.ToModel());
-            return Ok(userRole);
+            return Ok();
         }
 
-        // DELETE api/users/5
+        [HttpPost]
+        public async Task<ActionResult<UserRoleViewModel>> Post([FromBody]string  name)
+        {
+            var role = (await _userRoleService.GetAll())
+                .FirstOrDefault(userRole => 
+                    string.Equals(userRole.Name, name, StringComparison.CurrentCultureIgnoreCase));
+
+            if (role != null)
+            {
+                return Conflict();
+            }
+
+            await _userRoleService.Create(new UserRoleViewModel()
+            {
+                Name = name
+            }.ToModel());
+            return Ok();
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<UserRoleViewModel>> Delete(Guid id)
         {

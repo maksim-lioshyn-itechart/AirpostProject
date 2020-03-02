@@ -75,6 +75,7 @@ namespace PresentationAPILayer
                 {
                     builder.AllowAnyOrigin();
                     builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
                 });
             app.UseHttpsRedirection();
 

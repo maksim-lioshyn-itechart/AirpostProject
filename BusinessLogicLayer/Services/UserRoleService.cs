@@ -29,6 +29,8 @@ namespace BusinessLogicLayer.Services
                 return false;
             }
 
+            entity.Id = Guid.NewGuid();
+            entity.Name = entity.Name.ToUpper();
             await UserRole.Create(entity.ToEntity());
             return true;
         }
@@ -38,6 +40,7 @@ namespace BusinessLogicLayer.Services
             var role = await UserRole.GetById(entity.Id);
             if (role != null)
             {
+                entity.Name = entity.Name.ToUpper();
                 await UserRole.Update(entity.ToEntity());
             }
         }
