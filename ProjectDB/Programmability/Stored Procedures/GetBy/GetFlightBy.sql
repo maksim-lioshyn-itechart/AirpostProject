@@ -1,9 +1,13 @@
 CREATE PROCEDURE [dbo].[GetFlightBy]
-    @AirplaneId UNIQUEIDENTIFIER
+    @AirplaneId UNIQUEIDENTIFIER = NULL,
+    @DestinationAirportId UNIQUEIDENTIFIER = NULL,
+    @DepartureAirportId UNIQUEIDENTIFIER = NULL
 AS
 BEGIN
     SELECT [Id], [DepartureAirportId], [DestinationAirportId], [DepartureTimeUTC], [ArrivalTimeUTC], [AirplaneId]
     FROM [dbo].[Flights]
-    WHERE AirplaneId = @AirplaneId
+    WHERE [AirplaneId] = COALESCE(@AirplaneId, [AirplaneId])
+        AND [DestinationAirportId] = COALESCE(@DestinationAirportId, [DestinationAirportId])
+        AND [DepartureAirportId] = COALESCE(@DepartureAirportId, [DepartureAirportId])
 END
 GO

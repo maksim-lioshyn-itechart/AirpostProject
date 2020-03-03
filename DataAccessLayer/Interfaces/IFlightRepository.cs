@@ -7,6 +7,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IFlightRepository : IBaseRepository<FlightEntity>
     {
-        Task<IEnumerable<FlightEntity>> GetBy(Guid airplaneId);
+        Task<IEnumerable<FlightEntity>> GetBy(Guid? airplaneId = null, Guid? destinationAirportId = null, Guid? departureAirportId = null);
     }
 }

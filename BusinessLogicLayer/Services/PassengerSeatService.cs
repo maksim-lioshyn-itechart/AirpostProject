@@ -21,19 +21,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(PassengerSeat entity)
         {
-            var passengerSeats = (await PassengerSeat.GetBy(entity.AirplaneSchemaId))
-                .FirstOrDefault(
-                    seat =>
-                        seat.Id == entity.Id
-                        && seat.ClassTypeId == entity.ClassTypeId
-                        && seat.Sector == entity.Sector
-                        && seat.Floor == entity.Floor
-                        && seat.Row == entity.Row
-                        && seat.Seat == entity.Seat
-                        && seat.CoordinateX1 == entity.CoordinateX1
-                        && seat.CoordinateY1 == entity.CoordinateY1
-                        && seat.CoordinateX2 == entity.CoordinateX2
-                        && seat.CoordinateY2 == entity.CoordinateY2);
+            var passengerSeats = (await PassengerSeat.GetBy(
+                    entity.AirplaneSchemaId, entity.ClassTypeId, 
+                    entity.Sector, entity.Floor, 
+                    entity.Row, entity.Seat, 
+                    entity.CoordinateX1, entity.CoordinateY1, 
+                    entity.CoordinateX2, entity.CoordinateY2)
+                )
+                .FirstOrDefault();
+
             var isExist = passengerSeats != null;
 
             if (isExist)

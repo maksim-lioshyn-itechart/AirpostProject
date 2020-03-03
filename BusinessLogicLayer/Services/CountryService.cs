@@ -21,8 +21,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(Country entity)
         {
-            var countries = (await Country.GetAll())
-                .FirstOrDefault(country => country.Name == entity.Name);
+            var countries = (await Country.GetBy(entity.Name)).FirstOrDefault();
             var isExist = countries != null;
 
             if (isExist)

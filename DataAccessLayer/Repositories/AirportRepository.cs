@@ -47,10 +47,10 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeleteAirport", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<AirportEntity>> GetBy(Guid countryId)
+        public async Task<IEnumerable<AirportEntity>> GetBy(Guid? countryId = null, string name = null)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<AirportEntity>("GetAirportBy", new { countryId }, commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<AirportEntity>("GetAirportBy", new { countryId, name }, commandType: CommandType.StoredProcedure);
         }
     }
 }

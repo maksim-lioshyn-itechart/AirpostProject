@@ -21,11 +21,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(Ticket entity)
         {
-            var tickets = (await Ticket.GetAll())
-                .FirstOrDefault(
-                    ticket =>
-                        ticket.Id == entity.Id
-                        && ticket.TicketNumber == entity.TicketNumber);
+            var tickets = (await Ticket.GetBy(entity.TicketNumber))
+                .FirstOrDefault(ticket => ticket.Id == entity.Id);
             var isExist = tickets != null;
 
             if (isExist)

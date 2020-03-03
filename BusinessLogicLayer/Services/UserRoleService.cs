@@ -21,8 +21,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(UserRole entity)
         {
-            var roles = (await UserRole.GetAll())
-                .FirstOrDefault(role => role.Name == entity.Name);
+            var roles = (await UserRole.GetBy(entity.Name)).FirstOrDefault();
             var isExist = roles != null;
 
             if (isExist)

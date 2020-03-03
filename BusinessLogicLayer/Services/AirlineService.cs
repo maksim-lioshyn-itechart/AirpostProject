@@ -21,9 +21,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(Airline entity)
         {
-            var airlineEntity = (await Airline.GetBy(entity.CountryId))
-                .FirstOrDefault(airline => airline.Email == entity.Email);
-
+            var airlineEntity = (await Airline.GetBy(countryId: entity.CountryId)).FirstOrDefault();
             var isExist = airlineEntity != null;
             
             if (isExist)
