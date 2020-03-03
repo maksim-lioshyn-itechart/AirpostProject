@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 using static BusinessLogicLayer.Mappers.CommonMapper;
 
 namespace BusinessLogicLayer.Services
@@ -18,7 +19,7 @@ namespace BusinessLogicLayer.Services
             OrderStatus = orderStatus;
         }
 
-        public async Task<bool> Create(OrderStatus entity)
+        public async Task<StatusCode> Create(OrderStatus entity)
         {
             var statuses = (await OrderStatus.GetAll())
                 .FirstOrDefault(status => status.Name == entity.Name);
@@ -26,29 +27,33 @@ namespace BusinessLogicLayer.Services
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await OrderStatus.Create(entity.ToEntity());
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(OrderStatus entity)
+        public async Task<StatusCode> Update(OrderStatus entity)
         {
             var status = await OrderStatus.GetById(entity.Id);
             if (status != null)
             {
                 await OrderStatus.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(OrderStatus entity)
+        public async Task<StatusCode> Delete(OrderStatus entity)
         {
             var orderStatus = await OrderStatus.GetById(entity.Id);
             if (orderStatus != null)
             {
                 await OrderStatus.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<OrderStatus>> GetAll() =>

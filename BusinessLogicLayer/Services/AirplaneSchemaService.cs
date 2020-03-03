@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 using static BusinessLogicLayer.Mappers.CommonMapper;
 
 namespace BusinessLogicLayer.Services
@@ -18,37 +19,40 @@ namespace BusinessLogicLayer.Services
             AirplaneSchema = airplaneSchema;
         }
 
-        public async Task<bool> Create(AirplaneSchema entity)
+        public async Task<StatusCode> Create(AirplaneSchema entity)
         {
-            var schemas = (await AirplaneSchema.GetAll())
-                .FirstOrDefault(schema => schema.Name == entity.Name);
+            var schemas = await AirplaneSchema.GetBy(entity.Name);
             var isExist = schemas != null;
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await AirplaneSchema.Create(entity.ToEntity());
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(AirplaneSchema entity)
+        public async Task<StatusCode> Update(AirplaneSchema entity)
         {
             var schemas = await AirplaneSchema.GetById(entity.Id);
             if (schemas != null)
             {
                 await AirplaneSchema.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(AirplaneSchema entity)
+        public async Task<StatusCode> Delete(AirplaneSchema entity)
         {
             var schemas = await AirplaneSchema.GetById(entity.Id);
             if (schemas != null)
             {
                 await AirplaneSchema.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<AirplaneSchema>> GetAll() =>
