@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 using static BusinessLogicLayer.Mappers.CommonMapper;
 
 namespace BusinessLogicLayer.Services
@@ -18,7 +19,7 @@ namespace BusinessLogicLayer.Services
             DocumentType = documentType;
         }
 
-        public async Task<bool> Create(DocumentType entity)
+        public async Task<StatusCode> Create(DocumentType entity)
         {
             var types = (await DocumentType.GetAll())
                 .FirstOrDefault(type => type.Name == entity.Name);
@@ -26,29 +27,33 @@ namespace BusinessLogicLayer.Services
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await DocumentType.Create(entity.ToEntity());
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(DocumentType entity)
+        public async Task<StatusCode> Update(DocumentType entity)
         {
             var type = await DocumentType.GetById(entity.Id);
             if (type != null)
             {
                 await DocumentType.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(DocumentType entity)
+        public async Task<StatusCode> Delete(DocumentType entity)
         {
             var type = await DocumentType.GetById(entity.Id);
             if (type != null)
             {
                 await DocumentType.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<DocumentType>> GetAll() =>

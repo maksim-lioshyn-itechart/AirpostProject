@@ -130,6 +130,7 @@
     <Folder Include="Programmability\Stored Procedures\GetByIds" />
     <Folder Include="Programmability\Stored Procedures\Inserts" />
     <Folder Include="Programmability\Stored Procedures\Updates" />
+    <Folder Include="Programmability\Stored Procedures\GetBy" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Users.sql">
@@ -253,10 +254,11 @@
     <Build Include="Programmability\Stored Procedures\GetByIds\GetAirlineByCountryId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetAirplanesByAirlineId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetAirportByCountryId.sql" />
-    <Build Include="Programmability\Stored Procedures\GetByIds\GetDocumentsByDocumentTypeId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetUserPasswordByUserId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetPassengerSeatsByAirplaneSchemaId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetFlightByAirplaneId.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetAirplaneBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetDocumentsBy.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />

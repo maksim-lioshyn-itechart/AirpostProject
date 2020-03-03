@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 using static BusinessLogicLayer.Mappers.CommonMapper;
 
 namespace BusinessLogicLayer.Services
@@ -18,7 +19,7 @@ namespace BusinessLogicLayer.Services
             AirplaneType = airplaneType;
         }
 
-        public async Task<bool> Create(AirplaneType entity)
+        public async Task<StatusCode> Create(AirplaneType entity)
         {
             var types = (await AirplaneType.GetAll())
                 .FirstOrDefault(type => type.Name == entity.Name);
@@ -26,29 +27,33 @@ namespace BusinessLogicLayer.Services
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await AirplaneType.Create(entity.ToEntity());
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(AirplaneType entity)
+        public async Task<StatusCode> Update(AirplaneType entity)
         {
             var type = await AirplaneType.GetById(entity.Id);
             if (type != null)
             {
                 await AirplaneType.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(AirplaneType entity)
+        public async Task<StatusCode> Delete(AirplaneType entity)
         {
             var type = await AirplaneType.GetById(entity.Id);
             if (type != null)
             {
                 await AirplaneType.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<AirplaneType>> GetAll() =>

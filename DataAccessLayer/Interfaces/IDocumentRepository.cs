@@ -7,6 +7,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IDocumentRepository : IBaseRepository<DocumentEntity>
     {
-        Task<IEnumerable<DocumentEntity>> GetDocumentsByDocumentTypeId(Guid documentTypeId, bool isActive = true);
+        Task<IEnumerable<DocumentEntity>> GetBy(Guid documentTypeId, bool isActive = true);
     }
 }

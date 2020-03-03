@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 
 namespace BusinessLogicLayer.Services
 {
@@ -23,7 +24,7 @@ namespace BusinessLogicLayer.Services
             UserPassword = userPassword;
         }
 
-        public async Task<bool> Create(User entity)
+        public async Task<StatusCode> Create(User entity)
         {
             var users = (await User.GetAll())
                 .FirstOrDefault(
@@ -35,24 +36,26 @@ namespace BusinessLogicLayer.Services
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await User.Create(entity.ToEntity());
             await UserPassword.Create(NewUserPassword(entity.Password, entity.Id));
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(User entity)
+        public async Task<StatusCode> Update(User entity)
         {
             var user = await User.GetById(entity.Id);
             if (user != null)
             {
                 await User.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(User entity)
+        public async Task<StatusCode> Delete(User entity)
         {
             var user = await User.GetById(entity.Id);
             var passwordInformation = await UserPassword.GetByUserId(entity.Id);
@@ -60,7 +63,9 @@ namespace BusinessLogicLayer.Services
             {
                 await UserPassword.Delete(passwordInformation.Id);
                 await User.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<User>> GetAll() =>

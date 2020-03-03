@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 using static BusinessLogicLayer.Mappers.CommonMapper;
 
 namespace BusinessLogicLayer.Services
@@ -18,7 +19,7 @@ namespace BusinessLogicLayer.Services
             Country = country;
         }
 
-        public async Task<bool> Create(Country entity)
+        public async Task<StatusCode> Create(Country entity)
         {
             var countries = (await Country.GetAll())
                 .FirstOrDefault(country => country.Name == entity.Name);
@@ -26,29 +27,33 @@ namespace BusinessLogicLayer.Services
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await Country.Create(entity.ToEntity());
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(Country entity)
+        public async Task<StatusCode> Update(Country entity)
         {
             var country = await Country.GetById(entity.Id);
             if (country != null)
             {
                 await Country.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(Country entity)
+        public async Task<StatusCode> Delete(Country entity)
         {
             var country = await Country.GetById(entity.Id);
             if (country != null)
             {
                 await Country.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<Country>> GetAll() =>

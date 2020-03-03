@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 using static BusinessLogicLayer.Mappers.CommonMapper;
 
 namespace BusinessLogicLayer.Services
@@ -18,7 +19,7 @@ namespace BusinessLogicLayer.Services
             UserRole = userRole;
         }
 
-        public async Task<bool> Create(UserRole entity)
+        public async Task<StatusCode> Create(UserRole entity)
         {
             var roles = (await UserRole.GetAll())
                 .FirstOrDefault(role => role.Name == entity.Name);
@@ -26,29 +27,33 @@ namespace BusinessLogicLayer.Services
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await UserRole.Create(entity.ToEntity());
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(UserRole entity)
+        public async Task<StatusCode> Update(UserRole entity)
         {
             var role = await UserRole.GetById(entity.Id);
             if (role != null)
             {
                 await UserRole.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(UserRole entity)
+        public async Task<StatusCode> Delete(UserRole entity)
         {
             var role = await UserRole.GetById(entity.Id);
             if (role != null)
             {
                 await UserRole.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<UserRole>> GetAll() =>
