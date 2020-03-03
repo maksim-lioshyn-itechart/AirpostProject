@@ -7,6 +7,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IAirplaneRepository : IBaseRepository<AirplaneEntity>
     {
-        Task<IEnumerable<AirplaneEntity>> GetAirplanesByAirlineId(Guid airlineId);
+        Task<IEnumerable<AirplaneEntity>> GetBy(Guid airlineId);
     }
 }

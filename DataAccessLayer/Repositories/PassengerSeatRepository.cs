@@ -50,7 +50,7 @@ namespace DataAccessLayer.Repositories
         public async Task<IEnumerable<PassengerSeatEntity>> GetBy(Guid airplaneSchemaId)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<PassengerSeatEntity>("GetPassengerSeatsByAirplaneSchemaId", new { airplaneSchemaId }, commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<PassengerSeatEntity>("GetPassengerSeatsBy", new { airplaneSchemaId }, commandType: CommandType.StoredProcedure);
         }
     }
 }

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetDocumentsBy]
+CREATE PROCEDURE [dbo].[GetDocumentBy]
     @DocumentTypeId UNIQUEIDENTIFIER = NULL,
     @IsActive BIT = NULL
 AS

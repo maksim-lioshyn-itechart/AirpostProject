@@ -212,7 +212,6 @@
     <Build Include="Programmability\Stored Procedures\GetByIds\GetDocumentTypeById.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetFlightById.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetOrderStatuseById.sql" />
-    <Build Include="Programmability\Stored Procedures\GetByIds\GetPassengerSeatById.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetTicketById.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetUserById.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetUserPasswordById.sql" />
@@ -251,14 +250,16 @@
     <Build Include="Programmability\Stored Procedures\Updates\UpdateUser.sql" />
     <Build Include="Programmability\Stored Procedures\Updates\UpdateUserPassword.sql" />
     <Build Include="Programmability\Stored Procedures\Updates\UpdateUserRole.sql" />
-    <Build Include="Programmability\Stored Procedures\GetByIds\GetAirlineByCountryId.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetAirplanesByAirlineId.sql" />
-    <Build Include="Programmability\Stored Procedures\GetByIds\GetAirportByCountryId.sql" />
-    <Build Include="Programmability\Stored Procedures\GetByIds\GetUserPasswordByUserId.sql" />
-    <Build Include="Programmability\Stored Procedures\GetByIds\GetPassengerSeatsByAirplaneSchemaId.sql" />
-    <Build Include="Programmability\Stored Procedures\GetByIds\GetFlightByAirplaneId.sql" />
     <Build Include="Programmability\Stored Procedures\GetBy\GetAirplaneBy.sql" />
-    <Build Include="Programmability\Stored Procedures\GetBy\GetDocumentsBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetDocumentBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetAirlineBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetAirportBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetUserPasswordBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetFlightBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetPassengerSeatsBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetByIds\GetPassengerSeatById.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetAirplaneSchemasBy.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />

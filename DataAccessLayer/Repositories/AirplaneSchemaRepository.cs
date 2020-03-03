@@ -32,7 +32,7 @@ namespace DataAccessLayer.Repositories
         public async Task<AirplaneSchemaEntity> GetBy(string name)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<AirplaneSchemaEntity>("GetAirplaneBy", new { name }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<AirplaneSchemaEntity>("GetAirplaneSchemasBy", new { name }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<AirplaneSchemaEntity>> GetAll()

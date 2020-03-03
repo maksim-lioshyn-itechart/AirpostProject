@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[GetAirplaneBy]
     @Id UNIQUEIDENTIFIER = NULL,
-    @Name NVARCHAR(50) = NULL
+    @AirlineId UNIQUEIDENTIFIER = NULL
 AS
 BEGIN
-    SELECT [Id], [Name]
-    FROM [dbo].[AirplaneSchemas]
+    SELECT [Id], [AirplaneSubTypeId], [AirplaneTypeId], [AirplaneSchemaId], [AirlineId], [Name], [CarryingCapacity]
+    FROM [dbo].[Airplanes]
     WHERE Id = COALESCE(@Id, [Id]) 
-        AND [Name] = COALESCE(@Name, [Name])
+        AND [AirlineId] = COALESCE(@AirlineId, [AirlineId])
 END
 GO

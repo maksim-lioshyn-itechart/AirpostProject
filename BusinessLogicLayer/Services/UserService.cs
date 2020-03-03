@@ -58,7 +58,7 @@ namespace BusinessLogicLayer.Services
         public async Task<StatusCode> Delete(User entity)
         {
             var user = await User.GetById(entity.Id);
-            var passwordInformation = await UserPassword.GetByUserId(entity.Id);
+            var passwordInformation = await UserPassword.GetBy(entity.Id);
             if (user != null)
             {
                 await UserPassword.Delete(passwordInformation.Id);
@@ -76,7 +76,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> ValidatePassword(Guid userId, string password)
         {
-            var userPassword = await UserPassword.GetByUserId(userId);
+            var userPassword = await UserPassword.GetBy(userId);
             return Validate(password, userPassword.Salt, userPassword.Hash);
         }
 

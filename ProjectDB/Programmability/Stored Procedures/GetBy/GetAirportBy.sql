@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetAirportByCountryId]
+CREATE PROCEDURE [dbo].[GetAirportBy]
     @CountryId UNIQUEIDENTIFIER
 AS
 BEGIN

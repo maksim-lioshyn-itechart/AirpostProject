@@ -22,7 +22,7 @@ namespace BusinessLogicLayer.Services
         public async Task<StatusCode> Create(Airplane entity)
         {
             var airplanes = 
-                (await Airplane.GetAirplanesByAirlineId(entity.AirlineId))
+                (await Airplane.GetBy(entity.AirlineId))
                 .FirstOrDefault(
                     airplane =>
                         airplane.Id == entity.Id
