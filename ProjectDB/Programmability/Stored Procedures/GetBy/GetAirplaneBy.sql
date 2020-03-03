@@ -4,7 +4,7 @@ CREATE PROCEDURE [dbo].[GetAirplaneBy]
     @AirplaneTypeId UNIQUEIDENTIFIER = NULL,
     @AirplaneSchemaId UNIQUEIDENTIFIER = NULL,
     @AirlineId UNIQUEIDENTIFIER = NULL,
-    @Name UNIQUEIDENTIFIER = NULL
+    @Name NVARCHAR(50) = NULL
 AS
 BEGIN
     SELECT [Id], [AirplaneSubTypeId], [AirplaneTypeId], [AirplaneSchemaId], [AirlineId], [Name], [CarryingCapacity]
