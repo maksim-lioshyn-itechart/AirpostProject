@@ -21,13 +21,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(Document entity)
         {
-            var documents = (await Document.GetBy(entity.DocumentTypeId))
-                .FirstOrDefault(
-                    document =>
-                        document.Id == entity.Id
-                        && document.DocumentTypeId == entity.DocumentTypeId
-                        && document.Name == entity.Name
-                        && document.Number == entity.Number);
+            var documents = (await Document.GetBy(entity.DocumentTypeId, entity.Name, entity.Number))
+                .FirstOrDefault();
             var isExist = documents != null;
 
             if (isExist)

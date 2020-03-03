@@ -46,10 +46,16 @@ namespace DataAccessLayer.Repositories
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteUserRole", new { id }, commandType: CommandType.StoredProcedure);
         }
-
+       
+        public async Task<IEnumerable<UserRoleEntity>> GetBy(string name)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QueryAsync<UserRoleEntity>("GetUserRolesBy", new { name }, commandType: CommandType.StoredProcedure);
+        }
         public void AssignUser(Guid userId, Guid roleId)
         {
             throw new NotImplementedException();
         }
+
     }
 }

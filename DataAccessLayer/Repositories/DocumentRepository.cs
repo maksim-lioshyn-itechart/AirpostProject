@@ -47,7 +47,12 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeleteDocument", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<DocumentEntity>> GetBy(Guid documentTypeId, bool isActive)
+        public async Task<IEnumerable<DocumentEntity>> GetBy(
+            Guid? documentTypeId = null,
+            string name = null,
+            string number = null,
+            bool isActive = true
+            )
         {
             using IDbConnection db = _configuration.GetConnection();
             return await db.QueryAsync<DocumentEntity>("GetDocumentBy", new { documentTypeId, isActive }, commandType: CommandType.StoredProcedure);

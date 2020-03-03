@@ -47,10 +47,20 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeletePassengerSeat", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<PassengerSeatEntity>> GetBy(Guid airplaneSchemaId)
+        public async Task<IEnumerable<PassengerSeatEntity>> GetBy(
+            Guid? airplaneSchemaId = null, Guid? classTypeId = null, 
+            string sector = null, int? floor = null,
+            int? row = null, int? seat = null, 
+            int? coordinateX1 = null, int? coordinateY1 = null, 
+            int? coordinateX2 = null, int? coordinateY2 = null
+            )
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<PassengerSeatEntity>("GetPassengerSeatsBy", new { airplaneSchemaId }, commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<PassengerSeatEntity>("GetPassengerSeatsBy", 
+                new { airplaneSchemaId, classTypeId, sector, floor, row, seat,
+                    coordinateX1, coordinateY1, coordinateX2, coordinateY2
+                }, 
+                commandType: CommandType.StoredProcedure);
         }
     }
 }

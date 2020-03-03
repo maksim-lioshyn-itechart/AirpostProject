@@ -15,6 +15,12 @@ namespace BusinessLogicLayer.Services
 {
     public class UserService : IUserService
     {
+        private const int SaltSizeBytes = 32;
+        // about values https://en.wikipedia.org/wiki/PBKDF2 . I get for IOS
+        private const int IterationCount = 10000;
+        //SHA-1 is 20 bytes, SHA-224 is 28 bytes, SHA-256 is 32 bytes, SHA-384 is 48 bytes, SHA-512 is 64 bytes
+        private const int NumBytesRequested = 32;
+
         private IUserRepository User { get; }
         private IUserPasswordRepository UserPassword { get; }
 
@@ -26,12 +32,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(User entity)
         {
-            var users = (await User.GetAll())
-                .FirstOrDefault(
-                    user =>
-                        user.Id == entity.Id
-                        && user.Email == entity.Email
-                        && user.Phone == entity.Phone);
+            var users = (await User.GetBy(entity.Email, entity.Phone)).FirstOrDefault();
             var isExist = users != null;
 
             if (isExist)
@@ -100,8 +101,7 @@ namespace BusinessLogicLayer.Services
 
         private static byte[] CreateSalt()
         {
-            var saltSizeBytes = 32;
-            var randomBytes = new byte[saltSizeBytes];
+            var randomBytes = new byte[SaltSizeBytes];
             using var generator = RandomNumberGenerator.Create();
             generator.GetBytes(randomBytes);
             return randomBytes;
@@ -110,18 +110,12 @@ namespace BusinessLogicLayer.Services
         public static bool Validate(string value, byte[] salt, byte[] hash) =>
             GetUserPassword(value, salt).SequenceEqual(hash);
 
-        private static byte[] GetUserPassword(string password, byte[] salt)
-        {
-            // about values https://en.wikipedia.org/wiki/PBKDF2 . I get for IOS
-            var iterationCount = 10000;
-            //SHA-1 is 20 bytes, SHA-224 is 28 bytes, SHA-256 is 32 bytes, SHA-384 is 48 bytes, SHA-512 is 64 bytes
-            var numBytesRequested = 32;
-            return KeyDerivation.Pbkdf2(
+        private static byte[] GetUserPassword(string password, byte[] salt) =>
+            KeyDerivation.Pbkdf2(
                 password: password,
                 salt: salt,
                 prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: iterationCount,
-                numBytesRequested: numBytesRequested);
-        }
+                iterationCount: IterationCount,
+                numBytesRequested: NumBytesRequested);
     }
 }

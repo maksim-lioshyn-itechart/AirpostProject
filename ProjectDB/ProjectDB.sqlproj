@@ -260,6 +260,15 @@
     <Build Include="Programmability\Stored Procedures\GetBy\GetPassengerSeatsBy.sql" />
     <Build Include="Programmability\Stored Procedures\GetByIds\GetPassengerSeatById.sql" />
     <Build Include="Programmability\Stored Procedures\GetBy\GetAirplaneSchemasBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetAllAirplaneSubTypesBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetAirplaneTypesBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetClassTypeBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetCountriesBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetDocumentTypesBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetOrderStatusesBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetTicketsBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetUserRolesBy.sql" />
+    <Build Include="Programmability\Stored Procedures\GetBy\GetUserBy.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.InitialData.sql" />

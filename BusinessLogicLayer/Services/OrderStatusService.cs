@@ -21,8 +21,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(OrderStatus entity)
         {
-            var statuses = (await OrderStatus.GetAll())
-                .FirstOrDefault(status => status.Name == entity.Name);
+            var statuses = (await OrderStatus.GetBy(entity.Name)).FirstOrDefault();
             var isExist = statuses != null;
 
             if (isExist)
