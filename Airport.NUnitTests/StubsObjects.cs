@@ -9,18 +9,7 @@ namespace AirportProject.NUnitTests
         {
             Id = Guid.NewGuid(),
             Name = Guid.NewGuid().ToString(),
-            Code = Guid.NewGuid().ToString().Substring(0, 2)
-        };
-
-        public static Airline Airline = new Airline()
-        {
-            Id = Guid.NewGuid(),
-            Email = Guid.NewGuid().ToString(),
-            Name = Guid.NewGuid().ToString(),
-            Address = Guid.NewGuid().ToString(),
-            Phone = Guid.NewGuid().ToString().Substring(0, 8),
-            Url = Guid.NewGuid().ToString(),
-            CountryId = Country.Id
+            Code = Guid.NewGuid().ToString().Substring(0, 4)
         };
 
         public static AirplaneSchema AirplaneSchema = new AirplaneSchema()
@@ -56,7 +45,7 @@ namespace AirportProject.NUnitTests
         public static OrderStatus OrderStatus = new OrderStatus()
         {
             Id = Guid.NewGuid(),
-            Name = Guid.NewGuid().ToString().Substring(0,8)
+            Name = Guid.NewGuid().ToString().Substring(0, 8)
         };
 
         public static UserRole UserRole = new UserRole()
@@ -65,15 +54,17 @@ namespace AirportProject.NUnitTests
             Name = Guid.NewGuid().ToString()
         };
 
-        public static Airplane Airplane = new Airplane
+
+
+        public static Airline Airline = new Airline()
         {
             Id = Guid.NewGuid(),
-            AirlineId = Airline.Id,
-            AirplaneSchemaId = AirplaneSchema.Id,
-            AirplaneSubTypeId = AirplaneSubType.Id,
-            AirplaneTypeId = AirplaneType.Id,
-            CarryingCapacity = 100,
-            Name = Guid.NewGuid().ToString().Substring(0, 4)
+            Email = Guid.NewGuid().ToString(),
+            Name = Guid.NewGuid().ToString(),
+            Address = Guid.NewGuid().ToString(),
+            Phone = Guid.NewGuid().ToString().Substring(0, 8),
+            Url = Guid.NewGuid().ToString(),
+            CountryId = Country.Id
         };
 
         public static Airport Airport = new Airport()
@@ -120,6 +111,19 @@ namespace AirportProject.NUnitTests
             CoordinateY2 = 0
         };
 
+
+        public static Airplane Airplane = new Airplane
+        {
+            Id = Guid.NewGuid(),
+            AirlineId = Airline.Id,
+            AirplaneSchemaId = AirplaneSchema.Id,
+            AirplaneSubTypeId = AirplaneSubType.Id,
+            AirplaneTypeId = AirplaneType.Id,
+            CarryingCapacity = 100,
+            Name = Guid.NewGuid().ToString().Substring(0, 4)
+        };
+
+        
         public static Flight Flight = new Flight
         {
             Id = Guid.NewGuid(),

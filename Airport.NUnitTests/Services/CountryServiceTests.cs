@@ -3,7 +3,6 @@ using System.Linq;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
-using DataAccessLayer.Tests;
 using NUnit.Framework;
 
 namespace AirportProject.NUnitTests.Services

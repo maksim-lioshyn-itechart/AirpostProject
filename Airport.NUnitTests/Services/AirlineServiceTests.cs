@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using BusinessLogicLayer.Interfaces;
+using BusinessLogicLayer.Mappers;
 using BusinessLogicLayer.Models;
 using BusinessLogicLayer.Services;
-using DataAccessLayer.Tests;
 using NUnit.Framework;
 
 namespace AirportProject.NUnitTests.Services
@@ -22,7 +22,7 @@ namespace AirportProject.NUnitTests.Services
         [Order(0)]
         public void CreateTest()
         {
-            TestHelper.CreateEntitiesForAirportService();
+            TestHelper.CreateAllDictionaryEntities();
             Assert.IsTrue(_testEntityService.Create(_entityBm).Result == BusinessLogicLayer.enums.StatusCode.Created);
             Assert.IsFalse(_testEntityService.Create(_entityBm).Result == BusinessLogicLayer.enums.StatusCode.Created);
         }
@@ -57,8 +57,9 @@ namespace AirportProject.NUnitTests.Services
         [Order(100)]
         public void DeleteTest()
         {
-            TestHelper.DeleteEntitiesForAirportService();
+            
             _testEntityService.Delete(_entityBm).Wait();
+            TestHelper.DeleteAllDictionaryEntities();
         }
     }
 }

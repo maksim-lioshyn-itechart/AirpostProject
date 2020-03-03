@@ -1,9 +1,9 @@
-﻿using AirportProject.NUnitTests;
-using BusinessLogicLayer.Mappers;
+﻿using BusinessLogicLayer.Mappers;
+using BusinessLogicLayer.Models;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
 
-namespace DataAccessLayer.Tests
+namespace AirportProject.NUnitTests
 {
     public static class TestHelper
     {
@@ -26,105 +26,82 @@ namespace DataAccessLayer.Tests
         public static IUserRepository User = new UserRepository(Test);
         public static IUserRoleRepository UserRole = new UserRoleRepository(Test);
 
-
-        public static void CreateEntitiesForAirportService()
+        public static void CreateAllDictionaryEntities()
         {
-            Country.Create(StubsObjects.Country.ToEntity());
-        }
-
-        public static void DeleteEntitiesForAirportService()
-        {
-            Country.Delete(StubsObjects.Country.Id);
-        }
-
-        public static void CreateEntitiesForAirplaneService()
-        {
-            CreateEntitiesForAirportService();
             AirplaneSchema.Create(StubsObjects.AirplaneSchema.ToEntity());
-            AirplaneType.Create(StubsObjects.AirplaneType.ToEntity());
             AirplaneSubType.Create(StubsObjects.AirplaneSubType.ToEntity());
-            Airline.Create(StubsObjects.Airline.ToEntity());
-        }
-
-        public static void DeleteEntitiesForAirplaneService()
-        {
-            DeleteEntitiesForAirportService();
-            AirplaneSchema.Delete(StubsObjects.AirplaneSchema.Id);
-            AirplaneType.Delete(StubsObjects.AirplaneType.Id);
-            AirplaneSubType.Delete(StubsObjects.AirplaneSubType.Id);
-            Airline.Delete(StubsObjects.Airline.Id);
-        }
-
-        public static void CreateEntitiesForDocumentService()
-        {
+            AirplaneType.Create(StubsObjects.AirplaneType.ToEntity());
+            ClassType.Create(StubsObjects.ClassType.ToEntity());
+            Country.Create(StubsObjects.Country.ToEntity());
             DocumentType.Create(StubsObjects.DocumentType.ToEntity());
-        }
-
-        public static void DeleteEntitiesForDocumentService()
-        {
-            DocumentType.Delete(StubsObjects.DocumentType.Id);
-        }
-
-        public static void CreateEntitiesForUserService()
-        {
+            OrderStatus.Create(StubsObjects.OrderStatus.ToEntity());
             UserRole.Create(StubsObjects.UserRole.ToEntity());
         }
 
-        public static void DeleteEntitiesForUserService()
-        {
-            UserRole.Delete(StubsObjects.UserRole.Id);
-        }
-        public static void CreateEntitiesForPassengerSeatService()
-        {
-            AirplaneSchema.Create(StubsObjects.AirplaneSchema.ToEntity());
-            ClassType.Create(StubsObjects.ClassType.ToEntity());
-        }
-
-        public static void DeleteEntitiesForPassengerSeatService()
+        public static void DeleteAllDictionaryEntities()
         {
             AirplaneSchema.Delete(StubsObjects.AirplaneSchema.Id);
+            AirplaneSubType.Delete(StubsObjects.AirplaneSubType.Id);
+            AirplaneType.Delete(StubsObjects.AirplaneType.Id);
             ClassType.Delete(StubsObjects.ClassType.Id);
-        }
-
-        public static void CreateEntitiesForFlightService()
-        {
-            CreateEntitiesForAirplaneService();
-            CreateEntitiesForAirportService();
-            Airplane.Create(StubsObjects.Airplane.ToEntity());
-            Airport.Create(StubsObjects.Airport.ToEntity());
-
-        }
-
-        public static void DeleteEntitiesForFlightService()
-        {
-            DeleteEntitiesForAirplaneService();
-            DeleteEntitiesForAirportService();
-            Airplane.Delete(StubsObjects.Airplane.Id);
-            Airport.Delete(StubsObjects.Airport.Id);
-        }
-
-        public static void CreateEntitiesForTicketService()
-        {
-            CreateEntitiesForFlightService();
-            CreateEntitiesForDocumentService();
-
-            Flight.Create(StubsObjects.Flight.ToEntity()).Wait();
-
-            ClassType.Create(StubsObjects.ClassType.ToEntity());
-            PassengerSeat.Create(StubsObjects.PassengerSeat.ToEntity());
-            OrderStatus.Create(StubsObjects.OrderStatus.ToEntity());
-            Document.Create(StubsObjects.Document.ToEntity());
-        }
-
-        public static void DeleteEntitiesForTicketService()
-        {
-            DeleteEntitiesForFlightService();
-            DeleteEntitiesForDocumentService();
-            Flight.Delete(StubsObjects.Flight.Id);
-            ClassType.Delete(StubsObjects.ClassType.Id);
-            PassengerSeat.Delete(StubsObjects.PassengerSeat.Id);
+            Country.Delete(StubsObjects.Country.Id);
+            DocumentType.Delete(StubsObjects.DocumentType.Id);
             OrderStatus.Delete(StubsObjects.OrderStatus.Id);
-            Document.Delete(StubsObjects.Document.Id);
+            UserRole.Delete(StubsObjects.UserRole.Id);
         }
+
+
+        public static void CreateAllEntities(object o)
+        {
+            CreateAllDictionaryEntities();
+
+            if (o is Airplane)
+            {
+                Airline.Create(StubsObjects.Airline.ToEntity());
+            }
+            else if (o is Flight)
+            {
+                Airline.Create(StubsObjects.Airline.ToEntity());
+                Airplane.Create(StubsObjects.Airplane.ToEntity());
+                Airport.Create(StubsObjects.Airport.ToEntity());
+            }
+            else
+            {
+                Airline.Create(StubsObjects.Airline.ToEntity());
+                Airplane.Create(StubsObjects.Airplane.ToEntity());
+                Airport.Create(StubsObjects.Airport.ToEntity());
+                Document.Create(StubsObjects.Document.ToEntity());
+                Flight.Create(StubsObjects.Flight.ToEntity());
+                PassengerSeat.Create(StubsObjects.PassengerSeat.ToEntity());
+            }
+        }
+
+        public static void DeleteAllEntities(object o)
+        {
+            
+
+            if (o is Airplane)
+            {
+                Airline.Delete(StubsObjects.Airline.Id);
+            }
+            else if (o is Flight)
+            {
+                Airline.Delete(StubsObjects.Airline.Id);
+                Airplane.Delete(StubsObjects.Airplane.Id);
+                Airport.Delete(StubsObjects.Airport.Id);
+            }
+            else
+            {
+                Airline.Delete(StubsObjects.Airline.Id);
+                Airplane.Delete(StubsObjects.Airplane.Id);
+                Airport.Delete(StubsObjects.Airport.Id);
+                Document.Delete(StubsObjects.Document.Id);
+                Flight.Delete(StubsObjects.Flight.Id);
+                PassengerSeat.Delete(StubsObjects.PassengerSeat.Id);
+            }
+
+            DeleteAllDictionaryEntities();
+        }
+
     }
 }
