@@ -50,7 +50,7 @@ namespace DataAccessLayer.Repositories
         public async Task<IEnumerable<DocumentEntity>> GetBy(Guid documentTypeId, bool isActive)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<DocumentEntity>("GetBy", new { documentTypeId, isActive }, commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<DocumentEntity>("GetDocumentBy", new { documentTypeId, isActive }, commandType: CommandType.StoredProcedure);
         }
     }
 }

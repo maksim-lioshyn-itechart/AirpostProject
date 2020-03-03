@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetFlightByAirplaneId]
+CREATE PROCEDURE [dbo].[GetFlightBy]
     @AirplaneId UNIQUEIDENTIFIER
 AS
 BEGIN

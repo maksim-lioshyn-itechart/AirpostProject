@@ -6,6 +6,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IUserPasswordRepository : IBaseRepository<UserPasswordEntity>
     {
-        Task<UserPasswordEntity> GetByUserId(Guid userId);
+        Task<UserPasswordEntity> GetBy(Guid userId);
     }
 }

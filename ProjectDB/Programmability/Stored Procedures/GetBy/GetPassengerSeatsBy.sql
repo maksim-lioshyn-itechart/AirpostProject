@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetPassengerSeatsByAirplaneSchemaId]
+CREATE PROCEDURE [dbo].[GetPassengerSeatsBy]
     @AirplaneSchemaId UNIQUEIDENTIFIER
 AS
 BEGIN

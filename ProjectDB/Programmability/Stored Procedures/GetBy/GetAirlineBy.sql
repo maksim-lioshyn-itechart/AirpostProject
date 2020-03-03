@@ -1,5 +1,5 @@
-CREATE PROCEDURE [dbo].[GetAirlineByCountryId]
-    @CountryId UNIQUEIDENTIFIER
+CREATE PROCEDURE [dbo].[GetAirlineBy]
+    @CountryId UNIQUEIDENTIFIER = NULL
 AS
 BEGIN
     SELECT [Id], [Name], [Email], [Phone], [Address], [URL], [CountryId]
