@@ -21,7 +21,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(AirplaneSchema entity)
         {
-            var schemas = await AirplaneSchema.GetBy(entity.Name);
+            var schemas = (await AirplaneSchema.GetBy(entity.Name)).FirstOrDefault();
             var isExist = schemas != null;
 
             if (isExist)
