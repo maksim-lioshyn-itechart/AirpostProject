@@ -23,8 +23,8 @@ namespace AirportProject.NUnitTests.Services
         public void CreateTest()
         {
             TestHelper.CreateEntitiesForAirportService();
-            Assert.IsTrue(_testEntityService.Create(_entityBm).Result);
-            Assert.IsFalse(_testEntityService.Create(_entityBm).Result);
+            Assert.IsTrue(_testEntityService.Create(_entityBm).Result == BusinessLogicLayer.enums.StatusCode.Created);
+            Assert.IsFalse(_testEntityService.Create(_entityBm).Result == BusinessLogicLayer.enums.StatusCode.AlreadyExists);
         }
 
         [Test()]
