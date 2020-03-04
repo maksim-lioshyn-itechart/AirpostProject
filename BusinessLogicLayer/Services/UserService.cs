@@ -9,11 +9,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 
 namespace BusinessLogicLayer.Services
 {
     public class UserService : IUserService
     {
+        private const int SaltSizeBytes = 32;
+        // about values https://en.wikipedia.org/wiki/PBKDF2 . I get for IOS
+        private const int IterationCount = 10000;
+        //SHA-1 is 20 bytes, SHA-224 is 28 bytes, SHA-256 is 32 bytes, SHA-384 is 48 bytes, SHA-512 is 64 bytes
+        private const int NumBytesRequested = 32;
+
         private IUserRepository User { get; }
         private IUserPasswordRepository UserPassword { get; }
 
@@ -23,44 +30,43 @@ namespace BusinessLogicLayer.Services
             UserPassword = userPassword;
         }
 
-        public async Task<bool> Create(User entity)
+        public async Task<StatusCode> Create(User entity)
         {
-            var users = (await User.GetAll())
-                .FirstOrDefault(
-                    user =>
-                        user.Id == entity.Id
-                        && user.Email == entity.Email
-                        && user.Phone == entity.Phone);
+            var users = await User.GetBy(entity.Email, entity.Phone);
             var isExist = users != null;
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await User.Create(entity.ToEntity());
             await UserPassword.Create(NewUserPassword(entity.Password, entity.Id));
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(User entity)
+        public async Task<StatusCode> Update(User entity)
         {
             var user = await User.GetById(entity.Id);
             if (user != null)
             {
                 await User.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(User entity)
+        public async Task<StatusCode> Delete(User entity)
         {
             var user = await User.GetById(entity.Id);
-            var passwordInformation = await UserPassword.GetByUserId(entity.Id);
+            var passwordInformation = await UserPassword.GetBy(entity.Id);
             if (user != null)
             {
                 await UserPassword.Delete(passwordInformation.Id);
                 await User.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<User>> GetAll() =>
@@ -71,7 +77,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> ValidatePassword(Guid userId, string password)
         {
-            var userPassword = await UserPassword.GetByUserId(userId);
+            var userPassword = await UserPassword.GetBy(userId);
             return Validate(password, userPassword.Salt, userPassword.Hash);
         }
 
@@ -95,8 +101,7 @@ namespace BusinessLogicLayer.Services
 
         private static byte[] CreateSalt()
         {
-            var saltSizeBytes = 32;
-            var randomBytes = new byte[saltSizeBytes];
+            var randomBytes = new byte[SaltSizeBytes];
             using var generator = RandomNumberGenerator.Create();
             generator.GetBytes(randomBytes);
             return randomBytes;
@@ -105,18 +110,12 @@ namespace BusinessLogicLayer.Services
         public static bool Validate(string value, byte[] salt, byte[] hash) =>
             GetUserPassword(value, salt).SequenceEqual(hash);
 
-        private static byte[] GetUserPassword(string password, byte[] salt)
-        {
-            // about values https://en.wikipedia.org/wiki/PBKDF2 . I get for IOS
-            var iterationCount = 10000;
-            //SHA-1 is 20 bytes, SHA-224 is 28 bytes, SHA-256 is 32 bytes, SHA-384 is 48 bytes, SHA-512 is 64 bytes
-            var numBytesRequested = 32;
-            return KeyDerivation.Pbkdf2(
+        private static byte[] GetUserPassword(string password, byte[] salt) =>
+            KeyDerivation.Pbkdf2(
                 password: password,
                 salt: salt,
                 prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: iterationCount,
-                numBytesRequested: numBytesRequested);
-        }
+                iterationCount: IterationCount,
+                numBytesRequested: NumBytesRequested);
     }
 }

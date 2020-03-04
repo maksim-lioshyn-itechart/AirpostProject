@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 using static BusinessLogicLayer.Mappers.CommonMapper;
 
 namespace BusinessLogicLayer.Services
@@ -18,37 +19,41 @@ namespace BusinessLogicLayer.Services
             Airline = airline;
         }
 
-        public async Task<bool> Create(Airline entity)
+        public async Task<StatusCode> Create(Airline entity)
         {
-            var airlineEntity = (await Airline.GetAirlineByCountryId(entity.CountryId))
-                .FirstOrDefault(airline => airline.Email == entity.Email);
+            var airlineEntity = await Airline.GetBy(entity.Email, entity.CountryId);
             var isExist = airlineEntity != null;
             
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await Airline.Create(entity.ToEntity());
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(Airline entity)
+        public async Task<StatusCode> Update(Airline entity)
         {
             var airline = await Airline.GetById(entity.Id);
             if (airline != null)
             {
                 await Airline.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(Airline entity)
+        public async Task<StatusCode> Delete(Airline entity)
         {
             var airline = await Airline.GetById(entity.Id);
             if (airline != null)
             {
                 await Airline.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<Airline>> GetAll() =>

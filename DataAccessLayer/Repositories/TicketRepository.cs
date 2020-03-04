@@ -46,5 +46,11 @@ namespace DataAccessLayer.Repositories
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteTicket", new { id }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<TicketEntity> GetBy(string ticketNumber)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<TicketEntity>("GetTicketsBy", new { ticketNumber}, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 
 namespace BusinessLogicLayer.Services
 {
@@ -18,40 +19,40 @@ namespace BusinessLogicLayer.Services
             Ticket = ticket;
         }
 
-        public async Task<bool> Create(Ticket entity)
+        public async Task<StatusCode> Create(Ticket entity)
         {
-            var tickets = (await Ticket.GetAll())
-                .FirstOrDefault(
-                    ticket =>
-                        ticket.Id == entity.Id
-                        && ticket.TicketNumber == entity.TicketNumber);
+            var tickets = await Ticket.GetBy(entity.TicketNumber);
             var isExist = tickets != null;
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
             await Ticket.Create(entity.ToEntity());
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(Ticket entity)
+        public async Task<StatusCode> Update(Ticket entity)
         {
             var ticket = await Ticket.GetById(entity.Id);
             if (ticket != null)
             {
                 await Ticket.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(Ticket entity)
+        public async Task<StatusCode> Delete(Ticket entity)
         {
             var ticket = await Ticket.GetById(entity.Id);
             if (ticket != null)
             {
                 await Ticket.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<Ticket>> GetAll() =>

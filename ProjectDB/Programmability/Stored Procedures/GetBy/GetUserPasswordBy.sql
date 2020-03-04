@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetUserPasswordByUserId]
+CREATE PROCEDURE [dbo].[GetUserPasswordBy]
     @UserId UNIQUEIDENTIFIER
 AS
 BEGIN

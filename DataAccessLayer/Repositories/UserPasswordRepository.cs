@@ -47,10 +47,10 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeleteUserPassword", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<UserPasswordEntity> GetByUserId(Guid userId)
+        public async Task<UserPasswordEntity> GetBy(Guid userId)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleAsync<UserPasswordEntity>("GetUserPasswordByUserId", new { userId }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleAsync<UserPasswordEntity>("GetUserPasswordBy", new { userId }, commandType: CommandType.StoredProcedure);
         }
     }
 }

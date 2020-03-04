@@ -46,5 +46,11 @@ namespace DataAccessLayer.Repositories
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteUser", new { id }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<UserEntity> GetBy(string email, string phone)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<UserEntity>("GetUserBy", new { email, phone }, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.enums;
 
 namespace BusinessLogicLayer.Services
 {
@@ -18,45 +19,47 @@ namespace BusinessLogicLayer.Services
             Flight = flight;
         }
 
-        public async Task<bool> Create(Flight entity)
+        public async Task<StatusCode> Create(Flight entity)
         {
-            var flights = (await Flight.GetFlightByAirplaneId(entity.AirplaneId))
-                          .FirstOrDefault(
-                              flight =>
-                                  flight.Id == entity.Id
-                                  && flight.DestinationAirportId == entity.DestinationAirportId
-                                  && flight.DepartureAirportId == entity.DepartureAirportId
-                                  && flight.ArrivalTimeUtc == entity.ArrivalTimeUtc);
+            var flights = await Flight.GetBy(
+                entity.AirplaneId,
+                entity.DestinationAirportId,
+                entity.DepartureAirportId,
+                TruncateSeconds(entity.ArrivalTimeUtc));
             var isExist = flights != null;
 
             if (isExist)
             {
-                return false;
+                return StatusCode.AlreadyExists;
             }
 
-            entity.ArrivalTimeUtc = ConvertToDateTime(entity.ArrivalTimeUtc);
-            entity.DepartureTimeUtc = ConvertToDateTime(entity.DepartureTimeUtc);
+            entity.ArrivalTimeUtc = TruncateSeconds(entity.ArrivalTimeUtc);
+            entity.DepartureTimeUtc = TruncateSeconds(entity.DepartureTimeUtc);
 
             await Flight.Create(entity.ToEntity());
-            return true;
+            return StatusCode.Created;
         }
 
-        public async Task Update(Flight entity)
+        public async Task<StatusCode> Update(Flight entity)
         {
             var flight = await Flight.GetById(entity.Id);
             if (flight != null)
             {
                 await Flight.Update(entity.ToEntity());
+                return StatusCode.Updated;
             }
+            return StatusCode.DoesNotExist;
         }
 
-        public async Task Delete(Flight entity)
+        public async Task<StatusCode> Delete(Flight entity)
         {
             var flight = await Flight.GetById(entity.Id);
             if (flight != null)
             {
                 await Flight.Delete(entity.Id);
+                return StatusCode.Deleted;
             }
+            return StatusCode.DoesNotExist;
         }
 
         public async Task<IEnumerable<Flight>> GetAll() =>
@@ -65,7 +68,7 @@ namespace BusinessLogicLayer.Services
         public async Task<Flight> GetById(Guid id) =>
             (await Flight.GetById(id))?.ToModel();
 
-        private DateTime ConvertToDateTime(DateTime date) =>
+        private DateTime TruncateSeconds(DateTime date) =>
             new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0);
     }
 }

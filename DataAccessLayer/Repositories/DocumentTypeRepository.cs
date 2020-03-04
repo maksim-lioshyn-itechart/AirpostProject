@@ -46,5 +46,11 @@ namespace DataAccessLayer.Repositories
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteDocumentType", new { id }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<DocumentTypeEntity> GetBy(string name)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<DocumentTypeEntity>("GetDocumentTypesBy", new { name }, commandType: CommandType.StoredProcedure);
+        }
     }
 }
