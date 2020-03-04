@@ -47,10 +47,10 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeleteClassType", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<ClassTypeEntity>> GetBy(string name)
+        public async Task<ClassTypeEntity> GetBy(string name)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<ClassTypeEntity>("GetClassTypeBy", new { name }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<ClassTypeEntity>("GetClassTypeBy", new { name }, commandType: CommandType.StoredProcedure);
         }
     }
 }

@@ -6,6 +6,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface ICountryRepository : IBaseRepository<CountryEntity>
     {
-        Task<IEnumerable<CountryEntity>> GetBy(string name);
+        Task<CountryEntity> GetBy(string name);
     }
 }

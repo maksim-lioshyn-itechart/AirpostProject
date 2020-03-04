@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[UpdateAirplane]
     @AirplaneSchemaId UNIQUEIDENTIFIER,
     @AirlineId UNIQUEIDENTIFIER,
     @Name NVARCHAR(50),
+    @SerialNumber NVARCHAR(50),
     @CarryingCapacity DECIMAL
 AS
 BEGIN
@@ -15,6 +16,7 @@ BEGIN
         [AirplaneSchemaId] = @AirplaneSchemaId,
         [AirlineId] = @AirlineId,
         [Name] = @Name,
+        [SerialNumber] = @SerialNumber,
         [CarryingCapacity] = @CarryingCapacity
     WHERE Id = @Id
 END

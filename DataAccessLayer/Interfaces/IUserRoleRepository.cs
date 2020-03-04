@@ -8,6 +8,6 @@ namespace DataAccessLayer.Interfaces
     public interface IUserRoleRepository : IBaseRepository<UserRoleEntity>
     {
         void AssignUser(Guid userId, Guid roleId);
-        Task<IEnumerable<UserRoleEntity>> GetBy(string name);
+        Task<UserRoleEntity> GetBy(string name);
     }
 }

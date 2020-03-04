@@ -12,5 +12,11 @@ namespace DataAccessLayer.Interfaces
             string name = null,
             string number = null,
             bool isActive = true);
+
+        Task<DocumentEntity> GetBy(
+            Guid documentTypeId,
+            string name,
+            string number,
+            bool isActive = true);
     }
 }

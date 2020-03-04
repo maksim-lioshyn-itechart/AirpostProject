@@ -57,5 +57,11 @@ namespace DataAccessLayer.Repositories
             using IDbConnection db = _configuration.GetConnection();
             return await db.QueryAsync<DocumentEntity>("GetDocumentBy", new { documentTypeId, isActive }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<DocumentEntity> GetBy(Guid documentTypeId, string name, string number, bool isActive = true)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<DocumentEntity>("GetDocumentBy", new { documentTypeId, isActive }, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -6,6 +6,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IOrderStatusRepository : IBaseRepository<OrderStatusEntity>
     {
-        Task<IEnumerable<OrderStatusEntity>> GetBy(string name);
+        Task<OrderStatusEntity> GetBy(string name);
     }
 }

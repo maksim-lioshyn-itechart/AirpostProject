@@ -9,6 +9,7 @@ namespace BusinessLogicLayer.Models
         public Guid AirplaneSchemaId { get; set; }
         public Guid AirlineId { get; set; }
         public string Name { get; set; }
+        public string SerialNumber { get; set; }
         public decimal CarryingCapacity { get; set; }
     }
 }
