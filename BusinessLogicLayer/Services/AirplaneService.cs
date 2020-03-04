@@ -40,6 +40,9 @@ namespace BusinessLogicLayer.Services
             {
                 await Airplane.Update(entity.ToEntity());
                 return StatusCode.Updated;
+            } else if (entity.CarryingCapacity <= 0)
+            {
+                return StatusCode.IncorrectData;
             }
             return StatusCode.DoesNotExist;
         }

@@ -10,7 +10,7 @@ AS
 BEGIN
     SELECT [Id], [AirplaneSubTypeId], [AirplaneTypeId], [AirplaneSchemaId], [AirlineId], [Name], [CarryingCapacity], [SerialNumber]
     FROM [dbo].[Airplanes]
-    WHERE Id = COALESCE(@Id, [Id]) 
+    WHERE [Id] = COALESCE(@Id, [Id]) 
         AND [AirlineId] = COALESCE(@AirlineId, [AirlineId])
         AND [AirplaneSubTypeId] = COALESCE(@AirplaneSubTypeId, [AirplaneSubTypeId])
         AND [AirplaneTypeId] = COALESCE(@AirplaneTypeId, [AirplaneTypeId])

@@ -5,7 +5,7 @@ AS
 BEGIN
     SELECT [Id], [Name]
     FROM [dbo].[AirplaneSchemas]
-    WHERE Id = COALESCE(@Id, [Id]) 
+    WHERE [Id] = COALESCE(@Id, [Id]) 
         AND [Name] = COALESCE(@Name, [Name])
 END
 GO

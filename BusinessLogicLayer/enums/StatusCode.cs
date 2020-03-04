@@ -7,6 +7,7 @@
         Updated = 2,
         Deleted = 3,
         AlreadyExists = 4,
-        DoesNotExist = 5
+        DoesNotExist = 5,
+        IncorrectData = 6
     }
 }
