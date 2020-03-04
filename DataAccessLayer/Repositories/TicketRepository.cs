@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(Ticket entity)
+        public async Task Create(TicketEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertTicket", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<Ticket> GetById(Guid id)
+        public async Task<TicketEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<Ticket>("GetTicketById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<TicketEntity>("GetTicketById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Ticket>> GetAll()
+        public async Task<IEnumerable<TicketEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Ticket>("GetAllTickets", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<TicketEntity>("GetAllTickets", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(Ticket entity)
+        public async Task Update(TicketEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateTicket", entity, commandType: CommandType.StoredProcedure);
@@ -45,6 +45,12 @@ namespace DataAccessLayer.Repositories
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteTicket", new { id }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<TicketEntity> GetBy(string ticketNumber)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<TicketEntity>("GetTicketsBy", new { ticketNumber}, commandType: CommandType.StoredProcedure);
         }
     }
 }

@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(ClassType entity)
+        public async Task Create(ClassTypeEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertClassType", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<ClassType> GetById(Guid id)
+        public async Task<ClassTypeEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<ClassType>("GetClassTypeById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<ClassTypeEntity>("GetClassTypeById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<ClassType>> GetAll()
+        public async Task<IEnumerable<ClassTypeEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<ClassType>("GetAllClassTypes", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<ClassTypeEntity>("GetAllClassTypes", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(ClassType entity)
+        public async Task Update(ClassTypeEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateClassType", entity, commandType: CommandType.StoredProcedure);
@@ -45,6 +45,12 @@ namespace DataAccessLayer.Repositories
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteClassType", new { id }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<ClassTypeEntity> GetBy(string name)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<ClassTypeEntity>("GetClassTypeBy", new { name }, commandType: CommandType.StoredProcedure);
         }
     }
 }

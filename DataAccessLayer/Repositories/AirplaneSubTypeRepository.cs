@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(AirplaneSubType entity)
+        public async Task Create(AirplaneSubTypeEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertAirplaneSubType", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<AirplaneSubType> GetById(Guid id)
+        public async Task<AirplaneSubTypeEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<AirplaneSubType>("GetAirplaneSubTypeById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<AirplaneSubTypeEntity>("GetAirplaneSubTypeById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<AirplaneSubType>> GetAll()
+        public async Task<IEnumerable<AirplaneSubTypeEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<AirplaneSubType>("GetAllAirplaneSubTypes", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<AirplaneSubTypeEntity>("GetAllAirplaneSubTypes", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(AirplaneSubType entity)
+        public async Task Update(AirplaneSubTypeEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateAirplaneSubType", entity, commandType: CommandType.StoredProcedure);
@@ -45,6 +45,12 @@ namespace DataAccessLayer.Repositories
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteAirplaneSubType", new { id }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<AirplaneSubTypeEntity> GetBy(string name)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<AirplaneSubTypeEntity>("GetAllAirplaneSubTypesBy", new { name }, commandType: CommandType.StoredProcedure);
         }
     }
 }

@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(UserRole entity)
+        public async Task Create(UserRoleEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertUserRole", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<UserRole> GetById(Guid id)
+        public async Task<UserRoleEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<UserRole>("GetUserRoleById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<UserRoleEntity>("GetUserRoleById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<UserRole>> GetAll()
+        public async Task<IEnumerable<UserRoleEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<UserRole>("GetAllUserRoles", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<UserRoleEntity>("GetAllUserRoles", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(UserRole entity)
+        public async Task Update(UserRoleEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateUserRole", entity, commandType: CommandType.StoredProcedure);
@@ -46,10 +46,16 @@ namespace DataAccessLayer.Repositories
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteUserRole", new { id }, commandType: CommandType.StoredProcedure);
         }
-
+       
+        public async Task<UserRoleEntity> GetBy(string name)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<UserRoleEntity>("GetUserRolesBy", new { name }, commandType: CommandType.StoredProcedure);
+        }
         public void AssignUser(Guid userId, Guid roleId)
         {
             throw new NotImplementedException();
         }
+
     }
 }

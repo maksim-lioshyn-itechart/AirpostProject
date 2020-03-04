@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(Country entity)
+        public async Task Create(CountryEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertCountry", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<Country> GetById(Guid id)
+        public async Task<CountryEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<Country>("GetCountryById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<CountryEntity>("GetCountryById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Country>> GetAll()
+        public async Task<IEnumerable<CountryEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Country>("GetAllCountries", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<CountryEntity>("GetAllCountries", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(Country entity)
+        public async Task Update(CountryEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateCountry", entity, commandType: CommandType.StoredProcedure);
@@ -45,6 +45,12 @@ namespace DataAccessLayer.Repositories
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteCountry", new { id }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<CountryEntity> GetBy(string name)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<CountryEntity>("GetCountriesBy", new { name }, commandType: CommandType.StoredProcedure);
         }
     }
 }

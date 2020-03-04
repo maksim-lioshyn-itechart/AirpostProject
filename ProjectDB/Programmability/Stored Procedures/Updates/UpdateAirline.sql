@@ -1,5 +1,6 @@
 CREATE PROCEDURE [dbo].[UpdateAirline]
     @Id UNIQUEIDENTIFIER,
+    @CountryId UNIQUEIDENTIFIER,
     @Name NVARCHAR(50),
     @Email NVARCHAR(256),
     @Phone NVARCHAR(50),
@@ -9,6 +10,7 @@ AS
 BEGIN
     UPDATE [dbo].[Airlines]
     SET
+        [CountryId] = @CountryId,
         [Name] = @Name,
         [Email] = @Email,
         [Phone] = @Phone,

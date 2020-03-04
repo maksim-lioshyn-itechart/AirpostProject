@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(Flight entity)
+        public async Task Create(FlightEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertFlight", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<Flight> GetById(Guid id)
+        public async Task<FlightEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<Flight>("GetFlightById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<FlightEntity>("GetFlightById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Flight>> GetAll()
+        public async Task<IEnumerable<FlightEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Flight>("GetAllFlights", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<FlightEntity>("GetAllFlights", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(Flight entity)
+        public async Task Update(FlightEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateFlight", entity, commandType: CommandType.StoredProcedure);
@@ -45,6 +45,26 @@ namespace DataAccessLayer.Repositories
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteFlight", new { id }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<FlightEntity>> GetBy(
+            Guid? airplaneId = null, 
+            Guid? destinationAirportId = null, 
+            Guid? departureAirportId = null,
+            DateTime? arrivalTimeUtc = null)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QueryAsync<FlightEntity>("GetFlightBy", 
+                new { airplaneId, destinationAirportId, departureAirportId, arrivalTimeUtc }, 
+                commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<FlightEntity> GetBy(Guid airplaneId, Guid destinationAirportId, Guid departureAirportId, DateTime arrivalTimeUtc)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<FlightEntity>("GetFlightBy",
+                new { airplaneId, destinationAirportId, departureAirportId, arrivalTimeUtc },
+                commandType: CommandType.StoredProcedure);
         }
     }
 }

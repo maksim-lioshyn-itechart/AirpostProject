@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(Document entity)
+        public async Task Create(DocumentEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertDocument", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<Document> GetById(Guid id)
+        public async Task<DocumentEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<Document>("GetDocumentById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<DocumentEntity>("GetDocumentById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Document>> GetAll()
+        public async Task<IEnumerable<DocumentEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Document>("GetAllDocuments", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<DocumentEntity>("GetAllDocuments", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(Document entity)
+        public async Task Update(DocumentEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateDocument", entity, commandType: CommandType.StoredProcedure);
@@ -45,6 +45,23 @@ namespace DataAccessLayer.Repositories
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteDocument", new { id }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<DocumentEntity>> GetBy(
+            Guid? documentTypeId = null,
+            string name = null,
+            string number = null,
+            bool isActive = true
+            )
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QueryAsync<DocumentEntity>("GetDocumentBy", new { documentTypeId, isActive }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<DocumentEntity> GetBy(Guid documentTypeId, string name, string number, bool isActive = true)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<DocumentEntity>("GetDocumentBy", new { documentTypeId, isActive }, commandType: CommandType.StoredProcedure);
         }
     }
 }

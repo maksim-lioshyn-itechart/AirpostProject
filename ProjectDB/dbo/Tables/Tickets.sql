@@ -16,7 +16,7 @@
     [Total] MONEY NOT NULL, 
     CONSTRAINT [PK_Tickets] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Tickets_User] FOREIGN KEY ([UserId]) REFERENCES [Users]([Id]), 
-    CONSTRAINT [FK_Tickets_Raise] FOREIGN KEY ([FlightId]) REFERENCES [Flights]([Id]),
+    CONSTRAINT [FK_Tickets_Flight] FOREIGN KEY ([FlightId]) REFERENCES [Flights]([Id]),
     CONSTRAINT [FK_Tickets_PassengerSeats] FOREIGN KEY ([PassengerSeatId]) REFERENCES [PassengerSeats]([Id]),
     CONSTRAINT [FK_Tickets_OrderStatuses] FOREIGN KEY ([OrderStatusId]) REFERENCES [OrderStatuses]([Id]),
     CONSTRAINT [FK_Tickets_Documents] FOREIGN KEY ([DocumentId]) REFERENCES [Documents] ([Id])

@@ -17,25 +17,25 @@ namespace DataAccessLayer.Repositories
             _configuration = configuration;
         }
 
-        public async Task Create(Airline entity)
+        public async Task Create(AirlineEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("InsertAirline", entity, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<Airline> GetById(Guid id)
+        public async Task<AirlineEntity> GetById(Guid id)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<Airline>("GetAirlineById", new { id }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<AirlineEntity>("GetAirlineById", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<Airline>> GetAll()
+        public async Task<IEnumerable<AirlineEntity>> GetAll()
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<Airline>("GetAllAirlines", commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<AirlineEntity>("GetAllAirlines", commandType: CommandType.StoredProcedure);
         }
 
-        public async Task Update(Airline entity)
+        public async Task Update(AirlineEntity entity)
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("UpdateAirline", entity, commandType: CommandType.StoredProcedure);
@@ -45,6 +45,18 @@ namespace DataAccessLayer.Repositories
         {
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteAirline", new { id }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<AirlineEntity>> GetBy(string email, Guid? countryId)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QueryAsync<AirlineEntity>("GetAirlineBy", new { email, countryId }, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<AirlineEntity> GetBy(string email, Guid countryId)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<AirlineEntity>("GetAirlineBy", new { email, countryId }, commandType: CommandType.StoredProcedure);
         }
     }
 }
