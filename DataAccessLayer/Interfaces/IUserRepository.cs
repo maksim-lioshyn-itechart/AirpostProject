@@ -6,6 +6,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IUserRepository : IBaseRepository<UserEntity>
     {
-        Task<IEnumerable<UserEntity>> GetBy(string email, string phone);
+        Task<UserEntity> GetBy(string email, string phone);
     }
 }

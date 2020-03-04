@@ -21,7 +21,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(Airport entity)
         {
-            var airports = (await Airport.GetBy(entity.CountryId, entity.Name)).FirstOrDefault();
+            var airports = await Airport.GetBy(entity.CountryId, entity.Name);
             var isExist = airports != null;
 
             if (isExist)

@@ -8,5 +8,6 @@ namespace DataAccessLayer.Interfaces
     public interface IAirportRepository : IBaseRepository<AirportEntity>
     {
         Task<IEnumerable<AirportEntity>> GetBy(Guid? countryId = null, string name = null);
+        Task<AirportEntity> GetBy(Guid countryId, string name);
     }
 }

@@ -32,7 +32,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(User entity)
         {
-            var users = (await User.GetBy(entity.Email, entity.Phone)).FirstOrDefault();
+            var users = await User.GetBy(entity.Email, entity.Phone);
             var isExist = users != null;
 
             if (isExist)

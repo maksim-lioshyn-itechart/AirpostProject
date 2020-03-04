@@ -52,5 +52,11 @@ namespace DataAccessLayer.Repositories
             using IDbConnection db = _configuration.GetConnection();
             return await db.QueryAsync<AirportEntity>("GetAirportBy", new { countryId, name }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<AirportEntity> GetBy(Guid countryId, string name)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<AirportEntity>("GetAirportBy", new { countryId, name }, commandType: CommandType.StoredProcedure);
+        }
     }
 }

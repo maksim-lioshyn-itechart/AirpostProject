@@ -17,5 +17,16 @@ namespace DataAccessLayer.Interfaces
             int? coordinateX2 = null,
             int? coordinateY2 = null
         );
+
+        Task<PassengerSeatEntity> GetBy(Guid airplaneSchemaId, Guid classTypeId,
+            string sector,
+            int floor,
+            int row,
+            int seat,
+            int coordinateX1,
+            int coordinateY1,
+            int coordinateX2,
+            int coordinateY2
+        );
     }
 }

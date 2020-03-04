@@ -48,7 +48,8 @@ namespace DataAccessLayer.Repositories
         }
 
         public async Task<IEnumerable<AirplaneEntity>> GetBy(
-            string name, 
+            string serialNumber = null,
+            string name = null, 
             Guid? airlineId = null, 
             Guid? airplaneSchemaId = null, 
             Guid? airplaneSubTypeId = null, 
@@ -59,6 +60,12 @@ namespace DataAccessLayer.Repositories
             return await db.QueryAsync<AirplaneEntity>("GetAirplaneBy", 
                 new { name, airlineId, airplaneSchemaId, airplaneSubTypeId, airplaneTypeId }, 
                 commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<AirplaneEntity> GetBy(string serialNumber)
+        {
+            using IDbConnection db = _configuration.GetConnection();
+            return await db.QuerySingleOrDefaultAsync<AirplaneEntity>("GetAirplaneBy", new { serialNumber }, commandType: CommandType.StoredProcedure);
         }
     }
 }

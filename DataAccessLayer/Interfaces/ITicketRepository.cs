@@ -6,6 +6,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface ITicketRepository : IBaseRepository<TicketEntity>
     {
-        Task<IEnumerable<TicketEntity>> GetBy(string ticketNumber);
+        Task<TicketEntity> GetBy(string ticketNumber);
     }
 }

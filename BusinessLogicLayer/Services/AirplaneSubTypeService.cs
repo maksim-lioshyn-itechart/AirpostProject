@@ -21,7 +21,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(AirplaneSubType entity)
         {
-            var subTypes = (await AirplaneSubType.GetBy(entity.Name)).FirstOrDefault();
+            var subTypes = await AirplaneSubType.GetBy(entity.Name);
             var isExist = subTypes != null;
 
             if (isExist)

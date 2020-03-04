@@ -6,6 +6,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IClassTypeRepository : IBaseRepository<ClassTypeEntity>
     {
-        Task<IEnumerable<ClassTypeEntity>> GetBy(string name);
+        Task<ClassTypeEntity> GetBy(string name);
     }
 }

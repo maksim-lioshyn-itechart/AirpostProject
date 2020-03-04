@@ -6,6 +6,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IAirplaneSubTypeRepository : IBaseRepository<AirplaneSubTypeEntity>
     {
-        Task<IEnumerable<AirplaneSubTypeEntity>> GetBy(string name);
+        Task<AirplaneSubTypeEntity> GetBy(string name);
     }
 }

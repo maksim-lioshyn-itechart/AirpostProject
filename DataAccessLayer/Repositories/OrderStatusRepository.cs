@@ -47,10 +47,10 @@ namespace DataAccessLayer.Repositories
             await db.ExecuteAsync("DeleteOrderStatus", new { id }, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<OrderStatusEntity>> GetBy(string name)
+        public async Task<OrderStatusEntity> GetBy(string name)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<OrderStatusEntity>("GetOrderStatusesBy", new { name }, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<OrderStatusEntity>("GetOrderStatusesBy", new { name }, commandType: CommandType.StoredProcedure);
         }
     }
 }

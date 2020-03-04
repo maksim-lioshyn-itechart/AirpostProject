@@ -6,6 +6,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IDocumentTypeRepository : IBaseRepository<DocumentTypeEntity>
     {
-        Task<IEnumerable<DocumentTypeEntity>> GetBy(string name);
+        Task<DocumentTypeEntity> GetBy(string name);
     }
 }

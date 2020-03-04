@@ -21,7 +21,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<StatusCode> Create(ClassType entity)
         {
-            var types = (await ClassType.GetBy(entity.Name)).FirstOrDefault();
+            var types = await ClassType.GetBy(entity.Name);
             var isExist = types != null;
 
             if (isExist)
