@@ -120,6 +120,7 @@ namespace AirportProject.NUnitTests
             AirplaneSubTypeId = AirplaneSubType.Id,
             AirplaneTypeId = AirplaneType.Id,
             CarryingCapacity = 100,
+            SerialNumber = Guid.NewGuid().ToString(),
             Name = Guid.NewGuid().ToString().Substring(0, 4)
         };
 
