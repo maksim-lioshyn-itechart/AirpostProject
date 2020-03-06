@@ -23,8 +23,6 @@ namespace PresentationAPILayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddIdentity<IUserService, IUserRoleService>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddClaimsPrincipalFactory<ConfigurationFactory>();
             services.AddCors();
             services.AddMemoryCache();
 

@@ -1,8 +1,7 @@
-import { InsertRow, SaveCell, DeleteRow, FetchData } from '../common/operations'
-import { url } from "../../config.js";
+import { InsertRow, SaveCell, DeleteRow } from '../common/operations';
 
 export function onInsertRow(model) {
-    InsertRow("UserRoles", model.name)
+    InsertRow("UserRole/Post", { name: model.name })
         .then(response => {
             if (response.ok) {
                 alert('Added: ' + model.name)
@@ -10,18 +9,16 @@ export function onInsertRow(model) {
             throw new Error(response.statusText);
         })
 }
-
 export function onSaveCell(value) {
-    SaveCell("UserRoles", value)
+    SaveCell("UserRole/Update", value)
         .then(response => {
-            if (response.ok) {
-                alert('Updated: ' + value.name)
+            if (!response.ok) {
+                throw new Error(response.statusText);
             }
-            throw new Error(response.statusText);
         }
         )
 }
 
 export function onDeleteRow(rowKeys) {
-    rowKeys.map(key => DeleteRow("UserRoles", key));
+    rowKeys.map(key => DeleteRow("UserRole/Delete", key));
 }

@@ -2,7 +2,7 @@ import { url } from '../../config.js';
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn }
   from 'react-bootstrap-table'
-import {onDeleteRow, onInsertRow, onSaveCell} from './actions';
+import { onDeleteRow, onInsertRow, onSaveCell } from './Actions';
 
 class UserRole extends React.Component {
 
@@ -19,7 +19,7 @@ class UserRole extends React.Component {
   }
 
   async fetchData() {
-    await fetch(url + "UserRoles", {
+    await fetch(url + "UserRole/Get", {
       method: "GET",
       headers: { "Content-Type": "text/plain;charset=UTF-8" }
     })
@@ -32,7 +32,7 @@ class UserRole extends React.Component {
   render() {
 
     const options = {
-      afterInsertRow: this.fetchData,
+      afterInsertRow: this.fetchData(),
       onAddRow: onInsertRow,
       onDeleteRow: onDeleteRow
     }
@@ -44,7 +44,7 @@ class UserRole extends React.Component {
     const cellEditProp = {
       mode: 'click',
       afterSaveCell: onSaveCell,
-      blurToSave: true
+      blurToSave: true,
     }
 
     return (

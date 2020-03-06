@@ -9,13 +9,13 @@ using static PresentationAPILayer.Mappers.CommonMapper;
 
 namespace PresentationAPILayer.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
-    public class UserRolesController : ControllerBase
+    public class UserRoleController : ControllerBase
     {
         private readonly IUserRoleService _userRoleService;
 
-        public UserRolesController(IUserRoleService userRoleService)
+        public UserRoleController(IUserRoleService userRoleService)
         {
             _userRoleService = userRoleService;
         }
@@ -36,7 +36,7 @@ namespace PresentationAPILayer.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<UserRoleViewModel>> Put(UserRoleViewModel userRole)
+        public async Task<ActionResult<UserRoleViewModel>> Update(UserRoleViewModel userRole)
         {
             if (userRole == null)
             {
@@ -47,22 +47,17 @@ namespace PresentationAPILayer.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserRoleViewModel>> Post([FromBody]string  name)
+        public async Task<ActionResult<UserRoleViewModel>> Post(UserRoleViewModel model)
         {
-            var role = (await _userRoleService.GetAll())
-                .FirstOrDefault(userRole => 
-                    string.Equals(userRole.Name, name, StringComparison.CurrentCultureIgnoreCase));
-
-            if (role != null)
+            if (model == null)
             {
                 return Conflict();
             }
 
-            await _userRoleService.Create(new UserRoleViewModel()
-            {
-                Name = name
-            }.ToModel());
-            return Ok();
+            var response = await _userRoleService.Create(model.ToModel());
+            return response == BusinessLogicLayer.enums.StatusCode.Created
+                ? (ActionResult<UserRoleViewModel>) Ok()
+                : Conflict();
         }
 
         [HttpDelete("{id}")]

@@ -1,3 +1,12 @@
+# First start
+1. Publish DbProject into your database
+2. Open airport-ui from VS code or other manager and in console run yarn install.
+
+# For start application
+1. Open airport-ui from VS code or other manager and in console run yarn start.
+2. Start backend application from visual studio or from IIS.
+
+
 # Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 

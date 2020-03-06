@@ -1,5 +1,5 @@
 import React from 'react';
-import UserRole from "./components/userrole/userrole";
+import UserRole from "./components/UserRole/index";
 
 class App extends React.Component {
   render() {
