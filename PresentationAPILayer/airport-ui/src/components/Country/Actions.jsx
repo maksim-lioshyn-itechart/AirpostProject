@@ -3,7 +3,7 @@ import { Action } from '../../Enums/Action.jsx';
 import { Api } from '../../Enums/Api.jsx';
 
 export function onInsertRow(model) {
-    InsertRow(Api.UserRole + Action.Post, { name: model.name })
+    InsertRow(Api.Country + Action.Post, { name: model.name })
         .then(response => {
             if (response.ok) {
                 alert('Added: ' + model.name)
@@ -13,7 +13,7 @@ export function onInsertRow(model) {
 }
 
 export function onSaveCell(value) {
-    SaveCell(Api.UserRole + Action.Update, value)
+    SaveCell(Api.Country + Action.Update, value)
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.statusText);
@@ -23,9 +23,9 @@ export function onSaveCell(value) {
 }
 
 export function onDeleteRow(rowKeys) {
-    rowKeys.map(key => DeleteRow(Api.UserRole + Action.Delete, key));
+    rowKeys.map(key => DeleteRow(Api.Country + Action.Delete, key));
 }
 
 export async function fetchData() {
-    return FetchData(Api.UserRole + Action.Get);
+    return FetchData(Api.Country + Action.Get);
 }

@@ -17,8 +17,15 @@ export async function SaveCell(route, value) {
 }
 
 export function DeleteRow(route, key) {
-  return fetch(url + route + "/" + key,
-      {
+  return fetch(url + route + "/" + key, {
         method: "DELETE"
       })
+}
+
+export async function FetchData(route) {
+  return await fetch(url + route, {
+      method: "GET",
+      headers: { "Content-Type": "text/plain;charset=UTF-8" }
+  })
+      .then(r => r.json());
 }

@@ -1,20 +1,22 @@
+import "./Country.css";
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn }
   from 'react-bootstrap-table'
 import { onDeleteRow, onInsertRow, onSaveCell, fetchData } from './Actions';
 
-export const userRoleModel = {
+export const countryModel = {
   id: String,
-  name: String
+  name: String,
+  code: String
 };
 
-class UserRole extends React.Component {
+class Country extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       hidden: true,
-      userRoles: [userRoleModel]
+      countries: [countryModel]
     }
   }
 
@@ -25,7 +27,7 @@ class UserRole extends React.Component {
   fetchData() {
     fetchData()
       .then(response => this.setState({
-        userRoles: response
+        countries: response
       }));
   }
 
@@ -51,7 +53,7 @@ class UserRole extends React.Component {
       <div>
         <BootstrapTable
           keyField="id"
-          data={this.state.userRoles}
+          data={this.state.countries}
           insertRow
           deleteRow
           selectRow={selectRowProp}
@@ -71,10 +73,15 @@ class UserRole extends React.Component {
             dataSort={true}>
             Name
           </TableHeaderColumn>
+          <TableHeaderColumn
+            dataField='code'
+            dataSort={true}>
+            Code
+          </TableHeaderColumn>
         </BootstrapTable>
       </div>
     )
   }
-}
+};
 
-export default UserRole;
+export default Country;

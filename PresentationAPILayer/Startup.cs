@@ -52,6 +52,7 @@ namespace PresentationAPILayer
             services.AddScoped<IAirplaneTypeService, AirplaneTypeService>();
             services.AddScoped<IAirportService, AirportService>();
             services.AddScoped<IClassTypeService, ClassTypeService>();
+            services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IDocumentService, DocumentService>();
             services.AddScoped<IDocumentTypeService, DocumentTypeService>();
             services.AddScoped<IFlightService, FlightService>();
