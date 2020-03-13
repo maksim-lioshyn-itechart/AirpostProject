@@ -1,9 +1,9 @@
-﻿using DataAccessLayer.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataAccess.Models;
 
-namespace DataAccessLayer.Interfaces
+namespace DataAccess.Interfaces
 {
     public interface IAirportRepository : IBaseRepository<AirportEntity>
     {

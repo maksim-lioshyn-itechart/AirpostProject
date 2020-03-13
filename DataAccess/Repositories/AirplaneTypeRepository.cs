@@ -1,12 +1,12 @@
 ﻿using Dapper;
-using DataAccessLayer.Interfaces;
-using DataAccessLayer.Models;
+using DataAccess.Interfaces;
+using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Repositories
+namespace DataAccess.Repositories
 {
     public class AirplaneTypeRepository : IAirplaneTypeRepository
     {

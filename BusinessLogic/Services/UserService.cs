@@ -1,8 +1,8 @@
 ﻿using BusinessLogic.Interfaces;
 using BusinessLogic.Mappers;
 using BusinessLogic.Models;
-using DataAccessLayer.Interfaces;
-using DataAccessLayer.Models;
+using DataAccess.Interfaces;
+using DataAccess.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Collections.Generic;

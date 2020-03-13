@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.Interfaces;
 using BusinessLogic.Mappers;
 using BusinessLogic.Models;
-using DataAccessLayer.Interfaces;
+using DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

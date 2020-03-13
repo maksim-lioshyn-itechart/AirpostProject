@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.Models;
-using DataAccessLayer.Models;
+using DataAccess.Models;
 
 namespace BusinessLogic.Mappers
 {

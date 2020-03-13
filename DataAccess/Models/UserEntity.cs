@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataAccessLayer.Models
+namespace DataAccess.Models
 {
     public class UserEntity : BaseEntity
     {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
+using Microsoft.Extensions.Logging;
 using static API.Mappers.CommonMapper;
 
 namespace API.Controllers
@@ -14,10 +15,15 @@ namespace API.Controllers
     public class UserRoleController : ControllerBase
     {
         private readonly IUserRoleService _userRoleService;
+        private readonly ILogger<UserRoleController> _logger;
 
-        public UserRoleController(IUserRoleService userRoleService)
+        public UserRoleController(
+            IUserRoleService userRoleService, 
+            ILogger<UserRoleController> logger
+            )
         {
             _userRoleService = userRoleService;
+            _logger = logger;
         }
 
         [HttpGet]

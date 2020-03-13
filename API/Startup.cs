@@ -1,9 +1,8 @@
-using BusinessLogic.Services;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
-using DataAccessLayer;
-using DataAccessLayer.Interfaces;
-using DataAccessLayer.Repositories;
+using DataAccess;
+using DataAccess.Interfaces;
+using DataAccess.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

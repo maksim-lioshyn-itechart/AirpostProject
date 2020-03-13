@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccessLayer.Models;
+using DataAccess.Interfaces;
+using DataAccess.Models;
 
-namespace DataAccessLayer.Interfaces
+namespace DataAccess.Interfaces
 {
     public interface IAirplaneTypeRepository : IBaseRepository<AirplaneTypeEntity>
     {

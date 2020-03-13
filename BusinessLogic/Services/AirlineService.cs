@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using BusinessLogic.Enums;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Models;
-using DataAccessLayer.Interfaces;
+using DataAccess.Interfaces;
+using DataAccess.Interfaces;
 using static BusinessLogic.Mappers.CommonMapper;
 
 namespace BusinessLogic.Services

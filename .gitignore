@@ -340,5 +340,3 @@ ASALocalRun/
 healthchecksdb
 
 *.refactorlog
-PresentationAPILayer/airport-ui/yarn.lock
-PresentationAPILayer/airport-ui/package-lock.json

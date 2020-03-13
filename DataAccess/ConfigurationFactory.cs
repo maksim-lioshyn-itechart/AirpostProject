@@ -1,8 +1,8 @@
-﻿using DataAccessLayer.Interfaces;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.SqlClient;
+using DataAccess.Interfaces;
 
-namespace DataAccessLayer
+namespace DataAccess
 {
     public class ConfigurationFactory : IConfigurationFactory
     {

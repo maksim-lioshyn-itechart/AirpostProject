@@ -1,12 +1,13 @@
-﻿using Dapper;
-using DataAccessLayer.Interfaces;
-using DataAccessLayer.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using Dapper;
+using DataAccess.Interfaces;
+using DataAccess.Interfaces;
+using DataAccess.Models;
 
-namespace DataAccessLayer.Repositories
+namespace DataAccess.Repositories
 {
     public class AirlineRepository : IAirlineRepository
     {

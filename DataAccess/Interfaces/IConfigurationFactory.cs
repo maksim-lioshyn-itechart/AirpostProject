@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace DataAccessLayer.Interfaces
+namespace DataAccess.Interfaces
 {
     public interface IConfigurationFactory
     {
