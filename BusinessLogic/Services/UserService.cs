@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Enums;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Mappers;
 using BusinessLogic.Models;
 using DataAccess.Interfaces;
@@ -9,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using BusinessLogic.Enums;
 
 namespace BusinessLogic.Services
 {
@@ -32,6 +32,7 @@ namespace BusinessLogic.Services
 
         public async Task<StatusCode> Create(User entity)
         {
+            Validation(entity);
             var users = await User.GetBy(entity.Email, entity.Phone);
             var isExist = users != null;
 
@@ -50,6 +51,7 @@ namespace BusinessLogic.Services
             var user = await User.GetById(entity.Id);
             if (user != null)
             {
+                Validation(entity);
                 await User.Update(entity.ToEntity());
                 return StatusCode.Updated;
             }
@@ -117,5 +119,13 @@ namespace BusinessLogic.Services
                 prf: KeyDerivationPrf.HMACSHA256,
                 iterationCount: IterationCount,
                 numBytesRequested: NumBytesRequested);
+
+        private void Validation(User entity)
+        {
+            var validator = new Validator<User>();
+            validator.IsValidName(entity.FirstName + entity.LastName);
+            validator.IsValidEmail(entity.Email);
+            validator.IsValidPhone(entity.Phone);
+        }
     }
 }

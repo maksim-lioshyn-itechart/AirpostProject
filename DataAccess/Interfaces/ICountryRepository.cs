@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DataAccess.Models;
 using System.Threading.Tasks;
-using DataAccess.Interfaces;
-using DataAccess.Models;
 
 namespace DataAccess.Interfaces
 {

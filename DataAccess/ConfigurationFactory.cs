@@ -1,6 +1,6 @@
-﻿using System.Data.Common;
+﻿using DataAccess.Interfaces;
+using System.Data.Common;
 using System.Data.SqlClient;
-using DataAccess.Interfaces;
 
 namespace DataAccess
 {

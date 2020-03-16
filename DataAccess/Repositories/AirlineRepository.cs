@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Dapper;
+using DataAccess.Interfaces;
+using DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using Dapper;
-using DataAccess.Interfaces;
-using DataAccess.Interfaces;
-using DataAccess.Models;
 
 namespace DataAccess.Repositories
 {

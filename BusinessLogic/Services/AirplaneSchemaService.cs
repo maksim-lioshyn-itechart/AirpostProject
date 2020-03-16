@@ -1,11 +1,11 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Enums;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Models;
 using DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLogic.Enums;
 using static BusinessLogic.Mappers.CommonMapper;
 
 namespace BusinessLogic.Services
@@ -21,6 +21,7 @@ namespace BusinessLogic.Services
 
         public async Task<StatusCode> Create(AirplaneSchema entity)
         {
+            Validation(entity);
             var schemas = await AirplaneSchema.GetBy(entity.Name);
             var isExist = schemas != null;
 
@@ -38,6 +39,7 @@ namespace BusinessLogic.Services
             var schemas = await AirplaneSchema.GetById(entity.Id);
             if (schemas != null)
             {
+                Validation(entity);
                 await AirplaneSchema.Update(entity.ToEntity());
                 return StatusCode.Updated;
             }
@@ -61,5 +63,11 @@ namespace BusinessLogic.Services
 
         public async Task<AirplaneSchema> GetById(Guid id) =>
             (await AirplaneSchema.GetById(id))?.ToModel();
+
+        private void Validation(AirplaneSchema entity)
+        {
+            var validator = new Validator<AirplaneSchema>();
+            validator.IsValidName(entity.Name);
+        }
     }
 }

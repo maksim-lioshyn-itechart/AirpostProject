@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.Interfaces;
 
 namespace DataAccess.Interfaces
 {
     public interface IDocumentRepository : IBaseRepository<DocumentEntity>
     {
         Task<IEnumerable<DocumentEntity>> GetBy(
-            Guid? documentTypeId = null, 
+            Guid? documentTypeId = null,
             string name = null,
             string number = null,
             bool isActive = true);

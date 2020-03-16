@@ -1,3 +1,4 @@
+using BusinessLogic.Exceptions;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess;
@@ -8,17 +9,20 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+        public ILogger<Startup> Logger { get; }
+
+        public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
             Configuration = configuration;
+            Logger = logger;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -54,6 +58,7 @@ namespace API
             services.AddScoped<IClassTypeService, ClassTypeService>();
             services.AddScoped<IDocumentService, DocumentService>();
             services.AddScoped<IDocumentTypeService, DocumentTypeService>();
+            services.AddScoped<IExceptionService, NameException>();
             services.AddScoped<IFlightService, FlightService>();
             services.AddScoped<IOrderStatusService, OrderStatusService>();
             services.AddScoped<IPassengerSeatService, PassengerSeatService>();
@@ -68,6 +73,7 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseCors(
                 builder =>
                 {

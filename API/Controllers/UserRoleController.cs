@@ -1,16 +1,16 @@
-﻿using System;
+﻿using API.Models;
+using BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLogic.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using API.Models;
-using Microsoft.Extensions.Logging;
 using static API.Mappers.CommonMapper;
 
 namespace API.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserRoleController : ControllerBase
     {
@@ -18,7 +18,7 @@ namespace API.Controllers
         private readonly ILogger<UserRoleController> _logger;
 
         public UserRoleController(
-            IUserRoleService userRoleService, 
+            IUserRoleService userRoleService,
             ILogger<UserRoleController> logger
             )
         {
@@ -38,6 +38,7 @@ namespace API.Controllers
             var user = (await _userRoleService.GetById(id)).ToViewModel();
             if (user == null)
             {
+                _logger.LogInformation($"UserRole id = {id} not found.");
                 return NotFound();
             }
             return new ObjectResult(user);
@@ -46,26 +47,26 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult<UserRoleViewModel>> Update(UserRoleViewModel userRole)
         {
-            if (userRole == null)
+            var response = await _userRoleService.Update(userRole.ToModel());
+            if (response != BusinessLogic.Enums.StatusCode.Updated)
             {
-                return BadRequest();
+                _logger.LogError($"UserRole {userRole.Name} not found.");
             }
 
-            var response = await _userRoleService.Update(userRole.ToModel());
             return response == BusinessLogic.Enums.StatusCode.Created
                 ? (ActionResult<UserRoleViewModel>)Ok()
                 : Conflict();
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserRoleViewModel>> Post(UserRoleViewModel model)
+        public async Task<ActionResult<UserRoleViewModel>> Post(UserRoleViewModel userRole)
         {
-            if (model == null)
+            var response = await _userRoleService.Create(userRole.ToModel());
+            if (response != BusinessLogic.Enums.StatusCode.Created)
             {
-                return Conflict();
+                _logger.LogError($"UserRole {userRole.Name} not found.");
             }
 
-            var response = await _userRoleService.Create(model.ToModel());
             return response == BusinessLogic.Enums.StatusCode.Created
                 ? (ActionResult<UserRoleViewModel>)Ok()
                 : Conflict();
@@ -77,6 +78,7 @@ namespace API.Controllers
             var userRole = await _userRoleService.GetById(id);
             if (userRole == null)
             {
+                _logger.LogInformation($"UserRole id = {id} not found.");
                 return NotFound();
             }
 

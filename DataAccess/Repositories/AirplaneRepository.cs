@@ -49,16 +49,16 @@ namespace DataAccess.Repositories
 
         public async Task<IEnumerable<AirplaneEntity>> GetBy(
             string serialNumber = null,
-            string name = null, 
-            Guid? airlineId = null, 
-            Guid? airplaneSchemaId = null, 
-            Guid? airplaneSubTypeId = null, 
+            string name = null,
+            Guid? airlineId = null,
+            Guid? airplaneSchemaId = null,
+            Guid? airplaneSubTypeId = null,
             Guid? airplaneTypeId = null
             )
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<AirplaneEntity>("GetAirplaneBy", 
-                new { name, airlineId, airplaneSchemaId, airplaneSubTypeId, airplaneTypeId }, 
+            return await db.QueryAsync<AirplaneEntity>("GetAirplaneBy",
+                new { name, airlineId, airplaneSchemaId, airplaneSubTypeId, airplaneTypeId },
                 commandType: CommandType.StoredProcedure);
         }
 

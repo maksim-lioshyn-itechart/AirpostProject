@@ -1,11 +1,11 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Enums;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Models;
 using DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLogic.Enums;
 using static BusinessLogic.Mappers.CommonMapper;
 
 namespace BusinessLogic.Services
@@ -21,6 +21,7 @@ namespace BusinessLogic.Services
 
         public async Task<StatusCode> Create(Country entity)
         {
+            Validation(entity);
             var countries = await Country.GetBy(entity.Name);
             var isExist = countries != null;
 
@@ -38,6 +39,7 @@ namespace BusinessLogic.Services
             var country = await Country.GetById(entity.Id);
             if (country != null)
             {
+                Validation(entity);
                 await Country.Update(entity.ToEntity());
                 return StatusCode.Updated;
             }
@@ -61,5 +63,11 @@ namespace BusinessLogic.Services
 
         public async Task<Country> GetById(Guid id) =>
             (await Country.GetById(id))?.ToModel();
+
+        private void Validation(Country entity)
+        {
+            var validator = new Validator<Country>();
+            validator.IsValidName(entity.Name);
+        }
     }
 }

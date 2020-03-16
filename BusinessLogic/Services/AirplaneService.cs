@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLogic.Enums;
+﻿using BusinessLogic.Enums;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Mappers;
 using BusinessLogic.Models;
 using DataAccess.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -21,6 +21,7 @@ namespace BusinessLogic.Services
 
         public async Task<StatusCode> Create(Airplane entity)
         {
+            Validation(entity);
             var airplanes = await Airplane.GetBy(entity.SerialNumber);
             var isExist = airplanes != null;
 
@@ -38,9 +39,14 @@ namespace BusinessLogic.Services
             var airplane = await Airplane.GetById(entity.Id);
             if (airplane != null && entity.CarryingCapacity > 0)
             {
+                Validation(entity);
                 await Airplane.Update(entity.ToEntity());
                 return StatusCode.Updated;
-            } else if (entity.CarryingCapacity <= 0)
+            }
+
+
+
+            if (entity.CarryingCapacity <= 0)
             {
                 return StatusCode.IncorrectData;
             }
@@ -64,5 +70,11 @@ namespace BusinessLogic.Services
 
         public async Task<Airplane> GetById(Guid id) =>
             (await Airplane.GetById(id))?.ToModel();
+
+        private void Validation(Airplane entity)
+        {
+            var validator = new Validator<Airplane>();
+            validator.IsValidName(entity.Name);
+        }
     }
 }

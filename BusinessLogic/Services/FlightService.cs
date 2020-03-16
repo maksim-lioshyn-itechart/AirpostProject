@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Enums;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Mappers;
 using BusinessLogic.Models;
 using DataAccess.Interfaces;
@@ -6,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLogic.Enums;
+using BusinessLogic.Exceptions;
 
 namespace BusinessLogic.Services
 {
@@ -21,6 +22,7 @@ namespace BusinessLogic.Services
 
         public async Task<StatusCode> Create(Flight entity)
         {
+            Validation(entity);
             var flights = await Flight.GetBy(
                 entity.AirplaneId,
                 entity.DestinationAirportId,
@@ -45,6 +47,7 @@ namespace BusinessLogic.Services
             var flight = await Flight.GetById(entity.Id);
             if (flight != null)
             {
+                Validation(entity);
                 await Flight.Update(entity.ToEntity());
                 return StatusCode.Updated;
             }
@@ -70,5 +73,17 @@ namespace BusinessLogic.Services
 
         private DateTime TruncateSeconds(DateTime date) =>
             new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0);
+
+        private void Validation(Flight entity)
+        {
+            if (entity.ArrivalTimeUtc < entity.DepartureTimeUtc)
+            {
+                throw new TimeException(
+                    StatusCode.IncorrectData,
+                    "Check the correctness of what you entered date interval."
+                );
+            }
+
+        }
     }
 }

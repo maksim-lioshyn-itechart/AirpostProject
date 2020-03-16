@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using API.Models;
+﻿using API.Models;
+using AutoMapper;
 using BusinessLogic.Models;
 
 namespace API.Mappers

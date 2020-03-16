@@ -1,11 +1,11 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Enums;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Models;
 using DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLogic.Enums;
 using static BusinessLogic.Mappers.CommonMapper;
 
 namespace BusinessLogic.Services
@@ -21,6 +21,7 @@ namespace BusinessLogic.Services
 
         public async Task<StatusCode> Create(ClassType entity)
         {
+            Validation(entity);
             var types = await ClassType.GetBy(entity.Name);
             var isExist = types != null;
 
@@ -38,6 +39,7 @@ namespace BusinessLogic.Services
             var type = await ClassType.GetById(entity.Id);
             if (type != null)
             {
+                Validation(entity);
                 await ClassType.Update(entity.ToEntity());
                 return StatusCode.Updated;
             }
@@ -61,5 +63,11 @@ namespace BusinessLogic.Services
 
         public async Task<ClassType> GetById(Guid id) =>
             (await ClassType.GetById(id))?.ToModel();
+
+        private void Validation(ClassType entity)
+        {
+            var validator = new Validator<ClassType>();
+            validator.IsValidName(entity.Name);
+        }
     }
 }

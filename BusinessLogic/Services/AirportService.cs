@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Enums;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Mappers;
 using BusinessLogic.Models;
 using DataAccess.Interfaces;
@@ -6,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLogic.Enums;
-using DataAccess.Interfaces;
 
 namespace BusinessLogic.Services
 {
@@ -22,6 +21,7 @@ namespace BusinessLogic.Services
 
         public async Task<StatusCode> Create(Airport entity)
         {
+            Validation(entity);
             var airports = await Airport.GetBy(entity.CountryId, entity.Name);
             var isExist = airports != null;
 
@@ -29,6 +29,7 @@ namespace BusinessLogic.Services
             {
                 return StatusCode.AlreadyExists;
             }
+
             await Airport.Create(entity.ToEntity());
             return StatusCode.Created;
         }
@@ -38,6 +39,7 @@ namespace BusinessLogic.Services
             var airport = await Airport.GetById(entity.Id);
             if (airport != null)
             {
+                Validation(entity);
                 await Airport.Update(entity.ToEntity());
                 return StatusCode.Updated;
             }
@@ -61,5 +63,12 @@ namespace BusinessLogic.Services
 
         public async Task<Airport> GetById(Guid id) =>
             (await Airport.GetById(id))?.ToModel();
+
+        private void Validation(Airport entity)
+        {
+            var validator = new Validator<Airport>();
+            validator.IsValidName(entity.Name);
+        }
+
     }
 }

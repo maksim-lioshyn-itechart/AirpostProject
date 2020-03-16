@@ -1,7 +1,7 @@
-﻿using System;
+﻿using BusinessLogic.Enums;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BusinessLogic.Enums;
 
 namespace BusinessLogic.Interfaces
 {

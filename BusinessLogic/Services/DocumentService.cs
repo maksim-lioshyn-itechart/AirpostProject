@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Enums;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Mappers;
 using BusinessLogic.Models;
 using DataAccess.Interfaces;
@@ -6,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLogic.Enums;
 
 namespace BusinessLogic.Services
 {
@@ -21,6 +21,7 @@ namespace BusinessLogic.Services
 
         public async Task<StatusCode> Create(Document entity)
         {
+            Validation(entity);
             var documents = await Document.GetBy(entity.DocumentTypeId, entity.Name, entity.Number);
             var isExist = documents != null;
 
@@ -38,6 +39,7 @@ namespace BusinessLogic.Services
             var document = await Document.GetById(entity.Id);
             if (document != null)
             {
+                Validation(entity);
                 await Document.Update(entity.ToEntity());
                 return StatusCode.Updated;
             }
@@ -61,5 +63,11 @@ namespace BusinessLogic.Services
 
         public async Task<Document> GetById(Guid id) =>
             (await Document.GetById(id))?.ToModel();
+
+        private void Validation(Document entity)
+        {
+            var validator = new Validator<Document>();
+            validator.IsValidName(entity.Name);
+        }
     }
 }

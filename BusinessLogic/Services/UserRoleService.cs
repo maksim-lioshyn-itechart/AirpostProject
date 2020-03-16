@@ -1,11 +1,11 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Enums;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Models;
 using DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLogic.Enums;
 using static BusinessLogic.Mappers.CommonMapper;
 
 namespace BusinessLogic.Services
@@ -21,6 +21,7 @@ namespace BusinessLogic.Services
 
         public async Task<StatusCode> Create(UserRole entity)
         {
+            Validation(entity);
             var roles = await UserRole.GetBy(entity.Name);
             var isExist = roles != null;
 
@@ -30,7 +31,7 @@ namespace BusinessLogic.Services
             }
 
             entity.Id = Guid.NewGuid();
-            entity.Name = entity.Name.ToUpper();
+            entity.Name = entity.Name;
             await UserRole.Create(entity.ToEntity());
             return StatusCode.Created;
         }
@@ -40,7 +41,8 @@ namespace BusinessLogic.Services
             var role = await UserRole.GetById(entity.Id);
             if (role != null)
             {
-                entity.Name = entity.Name.ToUpper();
+                Validation(entity);
+                entity.Name = entity.Name;
                 await UserRole.Update(entity.ToEntity());
                 return StatusCode.Updated;
             }
@@ -64,5 +66,11 @@ namespace BusinessLogic.Services
 
         public async Task<UserRole> GetById(Guid id) =>
             (await UserRole.GetById(id))?.ToModel();
+
+        private void Validation(UserRole entity)
+        {
+            var validator = new Validator<UserRole>();
+            validator.IsValidName(entity.Name);
+        }
     }
 }

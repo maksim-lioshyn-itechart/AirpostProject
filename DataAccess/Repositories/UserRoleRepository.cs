@@ -46,7 +46,7 @@ namespace DataAccess.Repositories
             using IDbConnection db = _configuration.GetConnection();
             await db.ExecuteAsync("DeleteUserRole", new { id }, commandType: CommandType.StoredProcedure);
         }
-       
+
         public async Task<UserRoleEntity> GetBy(string name)
         {
             using IDbConnection db = _configuration.GetConnection();

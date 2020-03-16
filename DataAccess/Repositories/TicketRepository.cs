@@ -50,7 +50,7 @@ namespace DataAccess.Repositories
         public async Task<TicketEntity> GetBy(string ticketNumber)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QuerySingleOrDefaultAsync<TicketEntity>("GetTicketsBy", new { ticketNumber}, commandType: CommandType.StoredProcedure);
+            return await db.QuerySingleOrDefaultAsync<TicketEntity>("GetTicketsBy", new { ticketNumber }, commandType: CommandType.StoredProcedure);
         }
     }
 }

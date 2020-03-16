@@ -48,14 +48,14 @@ namespace DataAccess.Repositories
         }
 
         public async Task<IEnumerable<FlightEntity>> GetBy(
-            Guid? airplaneId = null, 
-            Guid? destinationAirportId = null, 
+            Guid? airplaneId = null,
+            Guid? destinationAirportId = null,
             Guid? departureAirportId = null,
             DateTime? arrivalTimeUtc = null)
         {
             using IDbConnection db = _configuration.GetConnection();
-            return await db.QueryAsync<FlightEntity>("GetFlightBy", 
-                new { airplaneId, destinationAirportId, departureAirportId, arrivalTimeUtc }, 
+            return await db.QueryAsync<FlightEntity>("GetFlightBy",
+                new { airplaneId, destinationAirportId, departureAirportId, arrivalTimeUtc },
                 commandType: CommandType.StoredProcedure);
         }
 
